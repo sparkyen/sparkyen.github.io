@@ -277,18 +277,26 @@
     
     <div class="post-body" itemprop="articleBody">
         <ul>
-<li><strong><code>scanf(&quot;%d %d&quot;,&amp;a,&amp;b);</code></strong><br>函数返回值为<code>int</code>型。如果<code>a</code>和<code>b</code>都被成功读入，那么<code>scanf</code>的返回值就是<code>2</code>；<br>如果只有<code>a</code>被成功读入，返回值为<code>1</code>；<br>如果<code>a</code>和<code>b</code>都未被成功读入，返回值为<code>0</code>；<br>如果遇到错误或遇到<code>end of file</code>，返回值为<code>EOF（-1）</code>。</li>
-<li><strong><code>~</code></strong><br><code>&#39;~&#39;</code>为一元运算符，用于求整数的二进制反码。<br><code>scanf()</code>的返回值为大于等于<code>-1</code>的数，只有当<code>scanf()</code>返回值为<code>-1</code>（二进制表示为全<code>1</code>）时，<code>~scanf()</code>的值为<code>0</code>，其他情况均不为<code>0</code>.</li>
-<li><strong><code>while</code></strong><br><code>while</code>循环只有在条件为假（<code>0</code>）时才跳出循环（条件值为负数仍继续循环）。</li>
+<li><strong><code>scanf("%d %d",&amp;a,&amp;b);</code></strong><br />
+函数返回值为<code>int</code>型。如果<code>a</code>和<code>b</code>都被成功读入，那么<code>scanf</code>的返回值就是<code>2</code>；<br />
+如果只有<code>a</code>被成功读入，返回值为<code>1</code>；<br />
+如果<code>a</code>和<code>b</code>都未被成功读入，返回值为<code>0</code>；<br />
+如果遇到错误或遇到<code>end of file</code>，返回值为<code>EOF（-1）</code>。</li>
+<li><strong><code>~</code></strong><br />
+<code>'~'</code>为一元运算符，用于求整数的二进制反码。<br />
+<code>scanf()</code>的返回值为大于等于<code>-1</code>的数，只有当<code>scanf()</code>返回值为<code>-1</code>（二进制表示为全<code>1</code>）时，<code>~scanf()</code>的值为<code>0</code>，其他情况均不为<code>0</code>.</li>
+<li><strong><code>while</code></strong><br />
+<code>while</code>循环只有在条件为假（<code>0</code>）时才跳出循环（条件值为负数仍继续循环）。</li>
 </ul>
-<p>当输入未遇到错误（<code>scanf()</code>返回值不为<code>0</code>）时，循环会一直继续下去，进而达到控制循环的目的。</p>
+<p>当输入未遇到错误（<code>scanf()</code>返回值不为<code>0</code>）时，循环会一直继续下去，进而达到控制循环的目的。
 <pre class="language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;stdio.h></span></span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">int</span> a<span class="token punctuation">,</span>b<span class="token punctuation">;</span>
 	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">~</span><span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>a<span class="token punctuation">,</span><span class="token operator">&amp;</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>		<span class="token comment">/*~scanf("%d%d",&amp;a,&amp;b)的返回值永不为0*/</span>
 		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span>a<span class="token operator">+</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> </code></pre>
+<span class="token punctuation">&#125;</span> </code></pre></p>
+
     </div>
 
     

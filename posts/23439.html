@@ -26,8 +26,6 @@
 <meta property="og:site_name" content="NOTES">
 <meta property="og:description" content="从二叉树的建立与编号介绍起，然后依次讲解二叉树的层次遍历和深度优先遍历">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86.jpg">
-<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86.jpg">
 <meta property="article:published_time" content="2022-07-18T16:00:00.000Z">
 <meta property="article:modified_time" content="2022-08-02T13:08:14.937Z">
 <meta property="article:author" content="sparkyen">
@@ -35,7 +33,6 @@
 <meta property="article:tag" content="NOI暑假集训">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86.jpg">
 
 
 <link rel="canonical" href="http://example.com/posts/23439.html">
@@ -147,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BC%96%E5%8F%B7"><span class="nav-number">1.</span> <span class="nav-text">二叉树的建立与编号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86"><span class="nav-number">2.</span> <span class="nav-text">二叉树的层次遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86"><span class="nav-number">3.</span> <span class="nav-text">二叉树的深度优先遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86"><span class="nav-number">1.</span> <span class="nav-text">二叉树的层次遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86"><span class="nav-number">2.</span> <span class="nav-text">二叉树的深度优先遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -281,33 +278,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>树作为一种基本的数据结构，不管是在各类信息学，还是在各种系统、工程问题中使用都十分广泛。但是时间有限，不能将其讲的面面俱到，目前掌握基础的常用做法就可，而信息学中二叉树的使用较为频繁。</p>
-<h2 id="二叉树的建立与编号"><a href="#二叉树的建立与编号" class="headerlink" title="二叉树的建立与编号"></a>二叉树的建立与编号</h2><p>计算机是人类发明的，因此所有相关的原理我们都可以相较其他自然学科更好的推测理解。</p>
+        <p>树作为一种基本的数据结构，不管是在各类信息学，还是在各种系统、工程问题中使用都十分广泛。但是时间有限，不能将其讲的面面俱到，目前掌握基础的常用做法就可，而信息学中二叉树的使用较为频繁。
+## 二叉树的建立与编号
+计算机是人类发明的，因此所有相关的原理我们都可以相较其他自然学科更好的推测理解。</p>
 <p>建立和记录一颗二叉树的信息我们有很多种方式，只要合理且对场景使用就是最好的方式。下面来介绍几种常见的方式，后面的题目中你也能见到它们各自的应用。</p>
-<ol>
+<ol type="1">
 <li>数组实现二叉树信息存储与索引</li>
 </ol>
 <ul>
-<li><p>当前节点为$u$, 将其左右子节点信息存储在$tree[2<em>u]$和$tree[2</em>u+1]$中。但是这种方式耗费空间较大，若二叉树深度为$n$，则需要建立大小为$2^n$的数组，会耗费较大的空间，尤其是当树退化成一条链的时候</p>
-</li>
-<li><p>当前节点为$u$, 将其左右子节点信息存储在$left[u]$和$right[u]$中</p>
-</li>
+<li><p>当前节点为<span class="math inline">\(u\)</span>,
+将其左右子节点信息存储在<span
+class="math inline">\(tree[2*u]\)</span>和<span
+class="math inline">\(tree[2*u+1]\)</span>中。但是这种方式耗费空间较大，若二叉树深度为<span
+class="math inline">\(n\)</span>，则需要建立大小为<span
+class="math inline">\(2^n\)</span>的数组，会耗费较大的空间，尤其是当树退化成一条链的时候</p></li>
+<li><p>当前节点为<span class="math inline">\(u\)</span>,
+将其左右子节点信息存储在<span
+class="math inline">\(left[u]\)</span>和<span
+class="math inline">\(right[u]\)</span>中</p></li>
 </ul>
-<ol start="2">
-<li><p>结构体数组实现二叉树信息存储与索引，例如：</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token punctuation">&#123;</span>
+<ol start="2" type="1">
+<li><p>结构体数组实现二叉树信息存储与索引，例如： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> left<span class="token punctuation">,</span> right<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>tree<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
-</li>
-<li><p>指针实现二叉树信息索引，例如：</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">node</span><span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span>tree<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></p></li>
+<li><p>指针实现二叉树信息索引，例如： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">node</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> v<span class="token punctuation">;</span><span class="token comment">//结点值</span>
     node <span class="token operator">*</span>left<span class="token punctuation">,</span> <span class="token operator">*</span>right<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre></li>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre></p></li>
 </ol>
-<p>以<a target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P4913">洛谷-P4913 二叉树深度 </a>为基础例子说明，在后面的题目中会有不同的做法并附上详细的解释</p>
-<p>方法一：</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+<p>以<a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P4913">洛谷-P4913
+二叉树深度</a>为基础例子说明，在后面的题目中会有不同的做法并附上详细的解释</p>
+<p>方法一： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
 当前节点为u, 使用2*u, 2*u+1分别表示左右子节点
 二叉树深度为n，则需要建立大小为2^n的数组, 需要较大的空间 
 */</span>
@@ -331,10 +333,8 @@
     <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//从1号节点出发，当前深度为1</span>
     cout <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
-</code></pre>
-
-<p>方法二：</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+</code></pre></p>
+<p>方法二： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
 使用结构体node来表示当前节点存储的信息 
 */</span> 
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
@@ -357,11 +357,13 @@
    		cin <span class="token operator">>></span> tree<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>left <span class="token operator">>></span> tree<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>right<span class="token punctuation">;</span>
     <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     cout <span class="token operator">&lt;&lt;</span> ans <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-<h2 id="二叉树的层次遍历"><a href="#二叉树的层次遍历" class="headerlink" title="二叉树的层次遍历"></a>二叉树的层次遍历</h2><p>从根节点开始，按照一层层的顺序从左到右遍历输出所有节点的遍历方式就叫做二叉树的层次遍历，如下图：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86.jpg"></p>
-<p>二叉树的层次遍历通过队列可以实现，以<a target="_blank" rel="noopener" href="https://vjudge.net/problem/UVA-122">UVA-122 Trees on the level</a>为例说明：</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
+<span class="token punctuation">&#125;</span></code></pre></p>
+<h2 id="二叉树的层次遍历">二叉树的层次遍历</h2>
+<p>从根节点开始，按照一层层的顺序从左到右遍历输出所有节点的遍历方式就叫做二叉树的层次遍历，如下图：
+<img data-src="../images/NOI暑假培训/算法专题/数据结构/二叉树层次遍历.jpg" /></p>
+<p>二叉树的层次遍历通过队列可以实现，以<a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/UVA-122">UVA-122 Trees on the
+level</a>为例说明： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;string.h></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;vector></span></span>
@@ -451,11 +453,14 @@ node<span class="token operator">*</span> <span class="token function">newNode</
             <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-<p><em><strong>为什么结点有时要用指针实现？</strong></em></p>
-<p><em>使用数组或是指针来进行索引，功能上是等同的。</em><br><em>但如果用数组表示，会有一个问题：</em><br><em>数组是在定义时候确定大小，并且以后无法改变的；如果在编制程序之初无法确定有多少个节点，怎么办？ 而指针在使用上则更为简单。因此，具体的设计中，会倾向于使用指针。</em></p>
-<p>而二叉树并不一定要用指针实现，作为OI或者ACM选手，使用数组对于我们来说更加的方遍。接下来，把指针完全去掉。首先还是给每个结点编号，但不是按照从上到下从左到右的顺序，而是按照结点的生成顺序。用计数器<code>cnt</code>表示已存在的 结点编号的最大值，因此<code>newnode</code>函数需要改成这样：</p>
+<span class="token punctuation">&#125;</span></code></pre></p>
+<p><strong><em>为什么结点有时要用指针实现？</em></strong></p>
+<p><em>使用数组或是指针来进行索引，功能上是等同的。</em>
+<em>但如果用数组表示，会有一个问题：</em>
+<em>数组是在定义时候确定大小，并且以后无法改变的；如果在编制程序之初无法确定有多少个节点，怎么办？
+而指针在使用上则更为简单。因此，具体的设计中，会倾向于使用指针。</em></p>
+<p>而二叉树并不一定要用指针实现，作为OI或者ACM选手，使用数组对于我们来说更加的方遍。接下来，把指针完全去掉。首先还是给每个结点编号，但不是按照从上到下从左到右的顺序，而是按照结点的生成顺序。用计数器<code>cnt</code>表示已存在的
+结点编号的最大值，因此<code>newnode</code>函数需要改成这样：
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">const</span> <span class="token keyword">int</span> root <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">void</span> <span class="token function">newtree</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	left<span class="token punctuation">[</span>root<span class="token punctuation">]</span> <span class="token operator">=</span> right<span class="token punctuation">[</span>root<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -468,8 +473,8 @@ node<span class="token operator">*</span> <span class="token function">newNode</
 	have_value<span class="token punctuation">[</span>root<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 	<span class="token keyword">return</span> u<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>上面的<code>newtree()</code>是用来代替前面的<code>remove_tree(root)</code>和<code>root = newnode()</code>两条语句的。由于没有了动态内存的申请和释放，只需要重置结点计数器和根结点的左右子树了。</p>
-<p>当然这题还有一种更妙的方式：若当前节点为<code>str</code>，其左右子节点的信息存到<code>mp[str+&quot;L&quot;]</code>和<code>mp[str+&quot;R&quot;]</code>中：</p>
+上面的<code>newtree()</code>是用来代替前面的<code>remove_tree(root)</code>和<code>root = newnode()</code>两条语句的。由于没有了动态内存的申请和释放，只需要重置结点计数器和根结点的左右子树了。</p>
+<p>当然这题还有一种更妙的方式：若当前节点为<code>str</code>，其左右子节点的信息存到<code>mp[str+"L"]</code>和<code>mp[str+"R"]</code>中：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
 二叉树的层次遍历 
 ref:
@@ -529,15 +534,15 @@ map<span class="token operator">&lt;</span>string<span class="token punctuation"
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-
-<h2 id="二叉树的深度优先遍历"><a href="#二叉树的深度优先遍历" class="headerlink" title="二叉树的深度优先遍历"></a>二叉树的深度优先遍历</h2><p>给定任意节点，可以访问该节点本身、遍历左子树、遍历右子树，这就叫做如二叉树的深度优先遍历，如下图所示：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86.jpg"><br>根据在某个节点中比哪里的顺序不同，有以下3种遍历方式：</p>
-<ul>
-<li><strong>中序遍历：</strong> 左子树-&gt; 根结点 -&gt; 右子树<br>（先访问左子树，再访问根节点，后访问右子树，而对于每个子树来说，又按照同样的访问顺序进行遍历）</li>
-<li><strong>先序遍历：</strong> 根结点 -&gt; 左子树 -&gt; 右子树</li>
-<li><strong>后序遍历：</strong> 左子树 -&gt; 右子树 -&gt; 根结点</li>
-</ul>
-<p>根据三种遍历的特性，递归的算法很容易就能写出来：</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//先序</span>
+<h2 id="二叉树的深度优先遍历">二叉树的深度优先遍历</h2>
+<p>给定任意节点，可以访问该节点本身、遍历左子树、遍历右子树，这就叫做如二叉树的深度优先遍历，如下图所示：
+<img data-src="../images/NOI暑假培训/算法专题/数据结构/二叉树深度优先遍历.jpg" />
+根据在某个节点中比哪里的顺序不同，有以下3种遍历方式： -
+<strong>中序遍历：</strong> 左子树-&gt; 根结点 -&gt; 右子树
+（先访问左子树，再访问根节点，后访问右子树，而对于每个子树来说，又按照同样的访问顺序进行遍历）
+- <strong>先序遍历：</strong> 根结点 -&gt; 左子树 -&gt; 右子树 -
+<strong>后序遍历：</strong> 左子树 -&gt; 右子树 -&gt; 根结点</p>
+<p>根据三种遍历的特性，递归的算法很容易就能写出来： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//先序</span>
 <span class="token keyword">void</span> <span class="token function">PreOrder</span><span class="token punctuation">(</span>node <span class="token operator">*</span>root<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">==</span><span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
     <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
@@ -563,14 +568,14 @@ map<span class="token operator">&lt;</span>string<span class="token punctuation"
         <span class="token function">PostOrder</span><span class="token punctuation">(</span>root<span class="token operator">-></span>rch<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> root<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span> 
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-<p><strong>利用二叉树的深度优先遍历我们可以做到很多事情，如由两种遍历确定一颗二叉树、求二叉树的高度等等</strong>，这里以<a target="_blank" rel="noopener" href="https://vjudge.net/problem/UVA-548">UVA-548  Tree</a>说明上述两种应用：</p>
-<p>需注意的是，必须要有中序，否则无法确定，例如前序+后序，此时无法确定这颗树是何种形态：</p>
+<span class="token punctuation">&#125;</span></code></pre></p>
+<p><strong>利用二叉树的深度优先遍历我们可以做到很多事情，如由两种遍历确定一颗二叉树、求二叉树的高度等等</strong>，这里以<a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/UVA-548">UVA-548
+Tree</a>说明上述两种应用：</p>
+<p>需注意的是，必须要有中序，否则无法确定，例如前序+后序，此时无法确定这颗树是何种形态：
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp">  A 和 A 
  <span class="token operator">/</span>      \ 
-B        B</code></pre>
-
+B        B</code></pre></p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
 后序+中序确定一颗二叉树
 */</span>
@@ -625,9 +630,9 @@ B        B</code></pre>
 		cout <span class="token operator">&lt;&lt;</span> best <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-
 <p>这题需要特别注意输入，否则会TLE，需要使用getline()来判断是否到文件末尾</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>关于树的建立、层次遍历、深度优先遍历的基本概念和应用讲解完毕，将来这些思想还会在图或者其他类型题目上有更深的应用，有了这些基础将来可以自行探索。</p>
+<h2 id="总结">总结</h2>
+<p>关于树的建立、层次遍历、深度优先遍历的基本概念和应用讲解完毕，将来这些思想还会在图或者其他类型题目上有更深的应用，有了这些基础将来可以自行探索。</p>
 
     </div>
 

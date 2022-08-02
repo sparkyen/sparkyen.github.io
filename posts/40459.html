@@ -26,8 +26,6 @@
 <meta property="og:site_name" content="NOTES">
 <meta property="og:description" content="讲解计算机中常用的递归、递推思想，以斐波拉契数列、汉诺塔等经典问题为例说明具体的程序编写">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
-<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98%E6%B1%82%E8%A7%A3%E6%AD%A5%E9%AA%A4.png">
 <meta property="article:published_time" content="2022-07-07T16:00:00.000Z">
 <meta property="article:modified_time" content="2022-08-02T13:08:14.949Z">
 <meta property="article:author" content="sparkyen">
@@ -35,7 +33,6 @@
 <meta property="article:tag" content="publication">
 <meta property="article:tag" content="NOI暑假集训">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
 
 
 <link rel="canonical" href="http://example.com/posts/40459.html">
@@ -284,28 +281,38 @@
 <p><strong>简单来说，递归就是自上而下，而递推则是自下而上，二者可以相互转化</strong></p>
 </blockquote>
 <p>函数自己调用自己的行为就叫做递归，对于重复的子步骤，我们就可以使用递归来求解</p>
-<p>例如斐波拉契数列，其当前项等于前两项之和，要求$fib(n)$则需要先求出$fib(n-1)$和$fib(n-2)$，要求出$fib(n-1)$则需要先求出$fib(n-2)$和$fib(n-3)$，$\cdots$</p>
+<p>例如斐波拉契数列，其当前项等于前两项之和，要求<span
+class="math inline">\(fib(n)\)</span>则需要先求出<span
+class="math inline">\(fib(n-1)\)</span>和<span
+class="math inline">\(fib(n-2)\)</span>，要求出<span
+class="math inline">\(fib(n-1)\)</span>则需要先求出<span
+class="math inline">\(fib(n-2)\)</span>和<span
+class="math inline">\(fib(n-3)\)</span>，<span
+class="math inline">\(\cdots\)</span></p>
 <p>但是这个子过程求到最后一定可以找到我们已知的值，比如我们知道斐波拉契数列第一项和第二项都是1，然后向上返回求解。否则这个问题就会不断向下求解子问题，无穷无尽。</p>
-<p>依照这个过程，我们可以将$fib$定义为一个函数，于是有以下求解过程：</p>
+<p>依照这个过程，我们可以将<span
+class="math inline">\(fib\)</span>定义为一个函数，于是有以下求解过程：
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">fib</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">&lt;=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> n<span class="token punctuation">;</span>
 	<span class="token keyword">return</span> <span class="token function">fib</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">fib</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
-<p>实际运行的时候我们会发现就算是求解$fib(40)$这样$n$较小的结果，也要花费相当长的时间，因为其递归求解时，会像下图一样按照指数级别扩展开来：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E9%80%92%E5%BD%92%E8%B0%83%E7%94%A8%E7%A4%BA%E6%84%8F%E5%9B%BE.png"></p>
-<p>但是如果我们计算一次之后，就用用数列将结果存储起来，不用计算重复的结果，那速度会变得快不少，因此就有了下面的递推写法：</p>
+<span class="token punctuation">&#125;</span></code></pre></p>
+<p>实际运行的时候我们会发现就算是求解<span
+class="math inline">\(fib(40)\)</span>这样<span
+class="math inline">\(n\)</span>较小的结果，也要花费相当长的时间，因为其递归求解时，会像下图一样按照指数级别扩展开来：
+<img data-src="../images/NOI暑假培训/算法专题/斐波拉契递归调用示意图.png" /></p>
+<p>但是如果我们计算一次之后，就用用数列将结果存储起来，不用计算重复的结果，那速度会变得快不少，因此就有了下面的递推写法：
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp">f<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-	f<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span>f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
-
-<p><strong>递推的思路</strong>可以归纳如下：</p>
-<ol>
-<li>定义你想要的状态，比如斐波拉契数列里面$f[i]$就代表当前第$i$个斐波拉契数列的值</li>
-<li>找递推关系</li>
-<li>找递推边界</li>
-</ol>
-<p>受到斐波拉契数列求解方法的启发，我们来试试<a target="_blank" rel="noopener" href="https://vjudge.net/problem/51Nod-2115">上台阶</a>这道题目：</p>
-<p>同理，当前台阶$i$可以由之前走一步和走两步递推而来</p>
+	f<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span>f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></p>
+<p><strong>递推的思路</strong>可以归纳如下： 1.
+定义你想要的状态，比如斐波拉契数列里面<span
+class="math inline">\(f[i]\)</span>就代表当前第<span
+class="math inline">\(i\)</span>个斐波拉契数列的值 2. 找递推关系 3.
+找递推边界</p>
+<p>受到斐波拉契数列求解方法的启发，我们来试试<a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/51Nod-2115">上台阶</a>这道题目：</p>
+<p>同理，当前台阶<span
+class="math inline">\(i\)</span>可以由之前走一步和走两步递推而来
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
@@ -321,17 +328,17 @@
         f<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">%</span>mod<span class="token operator">+</span>f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">%</span>mod<span class="token punctuation">)</span><span class="token operator">%</span>mod<span class="token punctuation">;</span>
     cout <span class="token operator">&lt;&lt;</span> f<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
-</code></pre>
-
-<p>接下来我们再看看一道很经典的递归题目—<a target="_blank" rel="noopener" href="https://vjudge.net/problem/OpenJ_Bailian-4147">汉诺塔问题</a></p>
-<p>有三根杆子$a,b,c$。$a$杆上有 $n$ 个穿孔圆盘，盘的尺寸由下到上依次变小。要求按下列规则将所有圆盘移至 $c$ 杆：</p>
-<ol>
-<li>每次只能移动一个圆盘；</li>
-<li>大盘不能叠在小盘上面。</li>
-</ol>
-<p>其求解步骤如下：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98%E6%B1%82%E8%A7%A3%E6%AD%A5%E9%AA%A4.png"></p>
-<p>具体代码实现如下：</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+</code></pre></p>
+<p>接下来我们再看看一道很经典的递归题目—<a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/OpenJ_Bailian-4147">汉诺塔问题</a></p>
+<p>有三根杆子<span class="math inline">\(a,b,c\)</span>。<span
+class="math inline">\(a\)</span>杆上有 <span
+class="math inline">\(n\)</span>
+个穿孔圆盘，盘的尺寸由下到上依次变小。要求按下列规则将所有圆盘移至 <span
+class="math inline">\(c\)</span> 杆： 1. 每次只能移动一个圆盘； 2.
+大盘不能叠在小盘上面。</p>
+<p>其求解步骤如下： <img data-src="../images/NOI暑假培训/算法专题/汉诺塔问题求解步骤.png" /></p>
+<p>具体代码实现如下： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
@@ -354,16 +361,28 @@
 <span class="token comment">//	for(int i = 2; i &lt;= n; i++)</span>
 <span class="token comment">//		h[i] = 2*h[i-1] + 1;</span>
 <span class="token comment">//	cout &lt;&lt; cnt &lt;&lt; " " &lt;&lt; h[n];</span>
-<span class="token punctuation">&#125;</span> </code></pre>
-
-<p>同时，若我们将$h_{n}$表示为把$n$个盘子从$a$挪到$c$所需要的次数。结合上面的求解示意图，很容易就能发现：总时先借助$c$柱把上面的$n-1$个盘子移动到$b$柱，接着把$a$最下面的盘子挪到$c$柱上，最后把$b$上的$n-1$个盘子移动到$c$柱上，由于实际上每个柱的编号不重要，可以得出移动次数为：$h_{n-1}+1+h_{n-1}$</p>
-<p>于是得到递推表达式：$h_n&#x3D;2*h_{n-1}+1$，边界条件为$h_1&#x3D;1$</p>
-<p>求解汉诺塔问题移动次数的具体实现如下：</p>
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp">h<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> </code></pre></p>
+<p>同时，若我们将<span class="math inline">\(h_{n}\)</span>表示为把<span
+class="math inline">\(n\)</span>个盘子从<span
+class="math inline">\(a\)</span>挪到<span
+class="math inline">\(c\)</span>所需要的次数。结合上面的求解示意图，很容易就能发现：总时先借助<span
+class="math inline">\(c\)</span>柱把上面的<span
+class="math inline">\(n-1\)</span>个盘子移动到<span
+class="math inline">\(b\)</span>柱，接着把<span
+class="math inline">\(a\)</span>最下面的盘子挪到<span
+class="math inline">\(c\)</span>柱上，最后把<span
+class="math inline">\(b\)</span>上的<span
+class="math inline">\(n-1\)</span>个盘子移动到<span
+class="math inline">\(c\)</span>柱上，由于实际上每个柱的编号不重要，可以得出移动次数为：<span
+class="math inline">\(h_{n-1}+1+h_{n-1}\)</span></p>
+<p>于是得到递推表达式：<span
+class="math inline">\(h_n=2*h_{n-1}+1\)</span>，边界条件为<span
+class="math inline">\(h_1=1\)</span></p>
+<p>求解汉诺塔问题移动次数的具体实现如下： <pre class="language-cpp" data-language="cpp"><code class="language-cpp">h<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-	h<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>h<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre>
-
-<p>最后留下一道<a target="_blank" rel="noopener" href="https://vjudge.net/problem/%E8%AE%A1%E8%92%9C%E5%AE%A2-T2118">过河卒</a>作为练习，其代码实现如下：</p>
+	h<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token operator">*</span>h<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre></p>
+<p>最后留下一道<a
+target="_blank" rel="noopener" href="https://vjudge.net/problem/%E8%AE%A1%E8%92%9C%E5%AE%A2-T2118">过河卒</a>作为练习，其代码实现如下：
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;cstring></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;cstdio></span></span>
@@ -391,11 +410,9 @@ ll f<span class="token punctuation">[</span><span class="token number">40</span>
     <span class="token punctuation">&#125;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld\n"</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>bx<span class="token punctuation">]</span><span class="token punctuation">[</span>by<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> </code></pre>
-
-
-<hr>
-<p>参考自：<br>《信息学奥赛一本通》<br>《挑战程序设计竞赛》</p>
+<span class="token punctuation">&#125;</span> </code></pre></p>
+<hr />
+<p>参考自： 《信息学奥赛一本通》 《挑战程序设计竞赛》</p>
 
     </div>
 

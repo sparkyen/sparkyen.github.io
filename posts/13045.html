@@ -282,7 +282,14 @@
 <li><strong>特征</strong>：能将问题分解为能两两合并的形式，能将两个或多个部分进行整合。</li>
 <li><strong>求解</strong>：对整个问题设最优值，枚举合并点，将问题分解为左右两个部分，最后合并两个部分的最优值得到原问题的最优值。</li>
 </ul>
-<p>这里以<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1775">洛谷-P1775 石子合并（弱化版）</a> 为例说明，根据题意可以将$f[i][j]$表示为把第$i$堆到第$j$堆的石头合并为一堆的最优值，求出$f[1][n]$即为答案。将第$i$堆到第$j$堆的石头合并为一堆前，必然会有这样的一个过程：<strong>将区间左边的合为一堆、区间右边合为一堆，最后再将左右两堆合为一堆</strong>。因此区间长度更长的信息一定由区间长度更短的信息转移得到，因此我们需要将区间短的信息先求出来，之后通过中间的划分点来枚举转移的最优值。最后需要注意递推边界的初始化：</p>
+<p>这里以<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1775">洛谷-P1775
+石子合并（弱化版）</a> 为例说明，根据题意可以将<span
+class="math inline">\(f[i][j]\)</span>表示为把第<span
+class="math inline">\(i\)</span>堆到第<span
+class="math inline">\(j\)</span>堆的石头合并为一堆的最优值，求出<span
+class="math inline">\(f[1][n]\)</span>即为答案。将第<span
+class="math inline">\(i\)</span>堆到第<span
+class="math inline">\(j\)</span>堆的石头合并为一堆前，必然会有这样的一个过程：<strong>将区间左边的合为一堆、区间右边合为一堆，最后再将左右两堆合为一堆</strong>。因此区间长度更长的信息一定由区间长度更短的信息转移得到，因此我们需要将区间短的信息先求出来，之后通过中间的划分点来枚举转移的最优值。最后需要注意递推边界的初始化：
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">memset</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> <span class="token number">0x3f</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//INF</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	sum<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> sum<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -295,11 +302,16 @@
 			f<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token operator">+</span>f<span class="token punctuation">[</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 		f<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">+=</span> sum<span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token operator">-</span>sum<span class="token punctuation">[</span>l<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-
+<span class="token punctuation">&#125;</span></code></pre></p>
 <p>假设这里石头并不是一条链而是围成一个圆环，那么这时将这些石子合并的最优值该怎么求解呢？</p>
-<p>我们将这条链延长两倍，变成$2*n$堆，这样就能枚举到所有将环分开成链的位置，如下所示：</p>
-<p>$$1 \quad 2\quad 3\quad 4 \quad … \quad n \quad 1 \quad 2\quad 3 \quad 4 \quad …. \quad n$$<br>求解后取$f(1,n), f(2, n+1), …, f(n, n+n-1)$中的最优值，即为最后的答案。这里以<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1880">洛谷-P1880 [NOI1995] 石子合并</a>说明：</p>
+<p>我们将这条链延长两倍，变成<span
+class="math inline">\(2*n\)</span>堆，这样就能枚举到所有将环分开成链的位置，如下所示：</p>
+<p><span class="math display">\[1 \quad 2\quad 3\quad 4 \quad ... \quad
+n \quad 1 \quad 2\quad 3 \quad 4 \quad .... \quad n\]</span>
+求解后取<span class="math inline">\(f(1,n), f(2, n+1), ..., f(n,
+n+n-1)\)</span>中的最优值，即为最后的答案。这里以<a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1880">洛谷-P1880 [NOI1995]
+石子合并</a>说明：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">110</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> n<span class="token punctuation">,</span> a<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">,</span> sum<span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> f<span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>maxn<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>maxn<span class="token punctuation">]</span><span class="token punctuation">,</span> g<span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>maxn<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -334,8 +346,10 @@
 	<span class="token punctuation">&#125;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n%d"</span><span class="token punctuation">,</span> minRes<span class="token punctuation">,</span> maxRes<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span> </code></pre>
-
-<p>将以上内容弄清楚后，可以以<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1063">洛谷-P1063 [NOIP2006 提高组] 能量项链</a>为练习试试看自己是否掌握，这题需要注意合并价值的计算方法即可：</p>
+<p>将以上内容弄清楚后，可以以<a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1063">洛谷-P1063 [NOIP2006
+提高组]
+能量项链</a>为练习试试看自己是否掌握，这题需要注意合并价值的计算方法即可：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">110</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> n<span class="token punctuation">,</span> a<span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> f<span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>maxn<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -356,10 +370,9 @@
 	<span class="token punctuation">&#125;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span> </code></pre>
-
-
-<hr>
-<p>参考自:<br><a target="_blank" rel="noopener" href="https://oi-wiki.org/dp/interval/">区间 DP</a><br>《信息学奥赛一本通》<br>《算法竞赛进阶指南》</p>
+<hr />
+<p>参考自: <a target="_blank" rel="noopener" href="https://oi-wiki.org/dp/interval/">区间 DP</a>
+《信息学奥赛一本通》 《算法竞赛进阶指南》</p>
 
     </div>
 
