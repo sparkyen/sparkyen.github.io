@@ -27,10 +27,12 @@
 <meta property="og:description" content="介绍最小生成树的概念，并不带证明的讲解Prim和Kruskal算法，中间会穿插算法的优化">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/prim算法.png">
+<meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/并查集初始化.png">
 <meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/并查集合并1.png">
 <meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/并查集合并1.png">
+<meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/并查集合并2.png">
 <meta property="article:published_time" content="2022-07-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-02T13:08:14.931Z">
+<meta property="article:modified_time" content="2022-08-02T16:26:14.967Z">
 <meta property="article:author" content="sparkyen">
 <meta property="article:tag" content="publication">
 <meta property="article:tag" content="NOI暑假集训">
@@ -148,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#prim%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">Prim算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kruskal-%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Kruskal 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="nav-number">2.1.</span> <span class="nav-text">并查集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prim%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Prim算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kruskal-%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">Kruskal 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E6%9F%A5%E9%9B%86"><span class="nav-number">3.1.</span> <span class="nav-text">并查集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -174,7 +176,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -282,10 +284,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>和最短路径相似，甚至比它更加不注重证明过程，知道最小生成树的概念以及如何去求就已经足够了，将不再详细注明证明过程。实话实说这个证明看一次理解一次，过段时间又会忘掉，并且重点就是每次重新理解最小生成树算法的正确性还得花费一定的时间，并不是说我能够用一种很形象的理解一下子就能够回想起来。
-## 概念 <strong>生成子图：</strong> 对一张图 <span
-class="math inline">\(G = (V, E)\)</span>，若存在另一张图 <span
-class="math inline">\(H = (V&#39;, E&#39;)\)</span> 满足 <span
+        <p>和最短路径相似，甚至比它更加不注重证明过程，知道最小生成树的概念以及如何去求就已经足够了，将不再详细注明证明过程。实话实说这个证明看一次理解一次，过段时间又会忘掉，并且重点就是每次重新理解最小生成树算法的正确性还得花费一定的时间，并不是说我能够用一种很形象的理解一下子就能够回想起来。</p>
+<h2 id="概念">概念</h2>
+<p><strong>生成子图：</strong><br />
+对一张图 <span class="math inline">\(G = (V, E)\)</span>，若存在另一张图
+<span class="math inline">\(H = (V&#39;, E&#39;)\)</span> 满足 <span
 class="math inline">\(V&#39; \subseteq V\)</span> 且 <span
 class="math inline">\(E&#39; \subseteq E\)</span>，则称 <span
 class="math inline">\(H\)</span> 是 <span
@@ -297,24 +300,25 @@ class="math inline">\(V&#39; = V\)</span>，则称 <span
 class="math inline">\(H\)</span> 为 <span
 class="math inline">\(G\)</span> 的 <strong>生成子图(spanning
 subgraph)</strong></p>
-<p><strong>生成树：</strong>
+<p><strong>生成树：</strong><br />
 一个连通无向图的生成子图，同时要求是树。也即在图的边集中选择<span
 class="math inline">\(n-1\)</span>条，将所有顶点连通。(<span
 class="math inline">\(n\)</span>个节点的树有<span
 class="math inline">\(n-1\)</span>条边)</p>
 <p>我们定义无向连通图的 <strong>最小生成树</strong>（Minimum Spanning
 Tree，MST）为边权和最小的生成树。</p>
-<p><code>注意</code>
+<p><code>注意</code><br />
 只有连通图才有生成树，而对于非连通图，只存在生成森林。</p>
 <h2 id="prim算法">Prim算法</h2>
 <p>首先，我们假设有一颗只包含一个顶点<span
 class="math inline">\(v\)</span>的树<span
 class="math inline">\(T\)</span>。然后贪心地选取<span
 class="math inline">\(T\)</span>和其他顶点之间相连地最小权值的边，并把它加到<span
-class="math inline">\(T\)</span>中。不断进行这个操作，就可以得到一颗生成树了。如下图所示：
+class="math inline">\(T\)</span>中。不断进行这个操作，就可以得到一颗生成树了。如下图所示：<br />
 <img data-src="../images/NOI暑假培训/算法专题/图论/prim算法.png" /></p>
-<p>下面以<a href="">洛谷-P3366 【模板】最小生成树</a>为例说明： 1.
-一种是原始的prim算法 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<p>下面以<a href="">洛谷-P3366 【模板】最小生成树</a>为例说明：</p>
+<ol type="1">
+<li><p>一种是原始的prim算法 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
@@ -365,9 +369,8 @@ class="math inline">\(T\)</span>中。不断进行这个操作，就可以得到
 	<span class="token function">prim1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>tot<span class="token operator">==</span>n<span class="token punctuation">)</span> cout <span class="token operator">&lt;&lt;</span> ans<span class="token punctuation">;</span>
 	<span class="token keyword">else</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"orz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> </code></pre></p>
-<ol start="2" type="1">
-<li>另一种是用堆优化每次取出生成树距离最近的点，其中对于<code>if(vis[u]) continue</code>的解释为：节点已经加入生成树则忽略，如下图所示
+<span class="token punctuation">&#125;</span> </code></pre></p></li>
+<li><p>另一种是用堆优化每次取出生成树距离最近的点，其中对于<code>if(vis[u]) continue</code>的解释为：节点已经加入生成树则忽略，如下图所示<br />
 <img data-src="../images/NOI暑假培训/算法专题/图论/最小生成树%20prim算法%20vis%5B%5D的使用.png" />
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">node</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">int</span> pos<span class="token punctuation">,</span> dis<span class="token punctuation">;</span>
@@ -394,7 +397,7 @@ class="math inline">\(T\)</span>中。不断进行这个操作，就可以得到
 			<span class="token punctuation">&#125;</span>
 		<span class="token punctuation">&#125;</span>
 	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre></li>
+<span class="token punctuation">&#125;</span></code></pre></p></li>
 </ol>
 <h2 id="kruskal-算法">Kruskal 算法</h2>
 <p>Kruskal
@@ -410,20 +413,23 @@ class="math inline">\(u\)</span>和<span
 class="math inline">\(v\)</span>在同一个联通分量里，那么一定会产生圈。可以使用并查集高效地判断是否属于同一个联通分量。</p>
 <h3 id="并查集">并查集</h3>
 <p>并查集就是维护了几个动态的集合。集合中的每一个元素都标记了一个父节点，同一个集合的代表是相同的。<strong>当一个元素的父节点就是他本身时，它就是该集合的代表。</strong></p>
-<p><strong>初始时</strong> <img data-src="../images/NOI暑假培训/算法专题/图论/并查集初始化.png" />
-<strong>合并</strong>
-从一个组的根向另一个组的根连边，这样两颗树就变成了一棵树，也就把两个组合并为一个组了
+<p><strong>初始时</strong><br />
+<img data-src="../images/NOI暑假培训/算法专题/图论/并查集初始化.png" /><br />
+<strong>合并</strong><br />
+从一个组的根向另一个组的根连边，这样两颗树就变成了一棵树，也就把两个组合并为一个组了<br />
 <img data-src="../images/NOI暑假培训/算法专题/图论/并查集合并1.png" /></p>
-<p><strong>查询</strong>
-沿着树向上走就能查询到包含着这个元素的树的根是谁。若两个节点走到同一个根，代表属于同一个集合。
-<img data-src="../images/NOI暑假培训/算法专题/图论/并查集合并1.png" /> <img data-src="../images/NOI暑假培训/算法专题/图论/并查集合并2.png" />
-<strong><code>路径压缩</code></strong>
-通过路径压缩，可以使得并查集更加高效，一旦向上到了一次根节点，就把这个点到父亲的边改为直接连向根
+<p><strong>查询</strong><br />
+沿着树向上走就能查询到包含着这个元素的树的根是谁。若两个节点走到同一个根，代表属于同一个集合。<br />
+<img data-src="../images/NOI暑假培训/算法专题/图论/并查集合并1.png" /><br />
+<img data-src="../images/NOI暑假培训/算法专题/图论/并查集合并2.png" /><br />
+<strong><code>路径压缩</code></strong><br />
+通过路径压缩，可以使得并查集更加高效，一旦向上到了一次根节点，就把这个点到父亲的边改为直接连向根<br />
 <img data-src="../images/NOI暑假培训/算法专题/图论/并查集路径压缩1.png" /></p>
-<p>在此之上，不仅仅是所查询的节点，在查询过程中向上经过的所有节点，都改为直接连到根上。这样再次查询这些节点时，就可以很快知道根是谁了。
+<p>在此之上，不仅仅是所查询的节点，在查询过程中向上经过的所有节点，都改为直接连到根上。这样再次查询这些节点时，就可以很快知道根是谁了。<br />
 <img data-src="../images/NOI暑假培训/算法专题/图论/并查集路径压缩2.png" /></p>
 <p>下面以为<a target="_blank" rel="noopener" href="https://vjudge.net/problem/HDU-1232">HDU-1232
-畅通工程</a>例说明其具体实现，细节见注释： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+畅通工程</a>例说明其具体实现，细节见注释：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">1e3</span><span class="token operator">+</span><span class="token number">100</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
@@ -453,9 +459,10 @@ class="math inline">\(v\)</span>在同一个联通分量里，那么一定会产
 			<span class="token keyword">if</span><span class="token punctuation">(</span>fa<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>i<span class="token punctuation">)</span> cnt<span class="token operator">++</span><span class="token punctuation">;</span>
 		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> cnt<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <p>至此，对并查集有了基本的理解。接着我们可以用并查集维护Kruskal
-算法中的联通分量： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+算法中的联通分量：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span> </span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
@@ -491,7 +498,7 @@ class="math inline">\(v\)</span>在同一个联通分量里，那么一定会产
 	<span class="token function">kruskal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>cnt<span class="token operator">==</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> cout <span class="token operator">&lt;&lt;</span> ans<span class="token punctuation">;</span>
 	<span class="token keyword">else</span> <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"orz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> </code></pre></p>
+<span class="token punctuation">&#125;</span> </code></pre>
 <h2 id="总结">总结</h2>
 <p>在稠密图中，原版的Prim算法复杂度较优，但在稀疏图中，堆优化的Prim以及Kruskal算法表现会更好。在应用时，我们可以根据实际情况选择最优的算法。</p>
 

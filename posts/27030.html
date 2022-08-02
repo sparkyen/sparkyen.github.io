@@ -29,8 +29,9 @@
 <meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/最短路1-1.png">
 <meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/最短路1-2.png">
 <meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/最短路1-3.png">
+<meta property="og:image" content="http://example.com/images/NOI暑假培训/算法专题/图论/dijkstra.png">
 <meta property="article:published_time" content="2022-07-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-02T13:08:14.933Z">
+<meta property="article:modified_time" content="2022-08-02T16:26:14.968Z">
 <meta property="article:author" content="sparkyen">
 <meta property="article:tag" content="publication">
 <meta property="article:tag" content="NOI暑假集训">
@@ -148,7 +149,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="nav-number">1.</span> <span class="nav-text">图的存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">2.</span> <span class="nav-text">单源最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%BE%E5%BC%9B%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">松弛操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text">具体实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.1.2.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bellman-ford%E7%AE%97%E6%B3%95%E5%92%8Cspfa%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">Bellman-Ford算法和SPFA算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%9F%E7%8E%AF%E5%88%A4%E6%96%AD"><span class="nav-number">2.2.1.</span> <span class="nav-text">负环判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%9F%E5%88%97%E4%BC%98%E5%8C%96spfa"><span class="nav-number">2.2.2.</span> <span class="nav-text">队列优化SPFA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">3.</span> <span class="nav-text">多源最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E4%BC%A0%E9%80%92%E9%97%AD%E5%8C%85"><span class="nav-number">3.1.1.</span> <span class="nav-text">求传递闭包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">输出方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E5%B7%A9%E5%9B%BA"><span class="nav-number">5.</span> <span class="nav-text">练习巩固</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8"><span class="nav-number">2.</span> <span class="nav-text">图的存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5"><span class="nav-number">2.1.</span> <span class="nav-text">邻接矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%BB%E6%8E%A5%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">邻接表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F"><span class="nav-number">2.2.1.</span> <span class="nav-text">链式前向星</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">3.</span> <span class="nav-text">单源最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%BE%E5%BC%9B%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">松弛操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dijkstra%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">Dijkstra算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E6%80%9D%E6%83%B3"><span class="nav-number">3.2.1.</span> <span class="nav-text">重要思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.2.2.</span> <span class="nav-text">具体实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.2.3.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bellman-ford%E7%AE%97%E6%B3%95%E5%92%8Cspfa%E7%AE%97%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">Bellman-Ford算法和SPFA算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%9F%E7%8E%AF%E5%88%A4%E6%96%AD"><span class="nav-number">3.3.1.</span> <span class="nav-text">负环判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%9F%E5%88%97%E4%BC%98%E5%8C%96spfa"><span class="nav-number">3.3.2.</span> <span class="nav-text">队列优化SPFA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84"><span class="nav-number">4.</span> <span class="nav-text">多源最短路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#floyd%E7%AE%97%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">Floyd算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%82%E4%BC%A0%E9%80%92%E9%97%AD%E5%8C%85"><span class="nav-number">4.2.1.</span> <span class="nav-text">求传递闭包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%96%B9%E6%A1%88"><span class="nav-number">5.</span> <span class="nav-text">输出方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E5%B7%A9%E5%9B%BA"><span class="nav-number">6.</span> <span class="nav-text">练习巩固</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -174,7 +175,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -282,32 +283,37 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>本来的思路是想像当年我学最短路一样，讲解算法的证明，但是后来仔细一想发现这样他们既不能很好的理解，又不能很好的在比赛中发挥出来。由于人的精力有限并且有的知识点本身就不常用，在此选择教授最常用的内容并用通俗易懂的方式讲给他们听。
-## 前言
-在最基本的广度优先搜索中,每次沿着分支的扩展都记为“一步”，我们通过逐层搜索,解决了求从起始状态到每个状态的最少步数的问题。这其实等价于在一张边权均为1的图上执行广度优先遍历，求出每个点相对于起点的最短距离(层次)</p>
+        <p>本来的思路是想像当年我学最短路一样，讲解算法的证明，但是后来仔细一想发现这样他们既不能很好的理解，又不能很好的在比赛中发挥出来。由于人的精力有限并且有的知识点本身就不常用，在此选择教授最常用的内容并用通俗易懂的方式讲给他们听。</p>
+<h2 id="前言">前言</h2>
+<p>在最基本的广度优先搜索中,每次沿着分支的扩展都记为“一步”，我们通过逐层搜索,解决了求从起始状态到每个状态的最少步数的问题。这其实等价于在一张边权均为1的图上执行广度优先遍历，求出每个点相对于起点的最短距离(层次)</p>
 <p>然而，如果图上的边权不全是1呢?换句话说，如果每次扩展都有各自不同的“代价”，我们想求出起始状态到每个状态的最小代价,应该怎么办呢?</p>
-<p>对于更加具有普适性的情况，也就是每次扩展都有各自不同的“代价”时，求出起始状态到每个状态的最小代价，就相当于在一张带权图上求出从起点到每个节点的最短路。此时，我们有两个解决方案:
-<strong>方法一</strong> 仍然使用一般的广搜，采用一般的队列。</p>
+<p>对于更加具有普适性的情况，也就是每次扩展都有各自不同的“代价”时，求出起始状态到每个状态的最小代价，就相当于在一张带权图上求出从起点到每个节点的最短路。此时，我们有两个解决方案:<br />
+<strong>方法一</strong><br />
+仍然使用一般的广搜，采用一般的队列。</p>
 <p>这时我们不再能保证每个状态第一次入队时就能得到最小代价，所以只能允许一个状态被多次更新、多次进出队列。我们不断执行搜索，直到队列为空。</p>
 <p>整个广搜算法对搜索树进行了重复遍历与更新，直至“收敛”到最优解，其实也就是“迭代”的思想。</p>
 <p>对应在最短路问题中，就是我们将会介绍的SPFA 算法。</p>
-<p><strong>方法二</strong> 改用优先队列进行广搜。</p>
+<p><strong>方法二</strong><br />
+改用优先队列进行广搜。</p>
 <p>这里的“优先队列”就相当于一个二叉堆。我们可以每次从队列中取出当前代价最小的状态进行扩展(该状态一定已经是最优的,因为队列中其他状态的当前代价都不小于它,所以以后就不可能再更新它了),沿着各条分支把到达的新状态加入优先队列。不断执行搜索，直到队列为空。</p>
 <p>对应在最短路问题中，就是我们将会介绍的堆优化的 Dijkstra算法。</p>
 <h2 id="图的存储">图的存储</h2>
-<p>想要对图进行操作，就需要先学习图的存储方式。 ### 邻接矩阵
-使用一个二维数组 <code>edge</code> 来存边，其中 <code>edge[u][v]</code>
-为 1 表示存在 <span class="math inline">\(u\)</span> 到 <span
+<p>想要对图进行操作，就需要先学习图的存储方式。</p>
+<h3 id="邻接矩阵">邻接矩阵</h3>
+<p>使用一个二维数组 <code>edge</code> 来存边，其中
+<code>edge[u][v]</code> 为 1 表示存在 <span
+class="math inline">\(u\)</span> 到 <span
 class="math inline">\(v\)</span> 的边，为 0
 表示不存在。如果是带边权的图，可以在 <code>edge[u][v]</code> 中存储
 <span class="math inline">\(u\)</span> 到 <span
 class="math inline">\(v\)</span> 的边的边权。</p>
-<p>邻接矩阵在稀疏图上效率很低（尤其是在点数较多的图上，空间无法承受），所以一般只会在稠密图上使用邻接矩阵。
-### 邻接表
-使用一个支持动态增加元素的数据结构构成的数组，如 <code>vector&lt;pair&lt;int,int&gt; &gt; edge[n]</code> 来存边，其中 <code>edge[u]</code> 存储的是点<span
+<p>邻接矩阵在稀疏图上效率很低（尤其是在点数较多的图上，空间无法承受），所以一般只会在稠密图上使用邻接矩阵。</p>
+<h3 id="邻接表">邻接表</h3>
+<p>使用一个支持动态增加元素的数据结构构成的数组，如 <code>vector&lt;pair&lt;int,int&gt; &gt; edge[n]</code> 来存边，其中 <code>edge[u]</code> 存储的是点<span
 class="math inline">\(u\)</span>的所有出边的相关信息（终点、边权等）。</p>
-<p>存各种图都很适合，尤其适用于需要对一个点的所有出边进行排序的场合。
-#### 链式前向星 本质上是用链表实现的邻接表，具体实现如下：
+<p>存各种图都很适合，尤其适用于需要对一个点的所有出边进行排序的场合。</p>
+<h4 id="链式前向星">链式前向星</h4>
+<p>本质上是用链表实现的邻接表，具体实现如下：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> <span class="token keyword">int</span> v<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   nxt<span class="token punctuation">[</span><span class="token operator">++</span>cnt<span class="token punctuation">]</span> <span class="token operator">=</span> head<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// 当前边的后继</span>
   head<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> cnt<span class="token punctuation">;</span>         <span class="token comment">// 起点 u 的第一条边</span>
@@ -316,12 +322,12 @@ class="math inline">\(u\)</span>的所有出边的相关信息（终点、边权
 <span class="token comment">// 遍历 u 的出边</span>
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> head<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span> i<span class="token punctuation">;</span> i <span class="token operator">=</span> nxt<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  
   <span class="token keyword">int</span> v <span class="token operator">=</span> to<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <p>将<span class="math inline">\(to\)</span>数组和<span
-class="math inline">\(nxt\)</span>数组信息写在结构体里也是可以的：
+class="math inline">\(nxt\)</span>数组信息写在结构体里也是可以的：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">edge</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">int</span> to<span class="token punctuation">,</span> nxt<span class="token punctuation">,</span> cost<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>e<span class="token punctuation">[</span>maxm<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></p>
+<span class="token punctuation">&#125;</span>e<span class="token punctuation">[</span>maxm<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <h2 id="单源最短路径">单源最短路径</h2>
 <h3 id="松弛操作">松弛操作</h3>
 <p>先介绍最短路径要用到的松弛操作，这是这类算法的理论基础：</p>
@@ -333,12 +339,12 @@ class="math inline">\(dis_v\)</span>的变成<span
 class="math inline">\(dis_u+w\)</span>，因为这代表这从<span
 class="math inline">\(s\)</span>走到<span
 class="math inline">\(u\)</span>经过这条边再走到<span
-class="math inline">\(v\)</span>是一条未被发现过的，且比原先的最优路径还要短的边
-### Dijkstra算法
-Dijkstra算法是典型最短路径算法，用于计算一个节点到其他节点的最短路径。
-它的主要特点是以起始点为中心向外层层扩展(广度优先搜索思想)，直到扩展到终点为止。
-#### 重要思想
-以前学习的时候参考了《算法》、《挑战程序设计》还有网上博客等等，大多时候都是用数学归纳法或者其他的严谨证明，然而事实是每隔一段时间不接触就会忘记其正确性是如何被证明的。最后要么就是不理解，要么就是又重新证明一遍，依次反复，这不是个办法。因此还是要形象、通俗易懂的理解较好，下面引用当时考PTA甲级时候的思考：</p>
+class="math inline">\(v\)</span>是一条未被发现过的，且比原先的最优路径还要短的边</p>
+<h3 id="dijkstra算法">Dijkstra算法</h3>
+<p>Dijkstra算法是典型最短路径算法，用于计算一个节点到其他节点的最短路径。
+它的主要特点是以起始点为中心向外层层扩展(广度优先搜索思想)，直到扩展到终点为止。</p>
+<h4 id="重要思想">重要思想</h4>
+<p>以前学习的时候参考了《算法》、《挑战程序设计》还有网上博客等等，大多时候都是用数学归纳法或者其他的严谨证明，然而事实是每隔一段时间不接触就会忘记其正确性是如何被证明的。最后要么就是不理解，要么就是又重新证明一遍，依次反复，这不是个办法。因此还是要形象、通俗易懂的理解较好，下面引用当时考PTA甲级时候的思考：</p>
 <blockquote>
 <p>在一棵树中，一个结点到另一个结点的路径是唯一的，但在图中，结点之间可能有多条路径，其中哪条路最近呢？这一类问题称为最短路径问题。最短路径问题也是
 <span class="math inline">\(BFS\)</span>
@@ -371,13 +377,14 @@ class="math inline">\(dis\)</span>值最小的一个</li>
 <li>对该点进行标记</li>
 <li>重复第二步至第四步，直到不存在一条从已标记点通往未标记点的连边</li>
 </ol>
-<p>示例见下图： <img data-src="../images/NOI暑假培训/算法专题/图论/dijkstra.png" /></p>
+<p>示例见下图：<br />
+<img data-src="../images/NOI暑假培训/算法专题/图论/dijkstra.png" /></p>
 <p><strong>与每次花费<span
 class="math inline">\(O(n)\)</span>的时间寻找<span
 class="math inline">\(dis\)</span>最小的点相比，我们可以使用一个小根堆来维护<span
 class="math inline">\(dis\)</span>最小的点</strong>。每次松弛成功时，将被松弛的边的终点和对应的<span
 class="math inline">\(dis\)</span>打包放入堆中，需要<span
-class="math inline">\(dis\)</span>最小的点时将堆顶端的点取出即可。代码实现如下：
+class="math inline">\(dis\)</span>最小的点时将堆顶端的点取出即可。代码实现如下：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">node</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> to<span class="token punctuation">,</span> cost<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
@@ -405,17 +412,17 @@ vector<span class="token operator">&lt;</span>node<span class="token operator">>
         g<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">pb</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>v<span class="token punctuation">,</span> cost<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> g<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">pb</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>u<span class="token punctuation">,</span> cost<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 	<span class="token function">dijkstra</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
-<p><code>语法参考</code>
-<strong>priority_queue</strong>是种一种功能强大的队列，本质是一个堆
-比较方式默认用operator&lt;，所以如果把后面2个参数缺省的话，优先队列就是大顶堆（降序），队头元素最大。
+<span class="token punctuation">&#125;</span></code></pre>
+<p><code>语法参考</code><br />
+<strong>priority_queue</strong>是种一种功能强大的队列，本质是一个堆<br />
+比较方式默认用operator&lt;，所以如果把后面2个参数缺省的话，优先队列就是大顶堆（降序），队头元素最大。</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//下面两种优先队列的定义是等价的</span>
 priority_queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span><span class="token comment">//默认的优先队列</span>
 priority_queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">,</span>less<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">></span> q<span class="token punctuation">;</span>
 <span class="token comment">//注意最后两个“>”符号不要连在一起，否则会被很多（但不是所有）编译器误认为是‘>>’运算符</span></code></pre>
-如果想让优先队列总是把最小的元素放在队首，只需进行如下的定义：
-<pre class="language-cpp" data-language="cpp"><code class="language-cpp"> priority_queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">,</span>greater<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">></span>q<span class="token punctuation">;</span> </code></pre> less 表示数字大的优先级高，而
-greater表示数字小的优先级高</p>
+<p>如果想让优先队列总是把最小的元素放在队首，只需进行如下的定义：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"> priority_queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">,</span>greater<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">></span>q<span class="token punctuation">;</span> </code></pre>
+<p>less 表示数字大的优先级高，而 greater表示数字小的优先级高</p>
 <h4 id="注意事项">注意事项</h4>
 <p><strong>Dijkstra算法不适用于边长出现负数的情况</strong>。要证明一个问题是正确的我们需要从多方面严谨推理，但是要说明一个问题是错误的，我们只需举个反例即可。</p>
 <p>如下图，我们设置<span
@@ -432,7 +439,8 @@ class="math inline">\(CB\)</span>更新，因此最后<span
 class="math inline">\(dist[B]\)</span>就是-1，但显然<span
 class="math inline">\(A\)</span>到<span
 class="math inline">\(B\)</span>的最短路为<span
-class="math inline">\(A\rightarrow C\rightarrow B\)</span>的-4 <img data-src="../images/NOI暑假培训/算法专题/图论/dijkstra%20负权图示例图.png" /></p>
+class="math inline">\(A\rightarrow C\rightarrow B\)</span>的-4<br />
+<img data-src="../images/NOI暑假培训/算法专题/图论/dijkstra%20负权图示例图.png" /></p>
 <h3 id="bellman-ford算法和spfa算法">Bellman-Ford算法和SPFA算法</h3>
 <p>Bellman-Ford
 算法是一种基于松弛（relax）操作的最短路算法，可以求出有负权的图的最短路，并可以对最短路不存在的情况进行判断。</p>
@@ -449,7 +457,8 @@ class="math inline">\(n-1\)</span> 轮松弛操作。</p>
 <span class="math inline">\(n-1\)</span> 轮，因此如果第 <span
 class="math inline">\(n\)</span> 轮循环时仍然存在能松弛的边，说明从
 <span class="math inline">\(S\)</span> 点出发，能够抵达一个负环。</p>
-<p>具体实现如下： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">edge</span> <span class="token punctuation">&#123;</span>
+<p>具体实现如下：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">edge</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">int</span> v<span class="token punctuation">,</span> w<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 vector<span class="token operator">&lt;</span>edge<span class="token operator">></span> e<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -480,8 +489,8 @@ vector<span class="token operator">&lt;</span>edge<span class="token operator">>
   <span class="token punctuation">&#125;</span>
   <span class="token comment">// 第 n 轮循环仍然可以松弛时说明 s 点可以抵达一个负环</span>
   <span class="token keyword">return</span> flag<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
-<p><strong><code>负环判断中存在的常见误区</code></strong>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><strong><code>负环判断中存在的常见误区</code></strong><br />
 需要注意的是，以 <span class="math inline">\(S\)</span> 点为源点跑
 Bellman-Ford 算法时，如果没有给出存在负环的结果，只能说明从 <span
 class="math inline">\(S\)</span>
@@ -494,8 +503,8 @@ class="math inline">\(S\)</span>
 <p>那么我们用队列来维护“哪些结点可能会引起松弛操作”，就能只访问必要的边了。具体实现如下：</p>
 <p><strong>其中<span
 class="math inline">\(vis[]\)</span>用于记录每个点是否处在队列中</strong>，其作用例子如下图所示，搜索过的点（如图中先染上橙色后为黄色的点）可能还需要继续更新，这就是为什么<span
-class="math inline">\(vis[]\)</span>标记一个点入队并使用完后，要取消标记的原因
-<img data-src="../images/NOI暑假培训/算法专题/图论/spfa%20vis%5B%5D数组示例.png" />
+class="math inline">\(vis[]\)</span>标记一个点入队并使用完后，要取消标记的原因<br />
+<img data-src="../images/NOI暑假培训/算法专题/图论/spfa%20vis%5B%5D数组示例.png" /></p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">edge</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">int</span> v<span class="token punctuation">,</span> w<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
@@ -527,20 +536,22 @@ queue<span class="token operator">&lt;</span><span class="token keyword">int</sp
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span>
   <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
-<p><code>注意</code> 在没有负权边时最好使用 Dijkstra
+<span class="token punctuation">&#125;</span></code></pre>
+<p><code>注意</code><br />
+在没有负权边时最好使用 Dijkstra
 算法，因为出题人构造特定数据可能使其超时</p>
 <h2 id="多源最短路径">多源最短路径</h2>
-<p>同样是最短路径问题，而和单源最短路径不同的是它需要处理从不同点出发的最短路径
-### Floyd算法 采用动态规划的思路。设<span class="math inline">\(dis[i,
-j, k]\)</span>表示途径编号<span class="math inline">\(1\sim
+<p>同样是最短路径问题，而和单源最短路径不同的是它需要处理从不同点出发的最短路径</p>
+<h3 id="floyd算法">Floyd算法</h3>
+<p>采用动态规划的思路。设<span class="math inline">\(dis[i, j,
+k]\)</span>表示途径编号<span class="math inline">\(1\sim
 k\)</span>的点时，<span class="math inline">\(i\)</span>到<span
 class="math inline">\(j\)</span>的最短路的长度。答案就是<span
 class="math inline">\(dis[i, j, n]\)</span></p>
 <p>考虑递推关系，可以选择经过 / 不经过第<span
-class="math inline">\(k\)</span>个点： <span
-class="math display">\[dis[i, j, k] = min(dis[i, j, k-1], dis[i, k,
-k-1]+dis[k, j, k-1])\]</span></p>
+class="math inline">\(k\)</span>个点：<br />
+<span class="math display">\[dis[i, j, k] = min(dis[i, j, k-1], dis[i,
+k, k-1]+dis[k, j, k-1])\]</span></p>
 <p>特别需要注意<code>dis[x][y][0]</code>：<span
 class="math inline">\(x\)</span> 与 <span
 class="math inline">\(y\)</span> 的边权，或者 <span
@@ -557,11 +568,12 @@ class="math inline">\(+\infty\)</span>）。</p>
 <p>由于在递推过程中，第三维为<span
 class="math inline">\(k\)</span>时需要用到第三维为<span
 class="math inline">\(k-1\)</span>的数据，所以在枚举时应当先枚举第三维<span
-class="math inline">\(k\)</span>，如下所示： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span>
+class="math inline">\(k\)</span>，如下所示：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span>
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
-			dis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>dis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span>dis<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span></code></pre></p>
-<p>回忆下01背包滚动数据优化空间的办法，就能发现这里同样能够进行优化，只需要把递推式写成：
+			dis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>dis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span>dis<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span></code></pre>
+<p>回忆下01背包滚动数据优化空间的办法，就能发现这里同样能够进行优化，只需要把递推式写成：<br />
 <span class="math display">\[dis[i, j] = min(dis[i, j], dis[i, k]+dis[k,
 j])\]</span></p>
 <p>可以证明，当存在负权边时Floyd算法正确性可以保证。</p>
@@ -572,11 +584,11 @@ j])\]</span></p>
 k]\)</span>表示途径编号<span class="math inline">\(1\sim
 k\)</span>的点时，<span
 class="math inline">\(i\)</span>能否直接或间接到达<span
-class="math inline">\(j\)</span>即可，写出递推关系式： <span
-class="math display">\[f[i, j, k] = f[i, j, k] \vee f[i, k, k-1]\wedge
-f[k, j, k-1]\]</span></p>
+class="math inline">\(j\)</span>即可，写出递推关系式：<br />
+<span class="math display">\[f[i, j, k] = f[i, j, k] \vee f[i, k,
+k-1]\wedge f[k, j, k-1]\]</span></p>
 <p>同理，可以用滚动数组优化空间。</p>
-<p><code>提示</code>
+<p><code>提示</code><br />
 许多算法竞赛题目看起来和图没什么关系，但是如果可以找到状态节点和连接不同节点的边，也可以将其建立图模型，使用图论算法解决</p>
 <h2 id="输出方案">输出方案</h2>
 <p>开一个 <code>pre</code> 数组，在更新距离的时候记录下来后面的点是如何转移过去的，算法结束前再递归地输出路径即可。</p>
@@ -584,7 +596,7 @@ f[k, j, k-1]\]</span></p>
 就要记录 <code>pre[i][j] = k;</code></p>
 <h2 id="练习巩固">练习巩固</h2>
 <p><strong>1. 洛谷-P3371 【模板】单源最短路径（弱化版）</strong></p>
-<p>使用dijkstra（堆优化）求源点到图中其他点的最短路的值
+<p>使用dijkstra（堆优化）求源点到图中其他点的最短路的值</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
@@ -662,9 +674,10 @@ ll dis<span class="token punctuation">[</span>maxn<span class="token punctuation
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 		cout <span class="token operator">&lt;&lt;</span> dis<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
-</code></pre></p>
+</code></pre>
 <p><strong>2. 洛谷-P3385 负环</strong></p>
-<p>使用SPFA判断是否存在源点能够到达的负环 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;cstdio></span></span>
+<p>使用SPFA判断是否存在源点能够到达的负环</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;cstring></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;queue></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">inf</span> <span class="token expression"><span class="token number">0x3f3f3f</span> </span></span>
@@ -724,11 +737,13 @@ ll dis<span class="token punctuation">[</span>maxn<span class="token punctuation
 		<span class="token punctuation">&#125;</span>
 		<span class="token function">puts</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">spfa</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token string">"YES"</span><span class="token operator">:</span><span class="token string">"NO"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <p><strong>3. HDU-1385 Minimum Transport Cost</strong></p>
-<p>floyd求多源最短路+输出方案。 <span
+<p>floyd求多源最短路+输出方案。<br />
+<span
 class="math inline">\(pre[i][j]\)</span>表示i到j的路径上的首个中转城市,
-这是最关键的地方 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+这是最关键的地方</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
 
 ref: https://vjudge.net/solution/32201255
 */</span>
@@ -776,9 +791,10 @@ ref: https://vjudge.net/solution/32201255
 			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\nTotal cost:%d\n"</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 		<span class="token punctuation">&#125;</span>
 	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <p><strong>4. 洛谷-B3611 【模板】传递闭包</strong></p>
-<p>floyd判断两点是否连通 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<p>floyd判断两点是否连通</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
@@ -798,22 +814,26 @@ ref: https://vjudge.net/solution/32201255
             cout <span class="token operator">&lt;&lt;</span> f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token char">' '</span><span class="token punctuation">;</span>
         cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <hr />
-<p>参考自： <a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/save/">OI-Wiki
-图的存储</a></p>
+<p>参考自：<br />
+<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/save/">OI-Wiki 图的存储</a></p>
 <p><em>Algorithms - Sanjoy Dasgupta, Christos H. Papadimitriou, and
-Umesh V. Vazirani</em> <a
-target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008235554">Dijkstra最短路径算法的理解与实现</a>
+Umesh V. Vazirani</em><br />
 <a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/sbb-first-blog/p/13259728.html">BFS(广度优先搜索)：层序遍历和最短路径</a>
+target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008235554">Dijkstra最短路径算法的理解与实现</a><br />
+<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/sbb-first-blog/p/13259728.html">BFS(广度优先搜索)：层序遍历和最短路径</a><br />
 <a
 target="_blank" rel="noopener" href="https://www.zhihu.com/question/68753603/answer/267513879">阮行止对最短路的理解</a></p>
 <p><a
-target="_blank" rel="noopener" href="https://wat1r.github.io/2020/09/23/dijkstra-algorithm-master/">一文掌握Dijkstra算法</a>
-<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/shortest-path/">OI-Wiki 最短路</a> <a
+target="_blank" rel="noopener" href="https://wat1r.github.io/2020/09/23/dijkstra-algorithm-master/">一文掌握Dijkstra算法</a><br />
+<a target="_blank" rel="noopener" href="https://oi-wiki.org/graph/shortest-path/">OI-Wiki
+最短路</a><br />
+<a
 target="_blank" rel="noopener" href="https://blog.51cto.com/u_14301180/5353950">dijkstra算法为什么不能有负边？</a></p>
-<p>《深入浅出程序设计竞赛—基础篇》 《算法竞赛进阶指南》
+<p>《深入浅出程序设计竞赛—基础篇》<br />
+《算法竞赛进阶指南》<br />
 《挑战程序设计竞赛》</p>
 
     </div>

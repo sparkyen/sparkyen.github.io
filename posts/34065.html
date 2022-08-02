@@ -27,11 +27,11 @@
 <meta property="og:description" content="NOI暑假集训最后一课，介绍算法竞赛的赛事、赛制，讲述如何评估算法并处理比赛时遇到的错误，最后着重强调OI比赛中的输入输出操作。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-02T13:08:14.919Z">
+<meta property="article:modified_time" content="2022-08-02T16:26:14.951Z">
 <meta property="article:author" content="sparkyen">
-<meta property="article:tag" content="技巧与思想">
 <meta property="article:tag" content="publication">
 <meta property="article:tag" content="NOI暑假集训">
+<meta property="article:tag" content="技巧与思想">
 <meta name="twitter:card" content="summary">
 
 
@@ -144,7 +144,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#oi-%E8%B5%9B%E4%BA%8B%E4%B8%8E%E8%B5%9B%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">OI 赛事与赛制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%9B%E4%BA%8B%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">赛事简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#codeforces-cf-%E8%B5%9B%E5%88%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">Codeforces (CF) 赛制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#acm%E8%B5%9B%E5%88%B6"><span class="nav-number">1.1.2.</span> <span class="nav-text">ACM赛制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%AF%94%E8%B5%9B"><span class="nav-number">1.2.</span> <span class="nav-text">主要比赛</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#noip"><span class="nav-number">1.2.1.</span> <span class="nav-text">NOIP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csp-js"><span class="nav-number">1.2.2.</span> <span class="nav-text">CSP J&#x2F;S</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9C%81%E9%98%9F%E9%80%89%E6%8B%94%E8%B5%9B"><span class="nav-number">1.2.3.</span> <span class="nav-text">省队选拔赛</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noi"><span class="nav-number">1.2.4.</span> <span class="nav-text">NOI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wc"><span class="nav-number">1.2.5.</span> <span class="nav-text">WC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.4.</span> <span class="nav-text">空间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AE%8C%E7%BE%8E%E7%AE%97%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">非完美算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E7%9A%84%E6%8A%80%E5%B7%A7"><span class="nav-number">2.</span> <span class="nav-text">算法竞赛的技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="nav-number">2.1.</span> <span class="nav-text">读入与输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.1.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">文件的概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">文件的操作步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#freopen-%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">freopen 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.1.3.1.</span> <span class="nav-text">函数简介</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#stdiossync_with_stdiofalse"><span class="nav-number">2.1.1.3.2.</span> <span class="nav-text">std::ios::sync_with_stdio(false)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#tie"><span class="nav-number">2.1.1.3.3.</span> <span class="nav-text">tie</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.1.3.4.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%9A%E5%AF%BC%E8%87%B4%E6%9C%AA%E7%9F%A5%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">2.1.2.</span> <span class="nav-text">会导致未知的结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%B8%B8%E6%95%B0%E8%BF%87%E5%A4%A7"><span class="nav-number">2.1.3.</span> <span class="nav-text">会导致常数过大</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%8A%80%E5%B7%A7"><span class="nav-number">2.2.</span> <span class="nav-text">常见技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%AE%80%E5%8C%96%E4%BB%A3%E7%A0%81%E9%87%8F"><span class="nav-number">2.2.1.</span> <span class="nav-text">利用宏定义简化代码量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95"><span class="nav-number">2.2.2.</span> <span class="nav-text">使用宏进行调试</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#oi-%E8%B5%9B%E4%BA%8B%E4%B8%8E%E8%B5%9B%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">OI 赛事与赛制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%9B%E4%BA%8B%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">赛事简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%9B%E5%88%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.2.</span> <span class="nav-text">赛制介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#oi-%E8%B5%9B%E5%88%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">OI 赛制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ioi-%E8%B5%9B%E5%88%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">IOI 赛制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#codeforces-cf-%E8%B5%9B%E5%88%B6"><span class="nav-number">1.2.3.</span> <span class="nav-text">Codeforces (CF) 赛制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#acm%E8%B5%9B%E5%88%B6"><span class="nav-number">1.2.4.</span> <span class="nav-text">ACM赛制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%AF%94%E8%B5%9B"><span class="nav-number">1.3.</span> <span class="nav-text">主要比赛</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#noip"><span class="nav-number">1.3.1.</span> <span class="nav-text">NOIP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csp-js"><span class="nav-number">1.3.2.</span> <span class="nav-text">CSP J&#x2F;S</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9C%81%E9%98%9F%E9%80%89%E6%8B%94%E8%B5%9B"><span class="nav-number">1.3.3.</span> <span class="nav-text">省队选拔赛</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#noi"><span class="nav-number">1.3.4.</span> <span class="nav-text">NOI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wc"><span class="nav-number">1.3.5.</span> <span class="nav-text">WC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0%E4%B8%8E%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">算法评估与复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%84%E4%BB%B7%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">如何评价算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.2.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.3.</span> <span class="nav-text">空间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%AE%8C%E7%BE%8E%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">非完美算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E7%9A%84%E6%8A%80%E5%B7%A7"><span class="nav-number">3.</span> <span class="nav-text">算法竞赛的技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="nav-number">3.1.</span> <span class="nav-text">读入与输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.1.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">文件的概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">文件的操作步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#freopen-%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">freopen 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%AE%80%E4%BB%8B"><span class="nav-number">3.1.1.3.1.</span> <span class="nav-text">函数简介</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.1.1.3.2.</span> <span class="nav-text">命令格式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">3.1.1.3.3.</span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%89%93%E5%BC%80%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.1.1.3.4.</span> <span class="nav-text">文件打开格式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.1.3.5.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.1.1.3.6.</span> <span class="nav-text">模板</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">3.1.2.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E5%90%8C%E6%AD%A5%E8%A7%A3%E9%99%A4%E7%BB%91%E5%AE%9A"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">关闭同步&#x2F;解除绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#stdiossync_with_stdiofalse"><span class="nav-number">3.1.2.1.1.</span> <span class="nav-text">std::ios::sync_with_stdio(false)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#tie"><span class="nav-number">3.1.2.1.2.</span> <span class="nav-text">tie</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.2.1.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E4%BC%98%E5%8C%96"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">输入优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E4%BC%98%E5%8C%96"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">输出优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E4%BF%A1%E6%81%AF%E4%B8%8E%E9%94%99%E8%AF%AF"><span class="nav-number">3.2.</span> <span class="nav-text">常见信息与错误</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#compile-error-%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF"><span class="nav-number">3.2.1.</span> <span class="nav-text">Compile Error: 编译错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#presentation-error-%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%E9%94%99%E8%AF%AF"><span class="nav-number">3.2.2.</span> <span class="nav-text">Presentation
+Error :输出格式错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wrong-answer-%E7%AD%94%E6%A1%88%E9%94%99%E8%AF%AF"><span class="nav-number">3.2.3.</span> <span class="nav-text">Wrong Answer ：答案错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#runtime-error-%E8%BF%90%E8%A1%8C%E6%97%B6%E9%94%99%E8%AF%AF"><span class="nav-number">3.2.4.</span> <span class="nav-text">Runtime Error ：运行时错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#segmentation-fault%E6%AE%B5%E9%94%99%E8%AF%AF"><span class="nav-number">3.2.5.</span> <span class="nav-text">Segmentation Fault：段错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#time-limit-exceeded-%E6%97%B6%E9%97%B4%E8%B6%85%E9%99%90"><span class="nav-number">3.2.6.</span> <span class="nav-text">Time Limit Exceeded :时间超限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#memory-limit-exceeded%E5%86%85%E5%AD%98%E8%B6%85%E9%99%90"><span class="nav-number">3.2.7.</span> <span class="nav-text">Memory Limit
+Exceeded：内存超限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%9A%E5%AF%BC%E8%87%B4%E6%9C%AA%E7%9F%A5%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.8.</span> <span class="nav-text">会导致未知的结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%B8%B8%E6%95%B0%E8%BF%87%E5%A4%A7"><span class="nav-number">3.2.9.</span> <span class="nav-text">会导致常数过大</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%8A%80%E5%B7%A7"><span class="nav-number">3.3.</span> <span class="nav-text">常见技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%AE%80%E5%8C%96%E4%BB%A3%E7%A0%81%E9%87%8F"><span class="nav-number">3.3.1.</span> <span class="nav-text">利用宏定义简化代码量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%8F%E8%BF%9B%E8%A1%8C%E8%B0%83%E8%AF%95"><span class="nav-number">3.3.2.</span> <span class="nav-text">使用宏进行调试</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -170,7 +172,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -293,17 +295,20 @@ Informatics，简称：OI）是一门在中学生中广泛开展的学科竞赛�
 <p>国际性的 OI 竞赛包括：</p>
 <ul>
 <li>国际信息学奥林匹克（IOI）</li>
-<li>美国计算机奥林匹克竞赛（USACO） ……</li>
+<li>美国计算机奥林匹克竞赛（USACO）<br />
+……</li>
 </ul>
 <p>对于大部分选手而言，每年的新赛季从 10 月的 NOIP 开始。</p>
 <p>OI 竞赛中允许使用的语言包括 C、C++ 和 Pascal（NOI 已于 2020
 年停止使用 Pascal，NOIP 将于 2022 年停止使用
 Pascal）。其中，不同的竞赛对 C++
-的版本有不同的规定。考试题目一般为算法或者数据结构相关的内容，题目形式包括传统题（最常见的规定输入和输出到文件的题目）和非传统题（提交答案题、交互题、补全代码题……等等）。
-### 赛制介绍 #### OI 赛制 一般的 OI 赛制可以理解为单人在 5
-个小时的时间内尝试解决 3 道题。</p>
+的版本有不同的规定。考试题目一般为算法或者数据结构相关的内容，题目形式包括传统题（最常见的规定输入和输出到文件的题目）和非传统题（提交答案题、交互题、补全代码题……等等）。</p>
+<h3 id="赛制介绍">赛制介绍</h3>
+<h4 id="oi-赛制">OI 赛制</h4>
+<p>一般的 OI 赛制可以理解为单人在 5 个小时的时间内尝试解决 3 道题。</p>
 <p>选手仅有一次提交机会。比赛时无法看到评测结果，评分会在赛后公布。每道题都有多个测试点，根据每道题通过的测试点的数量获得相应的分数；每个测试点还可能会有部分分，即使只有部分数据通过也能拿到分数。</p>
-<p>NOIP、NOI、省选都是 OI 赛制。 #### IOI 赛制</p>
+<p>NOIP、NOI、省选都是 OI 赛制。</p>
+<h4 id="ioi-赛制">IOI 赛制</h4>
 <p>选手在比赛时有多次提交机会。比赛实时评测并返回结果，如果提交的结果是错误的，不会有任何惩罚。每道题都有多个测试点，根据每道题通过的测试点的数量获得相应的分数。</p>
 <p>APIO、IOI 都是 IOI 赛制。目前国内比赛也在逐渐向 IOI 赛制靠拢。</p>
 <h4 id="codeforces-cf-赛制">Codeforces (CF) 赛制</h4>
@@ -382,45 +387,51 @@ Camp，中文：全国青少年信息学奥林匹克竞赛冬令营 ）是每年
 <p>WC
 的内容包括若干天的培训和一天的考试。这项考试主要用于从国家集训队（50
 人）选拔国家候选队（15 人），但是前一年 NOIP
-取得较好成绩的选手也可以参加（不参与选拔）。 ## 算法评估与复杂度 ###
-如何评价算法
-算法竞赛一般采用黑箱测试法来测试选手的程序。进行测试时,把程序看作一个不能打开的“黑盒子”。将输入数据调入这个黑盒子,观察这个黑盒子返回的结果是否正确(是否符合期望),而不关心程序内是如何实现的。</p>
+取得较好成绩的选手也可以参加（不参与选拔）。</p>
+<h2 id="算法评估与复杂度">算法评估与复杂度</h2>
+<h3 id="如何评价算法">如何评价算法</h3>
+<p>算法竞赛一般采用黑箱测试法来测试选手的程序。进行测试时,把程序看作一个不能打开的“黑盒子”。将输入数据调入这个黑盒子,观察这个黑盒子返回的结果是否正确(是否符合期望),而不关心程序内是如何实现的。</p>
 <p>对于算法竞赛的评价机制来说,选手必须在限定的时间按题目要求写出程序;这些程序必须在限制的时间内存之内运行完毕,并根据测试数据给出正确的答案。这就要求选手的程序达到以下要求。</p>
-<p><strong>(1）代码可实现</strong>
+<p><strong>(1）代码可实现</strong><br />
 按照编程者的能力可以将算法通过代码实现出来。如果能想出算法但是无法实现,或者需要花费非常多(超过比赛时间)的时间和行数才能编写出来,那也是不行的。</p>
-<p><strong>(2) 结果正确</strong>
+<p><strong>(2) 结果正确</strong><br />
 程序能够运行完毕,不会在运行的过程中出错崩溃。输出的结果必须符合期望才能通过这个测试点。</p>
-<p><strong>(3）能在限定的时间内运行完毕</strong>
+<p><strong>(3）能在限定的时间内运行完毕</strong><br />
 在结果正确的前提下,运行程序的时间越短越好。对于一些数据量较大的题目,需要尽力去优化程序的运行时间,否则会因为运行超时而不能通过这些测试点。</p>
-<p><strong>(4) 不超过内存等资源限制</strong>
+<p><strong>(4) 不超过内存等资源限制</strong><br />
 计算机内存是有限的,所以使用过多的内存也是不行的。</p>
 <h3 id="时间复杂度">时间复杂度</h3>
 <p>一个程序在写出来之前是无法准确估计实际运行时间的。但是几乎所有算法竞赛的任务都会告知输入数据的规模和运行时间限制，这就允许选手通过分析算法的时间复杂度,从而事先估计能丕在限定的时间内运行完程序。</p>
-<p><strong>时间复杂度举例</strong> - <span
-class="math inline">\(O(1)\)</span>—常数条语句：交换两个元素
+<p><strong>时间复杂度举例</strong></p>
+<ul>
+<li><span class="math inline">\(O(1)\)</span>—常数条语句：交换两个元素
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 输入</span>
 <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span> 
 <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span> 
 <span class="token comment">// 计算 int t = a; </span>
 a <span class="token operator">=</span> b<span class="token punctuation">;</span> 
-b <span class="token operator">=</span> t<span class="token punctuation">;</span></code></pre> - <span
-class="math inline">\(O(n)\)</span>—单重循环求数组和 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 输入 int a[] = &#123;2, 0, 1, 3, 5&#125;; </span>
+b <span class="token operator">=</span> t<span class="token punctuation">;</span></code></pre></li>
+<li><span class="math inline">\(O(n)\)</span>—单重循环求数组和
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 输入 int a[] = &#123;2, 0, 1, 3, 5&#125;; </span>
 <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span> 
 <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> 
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> 
-	sum <span class="token operator">+=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre> -
-<span class="math inline">\(O(\log n)\)</span>—二分 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> l <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> r <span class="token operator">=</span> n<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+	sum <span class="token operator">+=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></li>
+<li><span class="math inline">\(O(\log n)\)</span>—二分
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> l <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> r <span class="token operator">=</span> n<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
  <span class="token keyword">while</span><span class="token punctuation">(</span>l<span class="token operator">&lt;</span>r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">int</span> mid <span class="token operator">=</span> <span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
 	<span class="token keyword">if</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>mid<span class="token punctuation">]</span><span class="token operator">>=</span>x<span class="token punctuation">)</span> r <span class="token operator">=</span> mid<span class="token punctuation">;</span>
 	<span class="token keyword">else</span> l <span class="token operator">=</span> mid<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> </code></pre> -
-<span class="math inline">\(O(n^2)\)</span>—双重循环求数组中相等元素对数
+<span class="token punctuation">&#125;</span> </code></pre></li>
+<li><span
+class="math inline">\(O(n^2)\)</span>—双重循环求数组中相等元素对数
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 输入 int a[] = &#123;1, 1, 3, 5, 5&#125;; </span>
 <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span> <span class="token comment">// 计算 int cnt = 0; </span>
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> 
 	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> 
-	cnt <span class="token operator">+=</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   </code></pre> - <span class="math inline">\(O(2^n)\)</span>—枚举<span
+	cnt <span class="token operator">+=</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   </code></pre></li>
+<li><span class="math inline">\(O(2^n)\)</span>—枚举<span
 class="math inline">\(n\)</span>个数字组成集合的所有子集，输出子集和。
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 输入 int a[] = &#123;2, 1, 3, 6, 5&#125;; </span>
 <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span> 
@@ -432,36 +443,39 @@ class="math inline">\(n\)</span>个数字组成集合的所有子集，输出子
 	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> 
 		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>i <span class="token operator">>></span> j<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> sum <span class="token operator">+=</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 检查i的第j位是否是1 </span>
 	cout <span class="token operator">&lt;&lt;</span> sum <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span> 
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre></li>
+</ul>
 <p>在竞赛中，一般算机一秒能运行 <span class="math inline">\((5 \times
-10^8)\)</span>次计算 &gt; <span
-class="math inline">\(O(n)\)</span>的算法数据范围 <span
-class="math inline">\((n &lt;= 10^8)\)</span>。 &gt; <span
-class="math inline">\(O(n\log n)\)</span>的算法数据范围 <span
-class="math inline">\((n &lt;= 10^6)\)</span>。 &gt; <span
-class="math inline">\(O(n\sqrt[]{n})\)</span>的算法数据范围 <span
-class="math inline">\((n &lt;= 10^5)\)</span>。 &gt; <span
-class="math inline">\(O(n^{2})\)</span>的算法数据范围 <span
-class="math inline">\((n &lt;= 5000)\)</span>。 &gt; <span
-class="math inline">\(O(n^{3})\)</span>的算法数据范围 <span
-class="math inline">\((n &lt;300)\)</span> &gt; <span
-class="math inline">\(O(2^{n})\)</span>的算法数据范围 <span
-class="math inline">\((n &lt; 25)\)</span>。 &gt; <span
-class="math inline">\(O(n!)\)</span>的算法数据范围 <span
+10^8)\)</span>次计算</p>
+<blockquote>
+<p><span class="math inline">\(O(n)\)</span>的算法数据范围 <span
+class="math inline">\((n &lt;= 10^8)\)</span>。<br />
+<span class="math inline">\(O(n\log n)\)</span>的算法数据范围 <span
+class="math inline">\((n &lt;= 10^6)\)</span>。<br />
+<span class="math inline">\(O(n\sqrt[]{n})\)</span>的算法数据范围 <span
+class="math inline">\((n &lt;= 10^5)\)</span>。<br />
+<span class="math inline">\(O(n^{2})\)</span>的算法数据范围 <span
+class="math inline">\((n &lt;= 5000)\)</span>。<br />
+<span class="math inline">\(O(n^{3})\)</span>的算法数据范围 <span
+class="math inline">\((n &lt;300)\)</span><br />
+<span class="math inline">\(O(2^{n})\)</span>的算法数据范围 <span
+class="math inline">\((n &lt; 25)\)</span>。<br />
+<span class="math inline">\(O(n!)\)</span>的算法数据范围 <span
 class="math inline">\((n &lt; 11)\)</span>。</p>
-<p>则我们可以根据对应的数据范围选择合适的算法 <span
-class="math inline">\(n \leq 200\)</span>,可以选择复杂度为<span
-class="math inline">\(O(n3)\)</span>的算法。例如：floyd <span
-class="math inline">\(n \leq 5000\)</span>，可以选择复杂度为<span
-class="math inline">\(O(n2)\)</span>的算法。例如：dp, 朴素版Prim <span
-class="math inline">\(n \leq 10^6\)</span>,可以选择复杂度为<span
-class="math inline">\(O(nlogn)\)</span>的算法。 <span
-class="math inline">\(n \leq 10^8\)</span>，可以选择复杂度为<span
-class="math inline">\(O(n)\)</span>的算法。 <span
-class="math inline">\(n \leq 10^9\)</span>，可以选择复杂度为<span
-class="math inline">\(O(\sqrt{n})\)</span>的算法。例如：判断质数 <span
-class="math inline">\(n \leq 10^{18}\)</span>，可以选择复杂度为<span
-class="math inline">\(O(log\
+</blockquote>
+<p>则我们可以根据对应的数据范围选择合适的算法<br />
+<span class="math inline">\(n \leq 200\)</span>,可以选择复杂度为<span
+class="math inline">\(O(n3)\)</span>的算法。例如：floyd<br />
+<span class="math inline">\(n \leq 5000\)</span>，可以选择复杂度为<span
+class="math inline">\(O(n2)\)</span>的算法。例如：dp, 朴素版Prim<br />
+<span class="math inline">\(n \leq 10^6\)</span>,可以选择复杂度为<span
+class="math inline">\(O(nlogn)\)</span>的算法。<br />
+<span class="math inline">\(n \leq 10^8\)</span>，可以选择复杂度为<span
+class="math inline">\(O(n)\)</span>的算法。<br />
+<span class="math inline">\(n \leq 10^9\)</span>，可以选择复杂度为<span
+class="math inline">\(O(\sqrt{n})\)</span>的算法。例如：判断质数<br />
+<span class="math inline">\(n \leq
+10^{18}\)</span>，可以选择复杂度为<span class="math inline">\(O(log\
 n)\)</span>的算法。例如：二分，欧几里得算法，幂运算</p>
 <p>以上仅为参考，实际做题还需考虑具体数据细节。</p>
 <h3 id="空间复杂度">空间复杂度</h3>
@@ -470,9 +484,9 @@ n)\)</span>的算法。例如：二分，欧几里得算法，幂运算</p>
 容器存储内容、运行递归函数、建立动态对象等行为都会占用内存。其中定义数组所占用的空间最容易事前估计。</p>
 <p>以<span class="math inline">\(128MB\)</span>为例，<span
 class="math inline">\(128M=131072KB=134217728\)</span>字节</p>
-<p><span class="math inline">\(int=4\)</span>字节 <span
-class="math inline">\(char=1\)</span>字节 <span
-class="math inline">\(long long=8\)</span>字节</p>
+<p><span class="math inline">\(int=4\)</span>字节<br />
+<span class="math inline">\(char=1\)</span>字节<br />
+<span class="math inline">\(long long=8\)</span>字节</p>
 <p>开<span class="math inline">\(int\)</span>型变量的一维数组最多是<span
 class="math inline">\(3∗10^7\)</span>，<span class="math inline">\(long
 long\)</span>为<span class="math inline">\(1.5*10^7\)</span>，<span
@@ -492,10 +506,10 @@ class="math inline">\(a[100000][ 100000
 <h3 id="非完美算法">非完美算法</h3>
 <p>在各类程序设计竞赛中,选手都希望能在自己有限的水平下尽可能获得多的分数。有的比赛,例如ICPC,要求选手必须通过全部的测试点才能获得这道题的分数;而有的竞赛,例如NOI系列比赛,会将一道题的测试数据分为若干子任务,即使仅通过了部分测试数据,也可以获得部分分数。</p>
 <p>完全写对一道题目的正确解法可能很难,但是可以通过一些策略写出一个能够通过部分子任务的“非完美算法”.从而获得部分分数。获得部分分数的思路主要有以下几方面。</p>
-<p><strong>思路1:完成较小的数据范围的高复杂度方法。</strong>
+<p><strong>思路1:完成较小的数据范围的高复杂度方法。</strong><br />
 测试数据的数据范围是有梯度的。如果选手无法想到正确的解法,可以尝试使用枚举、搜索等效率较低的算法完成题意要求。尽管暴力算法的时间复杂度高，但是可以通过一些较小数据范围的子任务,获得一些分数。</p>
 <p>有些题目的正确解法是在暴力解法的基础上优化复杂度的,因此可以尝试找到算法的瓶颈,看看是否有办法通过减少枚举量和使用各种算法工具来优化时间复杂度,从而缩短程序的运行时间。</p>
-<p><strong>思路2:解决部分特殊情况。</strong>
+<p><strong>思路2:解决部分特殊情况。</strong><br />
 在NOI系列比赛中,有些部分的分数虽然数据范围不小,但是限定了一些特殊情况(例如将树结构退化成链状结构、某些题目规定的情况不会存在等)。这样就可以针对这些特殊情况的特性专门解决这个子任务。虽然这样的算法对于整个题目来说是错误的,但是适用于一些特殊情况,对于这些特殊情况来说是正解。由于只需要考虑这样的特殊情况,所以思维难度会有所降低。</p>
 <p>同一个题目可能会有多种特殊情况。选手可以针对每一种特殊情况单独写出对应的算法，然后判断输入数据符合哪一种情况，对这种情况专门进行计算。这样也可以获得力所能及的分数。</p>
 <p>平时练习在面对一些难度较大的题目，可以分析子任务，写出一些非完美解法,通过尽可能多的子任务。这样在竞赛场上,就可以在自己的能力范围内获得尽可能高的分数了。</p>
@@ -507,27 +521,41 @@ class="math inline">\(a[100000][ 100000
 把每一个文件都看成是一个有序的字节流，每个文件都是以 <strong>文件结束标志</strong>（EOF）结束，如果要操作某个文件，程序应该首先打开该文件，每当一个文件被打开后（请记得关闭打开的文件），该文件就和一个流关联起来，这里的流实际上是一个字节序列。</p>
 <h5 id="文件的操作步骤">文件的操作步骤</h5>
 <p>1、打开文件，将文件指针指向文件，决定打开文件类型；<br />
-2、对文件进行读、写操作 3、在使用完文件后，关闭文件。</p>
+2、对文件进行读、写操作<br />
+3、在使用完文件后，关闭文件。</p>
 <h5 id="freopen-函数">freopen 函数</h5>
 <h6 id="函数简介">函数简介</h6>
 <p>函数用于将指定输入输出流以指定方式重定向到文件，包含于头文件 <code>stdio.h (cstdio)</code> 中</p>
-<p>我们主要使用函数的两种方式：读、写 ###### 命令格式 <pre class="language-cpp" data-language="cpp"><code class="language-cpp">FILE<span class="token operator">*</span> <span class="token function">freopen</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> filename<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> mode<span class="token punctuation">,</span> FILE<span class="token operator">*</span> stream<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-###### 参数说明 - <code>filename</code>: 要打开的文件名 -
-<code>mode</code>: 文件打开的模式，表示文件访问的权限 -
-<code>stream</code>: 文件指针，通常使用标准文件流
-(<code>stdin/stdout</code>) 或标准错误输出流 (<code>stderr</code>) -
-返回值：文件指针，指向被打开文件 ###### 文件打开格式 -
-<code>r</code>：以只读方式打开文件，文件必须存在，只允许读入数据 -
-<code>w</code>：以只写方式打开文件，文件不存在会新建文件，否则清空内容，只允许写入数据
-###### 使用方法 读入文件内容： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">freopen</span><span class="token punctuation">(</span><span class="token string">"data.in"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">,</span> <span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token comment">// data.in 就是读取的文件名，要和可执行文件放在同一目录下</span></code></pre></p>
-<p>输出到文件： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">freopen</span><span class="token punctuation">(</span><span class="token string">"data.out"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">,</span> <span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token comment">// data.out 就是输出文件的文件名，和可执行文件在同一目录下</span></code></pre></p>
-<p>关闭标准输入/输出流 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">fclose</span><span class="token punctuation">(</span><span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></p>
-<p><strong><code>提示</code></strong>
-<code>printf/scanf/cin/cout</code> 等函数默认使用 <code>stdin/stdout</code>，将 <code>stdin/stdout</code> 重定向后，这些函数将输入/输出到被定向的文件
-###### 模板 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<p>我们主要使用函数的两种方式：读、写</p>
+<h6 id="命令格式">命令格式</h6>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">FILE<span class="token operator">*</span> <span class="token function">freopen</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> filename<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> mode<span class="token punctuation">,</span> FILE<span class="token operator">*</span> stream<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h6 id="参数说明">参数说明</h6>
+<ul>
+<li><code>filename</code>: 要打开的文件名</li>
+<li><code>mode</code>: 文件打开的模式，表示文件访问的权限</li>
+<li><code>stream</code>: 文件指针，通常使用标准文件流
+(<code>stdin/stdout</code>) 或标准错误输出流 (<code>stderr</code>)</li>
+<li>返回值：文件指针，指向被打开文件</li>
+</ul>
+<h6 id="文件打开格式">文件打开格式</h6>
+<ul>
+<li><code>r</code>：以只读方式打开文件，文件必须存在，只允许读入数据</li>
+<li><code>w</code>：以只写方式打开文件，文件不存在会新建文件，否则清空内容，只允许写入数据</li>
+</ul>
+<h6 id="使用方法">使用方法</h6>
+<p>读入文件内容：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">freopen</span><span class="token punctuation">(</span><span class="token string">"data.in"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">,</span> <span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">// data.in 就是读取的文件名，要和可执行文件放在同一目录下</span></code></pre>
+<p>输出到文件：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">freopen</span><span class="token punctuation">(</span><span class="token string">"data.out"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">,</span> <span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">// data.out 就是输出文件的文件名，和可执行文件在同一目录下</span></code></pre>
+<p>关闭标准输入/输出流</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">fclose</span><span class="token punctuation">(</span><span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p><strong><code>提示</code></strong><br />
+<code>printf/scanf/cin/cout</code> 等函数默认使用 <code>stdin/stdout</code>，将 <code>stdin/stdout</code> 重定向后，这些函数将输入/输出到被定向的文件</p>
+<h6 id="模板">模板</h6>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -539,13 +567,14 @@ class="math inline">\(a[100000][ 100000
   <span class="token function">fclose</span><span class="token punctuation">(</span><span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">fclose</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre> #### 优化
-在不改变算法复杂度但是可以加快程序运行速度的方法被称为<strong>常数优化</strong>。其中常数的意思为，我们评估一个算法时间复杂度为<span
+<span class="token punctuation">&#125;</span></code></pre>
+<h4 id="优化">优化</h4>
+<p>在不改变算法复杂度但是可以加快程序运行速度的方法被称为<strong>常数优化</strong>。其中常数的意思为，我们评估一个算法时间复杂度为<span
 class="math inline">\(O(n)\)</span>，其时间复杂度必定会带上一个常系数<span
 class="math inline">\(k\)</span>，总体就是<span
 class="math inline">\(k*n\)</span>。</p>
-<p>在默认情况下，<code>std::cin/std::cout</code> 是极为迟缓的读入/输出方式，而 <code>scanf/printf</code> 比 <code>std::cin/std::cout</code> 快得多。
-##### 关闭同步/解除绑定</p>
+<p>在默认情况下，<code>std::cin/std::cout</code> 是极为迟缓的读入/输出方式，而 <code>scanf/printf</code> 比 <code>std::cin/std::cout</code> 快得多。</p>
+<h5 id="关闭同步解除绑定">关闭同步/解除绑定</h5>
 <h6
 id="stdiossync_with_stdiofalse"><code>std::ios::sync_with_stdio(false)</code></h6>
 <p>这个函数是一个“是否兼容 stdio”的开关，C++ 为了兼容
@@ -572,9 +601,10 @@ std<span class="token double-colon punctuation">::</span>cin <span class="token 
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>ios<span class="token double-colon punctuation">::</span><span class="token function">sync_with_stdio</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 std<span class="token double-colon punctuation">::</span>cin<span class="token punctuation">.</span><span class="token function">tie</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>在算法竞赛中，程序需要考虑的一个重头就是时间复杂度。而对于省选或者ACM这样的大型比赛，卡常是家常便饭的事。<code>scanf</code> 和 <code>printf</code> 依然有优化的空间，这就是接下来介绍的内容—读入和输出优化。</p>
-<p><strong><code>注意</code></strong>
-下面介绍的读入和输出优化均针对整型数据，若要支持其他类型的数据（如浮点数），可自行按照下面介绍的优化原理来编写代码。
-##### 输入优化 <strong>原理</strong>
+<p><strong><code>注意</code></strong><br />
+下面介绍的读入和输出优化均针对整型数据，若要支持其他类型的数据（如浮点数），可自行按照下面介绍的优化原理来编写代码。</p>
+<h5 id="输入优化">输入优化</h5>
+<p><strong>原理</strong><br />
 众所周知，<code>getchar</code> 是用来读入 1 byte
 的数据并将其转换为 <code>char</code> 类型的函数，且速度很快，故可以用“读入字符—转换为整型”来代替缓慢的读入</p>
 <p>每个整数由两部分组成—符号和数字</p>
@@ -582,9 +612,10 @@ std<span class="token double-colon punctuation">::</span>cin<span class="token p
 不可省略，因此要进行判定</p>
 <p>10 进制整数中是不含空格或除 0~9
 和正负号外的其他字符的，因此在读入不应存在于整数中的字符（通常为空格）时，就可以判定已经读入结束</p>
-<p><strong>代码实现</strong> C 和 C++ 语言分别在 ctype.h 和 cctype
+<p><strong>代码实现</strong><br />
+C 和 C++ 语言分别在 ctype.h 和 cctype
 头文件中，提供了函数 <code>isdigit</code>,
-这个函数会检查传入的参数是否为十进制数字字符，是则返回 <strong>true</strong>，否则返回 <strong>false</strong>。对应的，在下面的代码中，可以使用 <code>isdigit(ch)</code> 代替 <code>ch &gt;= '0' &amp;&amp; ch &lt;= '9'</code>，而可以使用 <code>!isdigit(ch)</code> 代替 <code>ch &lt;'0' || ch&gt; '9'</code>
+这个函数会检查传入的参数是否为十进制数字字符，是则返回 <strong>true</strong>，否则返回 <strong>false</strong>。对应的，在下面的代码中，可以使用 <code>isdigit(ch)</code> 代替 <code>ch &gt;= '0' &amp;&amp; ch &lt;= '9'</code>，而可以使用 <code>!isdigit(ch)</code> 代替 <code>ch &lt;'0' || ch&gt; '9'</code></p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> w <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
   <span class="token keyword">char</span> ch <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -600,20 +631,22 @@ std<span class="token double-colon punctuation">::</span>cin<span class="token p
     ch <span class="token operator">=</span> <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 继续读入</span>
   <span class="token punctuation">&#125;</span>
   <span class="token keyword">return</span> x <span class="token operator">*</span> w<span class="token punctuation">;</span>  <span class="token comment">// 数字 * 正负号 = 实际数值</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
-<p>读入 num 可写为 <code>num=read();</code> ##### 输出优化
-<strong>原理</strong>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>读入 num 可写为 <code>num=read();</code></p>
+<h5 id="输出优化">输出优化</h5>
+<p><strong>原理</strong><br />
 同样是众所周知，<code>putchar</code> 是用来输出单个字符的函数，因此将数字的每一位转化为字符输出以加速。要注意的是，负号要单独判断输出，并且每次
 %（mod）取出的是数字末位，因此要倒序输出</p>
-<p><strong>代码实现</strong> <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">write</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<p><strong>代码实现</strong></p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">write</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  <span class="token comment">// 判负 + 输出负号 + 变原数为正数</span>
     x <span class="token operator">=</span> <span class="token operator">-</span>x<span class="token punctuation">;</span>
     <span class="token function">putchar</span><span class="token punctuation">(</span><span class="token char">'-'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">></span> <span class="token number">9</span><span class="token punctuation">)</span> <span class="token function">write</span><span class="token punctuation">(</span>x <span class="token operator">/</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 递归，将除最后一位外的其他部分放到递归中输出</span>
   <span class="token function">putchar</span><span class="token punctuation">(</span>x <span class="token operator">%</span> <span class="token number">10</span> <span class="token operator">+</span> <span class="token char">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 已经输出（递归）完 x 末位前的所有数字，输出末位</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
-<p>但是递归实现常数是较大的，我们可以写一个栈来实现这个过程
+<span class="token punctuation">&#125;</span></code></pre>
+<p>但是递归实现常数是较大的，我们可以写一个栈来实现这个过程</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">write</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">int</span> sta<span class="token punctuation">[</span><span class="token number">35</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
   <span class="token keyword">int</span> top <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -621,37 +654,70 @@ std<span class="token double-colon punctuation">::</span>cin<span class="token p
     sta<span class="token punctuation">[</span>top<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> x <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">,</span> x <span class="token operator">/=</span> <span class="token number">10</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">while</span> <span class="token punctuation">(</span>top<span class="token punctuation">)</span> <span class="token function">putchar</span><span class="token punctuation">(</span>sta<span class="token punctuation">[</span><span class="token operator">--</span>top<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">48</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 48 是 '0'</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
-<p>输出 num 可写为 <code>write(num);</code> ### 常见信息与错误 ####
-Compile Error: 编译错误
-这类错误多为词法、语法和语义错误，引发的原因较为简单，修复难度较低，比如：
-- <code>int main()</code> 写为 <code>int mian()</code> 之类的拼写错误 -
-忘记打分号 #### Presentation Error :输出格式错误
-答案正确但没按题目要求输出 #### Wrong Answer ：答案错误
-输出的答案错误，具体问题各不相同，大概有这几种情况 -
-代码哪里写出bug了，代码功能与自己想实现的功能相异。 -
-解题逻辑和思路错误。 -
-特殊情况没有处理，比如0，1，2和最大值这种边界值没有考虑。 -
-空间开的不够大，造成越界，但越界并没有进行修改，或者修改的数据不是关键数据，导致不触发RE，但因为访问或者修改的错误的数据，导致输出结果错误。
-#### Runtime Error ：运行时错误 程序运行到一半，程序就崩溃并异常终止了 -
-越界，想从一些非法的地址空间读取或向其中写入内容。 - 数组（下标）越界
-例如： - 未正确设置循环的初值导致访问了下标为 -1 的值。 - 无向图边表未开
-2 倍。 - 指针越界： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span> p<span class="token punctuation">;</span> 
+<span class="token punctuation">&#125;</span></code></pre>
+<p>输出 num 可写为 <code>write(num);</code></p>
+<h3 id="常见信息与错误">常见信息与错误</h3>
+<h4 id="compile-error-编译错误">Compile Error: 编译错误</h4>
+<p>这类错误多为词法、语法和语义错误，引发的原因较为简单，修复难度较低，比如：</p>
+<ul>
+<li><code>int main()</code> 写为 <code>int mian()</code> 之类的拼写错误</li>
+<li>忘记打分号</li>
+</ul>
+<h4 id="presentation-error-输出格式错误">Presentation
+Error :输出格式错误</h4>
+<p>答案正确但没按题目要求输出</p>
+<h4 id="wrong-answer-答案错误">Wrong Answer ：答案错误</h4>
+<p>输出的答案错误，具体问题各不相同，大概有这几种情况</p>
+<ul>
+<li>代码哪里写出bug了，代码功能与自己想实现的功能相异。</li>
+<li>解题逻辑和思路错误。</li>
+<li>特殊情况没有处理，比如0，1，2和最大值这种边界值没有考虑。</li>
+<li>空间开的不够大，造成越界，但越界并没有进行修改，或者修改的数据不是关键数据，导致不触发RE，但因为访问或者修改的错误的数据，导致输出结果错误。</li>
+</ul>
+<h4 id="runtime-error-运行时错误">Runtime Error ：运行时错误</h4>
+<p>程序运行到一半，程序就崩溃并异常终止了</p>
+<ul>
+<li>越界，想从一些非法的地址空间读取或向其中写入内容。
+<ul>
+<li>数组（下标）越界<br />
+例如：
+<ul>
+<li>未正确设置循环的初值导致访问了下标为 -1 的值。</li>
+<li>无向图边表未开 2 倍。</li>
+</ul></li>
+<li>指针越界： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span> p<span class="token punctuation">;</span> 
 p<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">5</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token operator">*</span><span class="token punctuation">(</span>p<span class="token operator">+</span><span class="token number">1000000</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span></code></pre> - 使用已经释放的空间： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span> p<span class="token punctuation">;</span> 
+<span class="token operator">*</span><span class="token punctuation">(</span>p<span class="token operator">+</span><span class="token number">1000000</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span></code></pre></li>
+<li>使用已经释放的空间： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span> p<span class="token punctuation">;</span> 
 p<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">5</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">free</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token operator">*</span>p<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span></code></pre>
-- 除0（求 0 的逆元）或模0错误 -
-过多的申请栈内存导致栈溢出，如无限或过多的递归，在main函数中申请空间（此项由于不同OJ设置可能会有出入，有些OJ堆栈内存共享）。
-- 使用STL的非法操作，比如从空stack中取top。 #### Segmentation
-Fault：段错误 类似Runtime Error。 - 缓冲区溢出，也就是你访问
-了非法内存，或者在C/C++中访问了空指针等等。 -
-堆栈溢出（例如数组开得太大，超出了栈的范围）。 #### Time Limit
-Exceeded :时间超限 程序运行时间太长了，超过了对应题目的时间限制。 -
-代码无限循环。 - 分治未判边界导致死递归。 - 死循环。 - BFS
-时不标记某个状态是否已访问过。 - 算法复杂度过大。 #### Memory Limit
-Exceeded：内存超限 程序运行所用的内存太多了，超过了对应题目的限制。</p>
+<span class="token operator">*</span>p<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span></code></pre></li>
+</ul></li>
+<li>除0（求 0 的逆元）或模0错误</li>
+<li>过多的申请栈内存导致栈溢出，如无限或过多的递归，在main函数中申请空间（此项由于不同OJ设置可能会有出入，有些OJ堆栈内存共享）。</li>
+<li>使用STL的非法操作，比如从空stack中取top。</li>
+</ul>
+<h4 id="segmentation-fault段错误">Segmentation Fault：段错误</h4>
+<p>类似Runtime Error。</p>
+<ul>
+<li>缓冲区溢出，也就是你访问
+了非法内存，或者在C/C++中访问了空指针等等。</li>
+<li>堆栈溢出（例如数组开得太大，超出了栈的范围）。</li>
+</ul>
+<h4 id="time-limit-exceeded-时间超限">Time Limit Exceeded :时间超限</h4>
+<p>程序运行时间太长了，超过了对应题目的时间限制。</p>
+<ul>
+<li>代码无限循环。
+<ul>
+<li>分治未判边界导致死递归。</li>
+<li>死循环。</li>
+<li>BFS 时不标记某个状态是否已访问过。</li>
+</ul></li>
+<li>算法复杂度过大。</li>
+</ul>
+<h4 id="memory-limit-exceeded内存超限">Memory Limit
+Exceeded：内存超限</h4>
+<p>程序运行所用的内存太多了，超过了对应题目的限制。</p>
 <ul>
 <li>内存空间申请过大。</li>
 <li>在有些oj（cf，洛谷）中，堆栈共享内存空间，这时当你出现过多的递归这种大量的栈内存使用的时候，不会栈溢出导致RE，而是内存超限导致MLE。</li>
@@ -662,11 +728,15 @@ Exceeded：内存超限 程序运行所用的内存太多了，超过了对应�
 </ul></li>
 </ul>
 <h4 id="会导致未知的结果">会导致未知的结果</h4>
-<p>未定义行为会导致未知的结果。 -
-使用 <code>scanf</code> 读入的时候没加取地址符 <code>&amp;</code>。 -
-使用 <code>scanf</code> 或 <code>printf</code> 的时候参数类型与格式指定符不符
-- 把 <code>==</code> 写成<code>=</code> - 不注意运算符的优先顺序和结合性
-- 局部变量未初始化 - 局部变量与全局变量重名，导致全局变量被意外覆盖</p>
+<p>未定义行为会导致未知的结果。</p>
+<ul>
+<li>使用 <code>scanf</code> 读入的时候没加取地址符 <code>&amp;</code>。</li>
+<li>使用 <code>scanf</code> 或 <code>printf</code> 的时候参数类型与格式指定符不符</li>
+<li>把 <code>==</code> 写成<code>=</code></li>
+<li>不注意运算符的优先顺序和结合性</li>
+<li>局部变量未初始化</li>
+<li>局部变量与全局变量重名，导致全局变量被意外覆盖</li>
+</ul>
 <h4 id="会导致常数过大">会导致常数过大</h4>
 <ul>
 <li>定义模数的时候，未定义为常量。
@@ -679,7 +749,8 @@ Exceeded：内存超限 程序运行所用的内存太多了，超过了对应�
 </ul>
 <h3 id="常见技巧">常见技巧</h3>
 <h4 id="利用宏定义简化代码量">利用宏定义简化代码量</h4>
-<p>最简单的例子就是： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span></code></pre></p>
+<p>最简单的例子就是：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span></span></span></code></pre>
 <h4 id="使用宏进行调试">使用宏进行调试</h4>
 <p>编程者在本地测试的时候，往往要加入一些调试语句。而在需要提交到 OJ
 时，为了不使调试语句的输出影响到系统对程序输出结果的判断，就要把它们全部删除，耗时较多。这种情况下，可以通过定义宏的方式来节省时间。大致的程序框架是这样的：</p>
@@ -696,24 +767,29 @@ Exceeded：内存超限 程序运行所用的内存太多了，超过了对应�
 <p>不少 OJ
 都开启了 <code>-DONLINE_JUDGE</code> 这一编译选项，善用这一特性可以节约不少时间。</p>
 <hr />
-<p>参考自： <a target="_blank" rel="noopener" href="https://oi-wiki.org/contest/oi/">OI 赛事与赛制</a>
+<p>参考自：<br />
+<a target="_blank" rel="noopener" href="https://oi-wiki.org/contest/oi/">OI 赛事与赛制</a><br />
 <a target="_blank" rel="noopener" href="https://oi-wiki.org/contest/common-tricks/">OI-Wiki
-常见技巧</a> <a target="_blank" rel="noopener" href="https://oi-wiki.org/lang/file-op/">OI-Wiki
-文件操作</a> <a target="_blank" rel="noopener" href="https://oi-wiki.org/contest/io/">OI-Wiki
-读入、输出优化</a> <a
-target="_blank" rel="noopener" href="https://oi-wiki.org/contest/common-mistakes/">OI-Wiki 常见错误</a>
+常见技巧</a><br />
+<a target="_blank" rel="noopener" href="https://oi-wiki.org/lang/file-op/">OI-Wiki 文件操作</a><br />
+<a target="_blank" rel="noopener" href="https://oi-wiki.org/contest/io/">OI-Wiki
+读入、输出优化</a><br />
+<a target="_blank" rel="noopener" href="https://oi-wiki.org/contest/common-mistakes/">OI-Wiki
+常见错误</a><br />
 <a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/littlehb/p/15304297.html">C++中数组可以开多大</a>
+target="_blank" rel="noopener" href="https://www.cnblogs.com/littlehb/p/15304297.html">C++中数组可以开多大</a><br />
 <a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15061931/4897317">ACM
-OJ常见错误以及解决方法</a> <a
-target="_blank" rel="noopener" href="https://blog.csdn.net/dreambyday/article/details/54880616">VJ
-runtime error可能的原因</a> <a
+OJ常见错误以及解决方法</a><br />
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/dreambyday/article/details/54880616">VJ
+runtime error可能的原因</a><br />
+<a
 target="_blank" rel="noopener" href="https://www.zhihu.com/question/49059234/answer/597104154%3E">如何看待在
 OI / ACM 赛事广为使用的快速读入整数？</a></p>
 <p><a
-target="_blank" rel="noopener" href="https://wenku.baidu.com/view/de96a16ee75c3b3567ec102de2bd960591c6d94c?aggId=de96a16ee75c3b3567ec102de2bd960591c6d94c">ACM时间复杂度及算法的选择分析</a>
+target="_blank" rel="noopener" href="https://wenku.baidu.com/view/de96a16ee75c3b3567ec102de2bd960591c6d94c?aggId=de96a16ee75c3b3567ec102de2bd960591c6d94c">ACM时间复杂度及算法的选择分析</a><br />
 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40763929/article/details/86726906">ACM
-竞赛 中 时间复杂度分析 及 每种复杂度的最大循环次数</a> <a
+竞赛 中 时间复杂度分析 及 每种复杂度的最大循环次数</a><br />
+<a
 target="_blank" rel="noopener" href="https://www.cnblogs.com/buhuizhuzhou/p/16186555.html">【上交ACM-算法初级】算法评价与复杂度</a></p>
 
     </div>
@@ -724,9 +800,9 @@ target="_blank" rel="noopener" href="https://www.cnblogs.com/buhuizhuzhou/p/1618
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%8A%80%E5%B7%A7%E4%B8%8E%E6%80%9D%E6%83%B3/" rel="tag"># 技巧与思想</a>
               <a href="/tags/publication/" rel="tag"># publication</a>
               <a href="/tags/NOI%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD/" rel="tag"># NOI暑假集训</a>
+              <a href="/tags/%E6%8A%80%E5%B7%A7%E4%B8%8E%E6%80%9D%E6%83%B3/" rel="tag"># 技巧与思想</a>
           </div>
 
         

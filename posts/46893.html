@@ -27,7 +27,7 @@
 <meta property="og:description" content="讲解图中深搜和广搜的应用，如求路径数、连通块、最短步数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-02T13:08:14.935Z">
+<meta property="article:modified_time" content="2022-08-02T16:26:14.973Z">
 <meta property="article:author" content="sparkyen">
 <meta property="article:tag" content="publication">
 <meta property="article:tag" content="NOI暑假集训">
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -280,13 +280,15 @@
     <div class="post-body" itemprop="articleBody">
         <p>关于<strong>深度优先搜索(DFS)</strong>和
 <strong>广度优先搜索(BFS)</strong>，不同的书对其有着不同的内容划分，有的将其划分到搜索（如《深入浅出程序设计竞赛—基础篇》），有的将其划分到数据结构基础（如《算法竞赛入门经典》）。不管怎么都是可以的，不过我倾向于在学完<code>数据结构—树</code>以后，将其的思想用到图的搜索上，这样一样和图论的讲解也就更好的衔接。</p>
-<p>下面的动图可以帮助你首先有个生动形象的直观理解： <a
+<p>下面的动图可以帮助你首先有个生动形象的直观理解：<br />
+<a
 target="_blank" rel="noopener" href="https://cs.stanford.edu/people/abisee/tutorial/bfsdfs.html">Comparing
 BFS and DFS</a></p>
 <h2 id="深度优先搜索">深度优先搜索</h2>
 <p>通俗易懂的来说就是：一条路走到黑，不撞南墙不回头。</p>
 <p>不过需要<code>注意</code>的是：假如一个方格可能会被多条路径经过，那么在标记其占位并搜索完前面的路径后，需要取消对其的占位标记（即回溯），这样才能让其在此被其他路径所经过。下面介绍几种基本应用：</p>
-<p><strong>1. 求路径数</strong> <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+<p><strong>1. 求路径数</strong></p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
 洛谷-P1605 迷宫
 https://www.luogu.com.cn/problem/P1605
 */</span>
@@ -333,12 +335,13 @@ https://www.luogu.com.cn/problem/P1605
 	<span class="token function">dfs</span><span class="token punctuation">(</span>sx<span class="token punctuation">,</span> sy<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> cnt<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	
-<span class="token punctuation">&#125;</span> </code></pre></p>
-<p><strong>2. 求连通块个数</strong> <span
-class="math inline">\(DFS\)</span>和<span
+<span class="token punctuation">&#125;</span> </code></pre>
+<p><strong>2. 求连通块个数</strong><br />
+<span class="math inline">\(DFS\)</span>和<span
 class="math inline">\(BFS\)</span>都可以用于求连通块，都是搜索，<span
 class="math inline">\(DFS\)</span>会更加简洁好写，因此基本使用<span
-class="math inline">\(DFS\)</span>来求解 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+class="math inline">\(DFS\)</span>来求解</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
 POJ-2386 Lake Counting 
 https://vjudge.net/problem/POJ-2386
 */</span>
@@ -374,12 +377,12 @@ https://vjudge.net/problem/POJ-2386
 		<span class="token punctuation">&#125;</span> 
 	<span class="token punctuation">&#125;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <h2 id="广度优先搜索">广度优先搜索</h2>
 <p>通俗易懂的来说就是：如洪水泛滥般，周围村庄先被殃及</p>
 <p>在<code>数据结构—树</code>中讲过了树的广度优先遍历，对于一个节点<span
 class="math inline">\(u\)</span>，我们优先遍历其所有的子节点，即靠其最近的节点（距离为1）。那么同样的道理，在图的搜索中，广度优先搜索(BFS)会优先考虑每种状态和初始状态的距离，越近的就会越先考虑。</p>
-<p>利用上述特性我们可以求图中的<strong>最短步数</strong>
+<p>利用上述特性我们可以求图中的<strong>最短步数</strong></p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
 POJ-2251 Dungeon Master
 */</span>
@@ -433,14 +436,15 @@ POJ-2251 Dungeon Master
 			<span class="token punctuation">&#125;</span>
         <span class="token function">bfs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <h2 id="总结">总结</h2>
 <p>以上分别介绍了深度优先搜索(DFS)和
 广度优先搜索(BFS)不同的基本应用，我们需要根据题目的性质来灵活的决定使用哪种搜索方式。</p>
 <hr />
-<p>参考自： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/70802487">BFS,DFS,A*
-and Dijkstra's的区别与联系</a> <a
-href="../images/NOI暑假培训/算法专题/图论/Graph%20Search.pdf">Graph
+<p>参考自：<br />
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/70802487">BFS,DFS,A* and
+Dijkstra's的区别与联系</a><br />
+<a href="../images/NOI暑假培训/算法专题/图论/Graph%20Search.pdf">Graph
 Search Algorithms</a></p>
 
     </div>

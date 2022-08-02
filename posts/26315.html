@@ -27,7 +27,7 @@
 <meta property="og:description" content="介绍模运算的概念与性质，讲述乘法逆元及其求解方法，最后谈到如何使用中国剩余定理求解同余方程并证明其正确性">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-02T13:08:14.943Z">
+<meta property="article:modified_time" content="2022-08-02T16:26:14.979Z">
 <meta property="article:author" content="sparkyen">
 <meta property="article:tag" content="publication">
 <meta property="article:tag" content="NOI暑假集训">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B1%82%E4%BD%99%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">为什么需要求余数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E4%BD%99%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="nav-number">1.1.</span> <span class="nav-text">同余的概念与性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%B1%82%E9%80%86%E5%85%83"><span class="nav-number">1.2.</span> <span class="nav-text">线性求逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%B1%82%E4%BB%BB%E6%84%8F-n-%E4%B8%AA%E6%95%B0%E7%9A%84%E9%80%86%E5%85%83"><span class="nav-number">1.3.</span> <span class="nav-text">线性求任意 n 个数的逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">求解同余方程组—中国剩余定理</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B1%82%E4%BD%99%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">为什么需要求余数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E8%BF%90%E7%AE%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">模运算的基本概念与性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="nav-number">2.1.</span> <span class="nav-text">模的概念与性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E4%BD%99%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="nav-number">2.2.</span> <span class="nav-text">同余的概念与性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83"><span class="nav-number">3.</span> <span class="nav-text">乘法逆元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%B1%82%E9%80%86%E5%85%83"><span class="nav-number">3.1.</span> <span class="nav-text">线性求逆元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%B1%82%E4%BB%BB%E6%84%8F-n-%E4%B8%AA%E6%95%B0%E7%9A%84%E9%80%86%E5%85%83"><span class="nav-number">3.2.</span> <span class="nav-text">线性求任意 n 个数的逆元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B%E4%B8%8E%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">同余方程与中国剩余定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86"><span class="nav-number">4.1.</span> <span class="nav-text">求解同余方程组—中国剩余定理</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -282,8 +282,10 @@
 <p>在程序设计竞赛中，如果计算结果超出了64位整数的范围，则可能会要求输出结果对合适的数取模后的余数。这样可以消除在高精度计算方面，语言的差异所带来的不利因素。例如，Java中有
 支持高精度计算的类Biglnteger，而C++和C则不得不靠自己实现。另一方面，高精度乘法不同实
 现的复杂度也不一样，因此，对算法本身的评价变得更为困难。正因为此类理由，程序设计竞赛
-中经常出现余数的计算 ## 模运算的基本概念与性质 ### 模的概念与性质
-对于整数<span class="math inline">\(a,b\)</span>，满足<span
+中经常出现余数的计算</p>
+<h2 id="模运算的基本概念与性质">模运算的基本概念与性质</h2>
+<h3 id="模的概念与性质">模的概念与性质</h3>
+<p>对于整数<span class="math inline">\(a,b\)</span>，满足<span
 class="math inline">\(b&gt;0\)</span>，则存在唯一的整数<span
 class="math inline">\(q,r\)</span>，满足<span
 class="math inline">\(a=bq+r\)</span>，其中<span
@@ -291,11 +293,15 @@ class="math inline">\(0\leq r &lt; b\)</span>。其中称<span
 class="math inline">\(q\)</span>为商，<span
 class="math inline">\(r\)</span>为余数。余数用<span
 class="math inline">\(a\ mod\ b\)</span>或者<span
-class="math inline">\(a\%b\)</span>表示。 1. <span
-class="math inline">\((a+b)\mod M=(a\mod M+b\mod M)\mod M\)</span> 2.
-<span class="math inline">\((a-b)\mod M=(a\mod M-b\mod M)\mod M\)</span>
-3. <span class="math inline">\((a\times b)\mod M=(a\mod M\times b\mod
-M)\mod M\)</span></p>
+class="math inline">\(a\%b\)</span>表示。</p>
+<ol type="1">
+<li><span class="math inline">\((a+b)\mod M=(a\mod M+b\mod M)\mod
+M\)</span></li>
+<li><span class="math inline">\((a-b)\mod M=(a\mod M-b\mod M)\mod
+M\)</span></li>
+<li><span class="math inline">\((a\times b)\mod M=(a\mod M\times b\mod
+M)\mod M\)</span></li>
+</ol>
 <p>（温馨提示：先学习后面的<a
 href="##乘法逆元">乘法逆元</a>再回来看下面的内容）</p>
 <p>那么下面来看看，能不能进行“模除法”？例如<span
@@ -322,23 +328,31 @@ class="math inline">\(M\)</span>的余数相等，则称<span
 class="math inline">\(x,y\)</span>模<span
 class="math inline">\(M\)</span>同余，记做<span
 class="math inline">\(x\equiv y\pmod M\)</span></p>
-<p>以下是几个最基础的性质： 1. 自反性：<span
-class="math inline">\(x\equiv x\pmod M\)</span> 2. 对称性：若<span
-class="math inline">\(x\equiv y\pmod M\)</span>，则<span
-class="math inline">\(y\equiv x\pmod M\)</span> 3. 传递性：若<span
-class="math inline">\(x\equiv y\pmod M, y\equiv z\pmod
-M\)</span>，则<span class="math inline">\(x\equiv z\pmod M\)</span></p>
-<p>根据上述取模运算的计算方法，同余还有以下性质： 4. 同加性：若<span
-class="math inline">\(x\equiv y\pmod M\)</span>，则<span
-class="math inline">\(x+z\equiv y+z\pmod M\)</span> 5. 同乘性：若<span
-class="math inline">\(x\equiv y\pmod M\)</span>，则<span
-class="math inline">\(x\times z\equiv y\times z\pmod M\)</span> 6.
-同幂性：若<span class="math inline">\(x\equiv y\pmod M\)</span>，则<span
-class="math inline">\(x^n\equiv y^n\pmod M\)</span> 7. <span
-class="math inline">\(x\times y\pmod M \Leftrightarrow M |
-(x-y)\)</span> ## 乘法逆元 在实数意义下，对于任意<span
-class="math inline">\(a \neq 0\)</span>，都有<span
-class="math inline">\(a \times \frac{1}{a}=1\)</span>，<span
+<p>以下是几个最基础的性质：</p>
+<ol type="1">
+<li>自反性：<span class="math inline">\(x\equiv x\pmod M\)</span></li>
+<li>对称性：若<span class="math inline">\(x\equiv y\pmod
+M\)</span>，则<span class="math inline">\(y\equiv x\pmod M\)</span></li>
+<li>传递性：若<span class="math inline">\(x\equiv y\pmod M, y\equiv
+z\pmod M\)</span>，则<span class="math inline">\(x\equiv z\pmod
+M\)</span></li>
+</ol>
+<p>根据上述取模运算的计算方法，同余还有以下性质：<br />
+4. 同加性：若<span class="math inline">\(x\equiv y\pmod
+M\)</span>，则<span class="math inline">\(x+z\equiv y+z\pmod
+M\)</span><br />
+5. 同乘性：若<span class="math inline">\(x\equiv y\pmod
+M\)</span>，则<span class="math inline">\(x\times z\equiv y\times z\pmod
+M\)</span><br />
+6. 同幂性：若<span class="math inline">\(x\equiv y\pmod
+M\)</span>，则<span class="math inline">\(x^n\equiv y^n\pmod
+M\)</span><br />
+7. <span class="math inline">\(x\times y\pmod M \Leftrightarrow M |
+(x-y)\)</span></p>
+<h2 id="乘法逆元">乘法逆元</h2>
+<p>在实数意义下，对于任意<span class="math inline">\(a \neq
+0\)</span>，都有<span class="math inline">\(a \times
+\frac{1}{a}=1\)</span>，<span
 class="math inline">\(\frac{1}{a}\)</span>称作是<span
 class="math inline">\(a\)</span>的倒数。所以在模意义下，也希望<span
 class="math inline">\(\frac{1}{a}\)</span>满足这样的性质：<span
@@ -354,8 +368,8 @@ class="math inline">\(a^{-1}(\mod\ p)\)</span></p>
 <p>接下来介绍两种方法来求出<span
 class="math inline">\(a\)</span>在模<span
 class="math inline">\(p\)</span>意义下的逆元</p>
-<p><strong>方法1：扩展欧几里得算法</strong> 从<span
-class="math inline">\(a \times x\equiv 1(\mod\
+<p><strong>方法1：扩展欧几里得算法</strong><br />
+从<span class="math inline">\(a \times x\equiv 1(\mod\
 p)\)</span>这个式子入手发现，它和<span class="math inline">\(\exists y,\
 ax+py=1\)</span>等价，可以使用扩展欧几里得算法解出这个关于<span
 class="math inline">\(a,p\)</span>的不定方程。并且由裴蜀定理可以发现存在<span
@@ -364,22 +378,23 @@ class="math inline">\(p\)</span>意义下的逆元当且仅当<span
 class="math inline">\(gcd(a, p) = 1\)</span>，即<span
 class="math inline">\(a\)</span>和<span
 class="math inline">\(p\)</span>互质（<span class="math inline">\(a\perp
-p\)</span>）。 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">inv</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> p<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+p\)</span>）。</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">inv</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> p<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
 	<span class="token function">exgcd</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> p<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token keyword">return</span> x<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
-<p><strong><code>提示</code></strong>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><strong><code>提示</code></strong><br />
 <strong>逆元有时求出来可能是负数</strong>。例如若<span
 class="math inline">\(a=2,p=3\)</span>，求<span
-class="math inline">\(a\)</span>的逆元。 即求<span
-class="math inline">\(x\)</span>使得<span class="math inline">\(2x\equiv
-1\pmod 3\)</span>，等同于<span
+class="math inline">\(a\)</span>的逆元。<br />
+即求<span class="math inline">\(x\)</span>使得<span
+class="math inline">\(2x\equiv 1\pmod 3\)</span>，等同于<span
 class="math inline">\(2x+3y=1\)</span>，其中一组解为<span
 class="math inline">\((-1,1)\)</span>，此时-1就是<span
 class="math inline">\(a\)</span>的逆元</p>
-<p><strong>方法2：费马小定理</strong> 费马小定理：若<span
-class="math inline">\(p\)</span>是质数，且<span
+<p><strong>方法2：费马小定理</strong><br />
+费马小定理：若<span class="math inline">\(p\)</span>是质数，且<span
 class="math inline">\(a\)</span>不是<span
 class="math inline">\(p\)</span>的倍数，则<span
 class="math inline">\(a^{p-1}\equiv 1(\mod\ p)\)</span></p>
@@ -391,10 +406,10 @@ class="math inline">\(a \times a^{p-2}=a^{p-1}\equiv 1(\mod\
 p)\)</span>。根据乘法逆元的定义，就知道<span
 class="math inline">\(a\)</span>在模<span
 class="math inline">\(p\)</span>意义下的逆元是<span
-class="math inline">\(a^{p-2}\)</span>，可以用快速幂求出。
+class="math inline">\(a^{p-2}\)</span>，可以用快速幂求出。</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">inv</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> p<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">return</span> <span class="token function">qpow</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> p<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <h3 id="线性求逆元">线性求逆元</h3>
 <p>求出 <span class="math inline">\(1,2,...,n\)</span> 中每个数关于
 <span class="math inline">\(p\)</span> 的逆元。</p>
@@ -413,10 +428,13 @@ class="math inline">\(\mod p\)</span> 意义下就会得到：<span
 class="math inline">\(ki+j \equiv 0 \pmod p\)</span>；</p>
 <p>两边同时乘 <span class="math inline">\(i^{-1} \times
 j^{-1}\)</span>（<span class="math inline">\(j&lt;i\Rightarrow
-j^{-1}\)</span>存在）： <span class="math inline">\(kj^{-1}+i^{-1}
-\equiv 0 \pmod p\)</span> <span class="math inline">\(i^{-1} \equiv
--kj^{-1} \pmod p\)</span> 再带入 <span class="math inline">\(j = p \bmod
-i\)</span>，有 <span class="math inline">\(p = ki + j\)</span>，有：
+j^{-1}\)</span>存在）：<br />
+<span class="math inline">\(kj^{-1}+i^{-1} \equiv 0 \pmod
+p\)</span><br />
+<span class="math inline">\(i^{-1} \equiv -kj^{-1} \pmod
+p\)</span><br />
+再带入 <span class="math inline">\(j = p \bmod i\)</span>，有 <span
+class="math inline">\(p = ki + j\)</span>，有：<br />
 <span class="math inline">\(i^{-1} \equiv -\lfloor\frac{p}{i}\rfloor (p
 \bmod i)^{-1} \pmod p\)</span></p>
 <p>我们注意到 <span class="math inline">\(p \bmod i &lt;
@@ -424,13 +442,13 @@ i\)</span>，而在迭代中我们完全可以假设我们已经知道了所有�
 class="math inline">\(p\)</span> 下的逆元 <span
 class="math inline">\(j^{-1}, j &lt; i\)</span>。</p>
 <p>故我们就可以推出逆元，利用递推的形式实现：</p>
-<p><span class="math display">\[
-i^{-1} \equiv \begin{cases}
+<p><span class="math display">\[  
+i^{-1} \equiv \begin{cases}  
     1,                                           &amp; \text{if } i = 1,
-\\
+\\  
     -\lfloor\frac{p}{i}\rfloor (p \bmod i)^{-1}, &amp;
-\text{otherwises}.
-\end{cases} \pmod p
+\text{otherwises}.  
+\end{cases} \pmod p  
 \]</span></p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp">inv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
@@ -456,22 +474,26 @@ class="math inline">\(sv_{n-1}\)</span>。</p>
 <p>同理我们可以依次计算出所有的 <span
 class="math inline">\(sv_i\)</span>，于是 <span
 class="math inline">\(a_i^{-1}\)</span> 就可以用 <span
-class="math inline">\(s_{i-1} \times sv_i\)</span> 求得。 <pre class="language-cpp" data-language="cpp"><code class="language-cpp">s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+class="math inline">\(s_{i-1} \times sv_i\)</span> 求得。</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> s<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> s<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">*</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">%</span>p<span class="token punctuation">;</span>
 sv<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">qpow</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">,</span> p<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> n<span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> sv<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> sv<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">*</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">%</span>p<span class="token punctuation">;</span>
 <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> inv<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> sv<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">*</span>s<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">%</span>p<span class="token punctuation">;</span></code></pre>
-## 同余方程与中国剩余定理 形如  <span class="math inline">\(ax\equiv
-c(\mod\ b)\)</span>的方程被称为 <strong>线性同余方程</strong></p>
-<p>而在中国古代就有这类问题的踪影： &gt;
-有物不知其数，三三数之剩二，五五数之剩三，七七数之剩二。问物几何？</p>
-<p>即求满足以下条件的整数：除以3余2，除以5余3，除以7余2。可以转写成下面这样一个方程组：
-<span class="math display">\[
-\begin{cases}
-x &amp;\equiv 2 \pmod {3} \\
-x &amp;\equiv 3 \pmod {5} \\
-x &amp;\equiv 2 \pmod {7} \\
-\end{cases}
+<h2 id="同余方程与中国剩余定理">同余方程与中国剩余定理</h2>
+<p>形如  <span class="math inline">\(ax\equiv c(\mod\
+b)\)</span>的方程被称为 <strong>线性同余方程</strong></p>
+<p>而在中国古代就有这类问题的踪影：</p>
+<blockquote>
+<p>有物不知其数，三三数之剩二，五五数之剩三，七七数之剩二。问物几何？</p>
+</blockquote>
+<p>即求满足以下条件的整数：除以3余2，除以5余3，除以7余2。可以转写成下面这样一个方程组：<br />
+<span class="math display">\[  
+\begin{cases}  
+x &amp;\equiv 2 \pmod {3} \\  
+x &amp;\equiv 3 \pmod {5} \\  
+x &amp;\equiv 2 \pmod {7} \\  
+\end{cases}  
 \]</span></p>
 <p>该问题最早见于《孙子算经》中，并有该问题的具体解法。上面具体问题的解答口诀由明朝数学家程大位在《算法统宗》中给出：</p>
 <blockquote>
@@ -479,61 +501,80 @@ x &amp;\equiv 2 \pmod {7} \\
 </blockquote>
 <h3 id="求解同余方程组中国剩余定理">求解同余方程组—中国剩余定理</h3>
 <p>一般来说，中国剩余定理(Chinese Remainder Theorem,
-CRT)可以用来求解下面这样一类方程组： <span class="math display">\[
-\begin{cases}
-x &amp;\equiv a_1 \pmod {m_1} \\
-x &amp;\equiv a_2 \pmod {m_2} \\
-  &amp;\vdots \\
-x &amp;\equiv a_n \pmod {m_n} \\
-\end{cases}
+CRT)可以用来求解下面这样一类方程组：<br />
+<span class="math display">\[  
+\begin{cases}  
+x &amp;\equiv a_1 \pmod {m_1} \\  
+x &amp;\equiv a_2 \pmod {m_2} \\  
+  &amp;\vdots \\  
+x &amp;\equiv a_n \pmod {m_n} \\  
+\end{cases}  
 \]</span></p>
 <p>其中，<span class="math inline">\(m_1,m_2, \cdots,
 m_n\)</span>两两互质，则对于任意的整数<span
 class="math inline">\(a_1,a_2, \cdots,
-a_n\)</span>，上面这个方程组有解。中国剩余定理给出了 解的构造方式： 1.
-计算所有模数的积<span class="math inline">\(M=m_1\times m_2\times
-\cdots\times m_n=\prod_{i=1}^nm_i\)</span>。 1. 对于第i个方程计算： i.
-<span class="math inline">\(M_i =\frac{M}{m_i}\)</span> ii. 计算 <span
-class="math inline">\(M_i\)</span> 在模 <span
+a_n\)</span>，上面这个方程组有解。中国剩余定理给出了 解的构造方式：</p>
+<ol type="1">
+<li>计算所有模数的积<span class="math inline">\(M=m_1\times m_2\times
+\cdots\times m_n=\prod_{i=1}^nm_i\)</span>。</li>
+<li>对于第i个方程计算：
+<ol type="i">
+<li><span class="math inline">\(M_i =\frac{M}{m_i}\)</span><br />
+</li>
+<li>计算 <span class="math inline">\(M_i\)</span> 在模 <span
 class="math inline">\(m_i\)</span> 意义下的逆元 <span
 class="math inline">\(M_i^{-1}\)</span>（易知<span
 class="math inline">\(M_i\)</span> 和<span
-class="math inline">\(m_i\)</span>是互质的，所以逆元一定存在） iii.
-计算<span class="math inline">\(b_i=M_iM_i^{-1}\)</span>（<strong>不要对
-<span class="math inline">\(m_i\)</span> 取模</strong>） 3.
-方程组的唯一解为：<span class="math inline">\(x=\sum_{i=1}^n a_ib_i
-\pmod M\)</span>。</p>
-<p>可以先来验证一下上面问题的解： 1. <span
-class="math inline">\(M=3\times 5\times 7=105\)</span>； 2. 三人同行
-<strong>七十</strong> 希：<span class="math inline">\(m_1=3,
-M_1=M/m_1=35, M_1^{-1}\equiv 2\pmod 3\)</span>，故 <span
-class="math inline">\(b_1=35\times 2=70\)</span>； 3. 五树梅花
-<strong>廿一</strong> 支：<span class="math inline">\(m_2=5,
-M_2=M/m_2=21, M_2^{-1}\equiv 1\pmod 5\)</span>，故 <span
-class="math inline">\(b_2=21\times 1=21\)</span>； 4. 七子团圆正
-<strong>半月</strong>：<span class="math inline">\(m_3=7, M_3=M/m_3=15,
-M_3^{-1}\equiv 1\pmod 7\)</span>，故 <span
-class="math inline">\(b_3=15\times 1=15\)</span>； 5.
-所以方程组的唯一解为 <span class="math inline">\(x\equiv 2\times
+class="math inline">\(m_i\)</span>是互质的，所以逆元一定存在）<br />
+</li>
+<li>计算<span
+class="math inline">\(b_i=M_iM_i^{-1}\)</span>（<strong>不要对 <span
+class="math inline">\(m_i\)</span> 取模</strong>）</li>
+</ol></li>
+<li>方程组的唯一解为：<span class="math inline">\(x=\sum_{i=1}^n a_ib_i
+\pmod M\)</span>。</li>
+</ol>
+<p>可以先来验证一下上面问题的解：</p>
+<ol type="1">
+<li><span class="math inline">\(M=3\times 5\times 7=105\)</span>；</li>
+<li>三人同行 <strong>七十</strong> 希：<span
+class="math inline">\(m_1=3, M_1=M/m_1=35, M_1^{-1}\equiv 2\pmod
+3\)</span>，故 <span class="math inline">\(b_1=35\times
+2=70\)</span>；</li>
+<li>五树梅花 <strong>廿一</strong> 支：<span
+class="math inline">\(m_2=5, M_2=M/m_2=21, M_2^{-1}\equiv 1\pmod
+5\)</span>，故 <span class="math inline">\(b_2=21\times
+1=21\)</span>；</li>
+<li>七子团圆正 <strong>半月</strong>：<span class="math inline">\(m_3=7,
+M_3=M/m_3=15, M_3^{-1}\equiv 1\pmod 7\)</span>，故 <span
+class="math inline">\(b_3=15\times 1=15\)</span>；</li>
+<li>所以方程组的唯一解为 <span class="math inline">\(x\equiv 2\times
 70+3\times 21+2\times 15\equiv 233\equiv 23 \pmod {105}\)</span>。（除
-<strong>百零五</strong> 便得知）</p>
+<strong>百零五</strong> 便得知）</li>
+</ol>
 <p>下面我们来证明这个方法的正确性：</p>
-<p>由于 1. 显然<span class="math inline">\(b_i=M_iM_i^{-1} \equiv 1\pmod
-{m_i}\)</span> 2. 对于<span class="math inline">\(j\neq
-i\)</span>，<span class="math inline">\(M_j\)</span>为<span
+<p>由于</p>
+<ol type="1">
+<li>显然<span class="math inline">\(b_i=M_iM_i^{-1} \equiv 1\pmod
+{m_i}\)</span></li>
+<li>对于<span class="math inline">\(j\neq i\)</span>，<span
+class="math inline">\(M_j\)</span>为<span
 class="math inline">\(m_i\)</span>的倍数，即<span
 class="math inline">\(M_j\equiv 0\pmod {m_i}\)</span>。故<span
-class="math inline">\(b_j=M_jM_j^{-1} \equiv 0\pmod {m_i}\)</span></p>
-<p>可以得到 <span class="math display">\[
-\begin{aligned}
+class="math inline">\(b_j=M_jM_j^{-1} \equiv 0\pmod {m_i}\)</span></li>
+</ol>
+<p>可以得到<br />
+<span class="math display">\[  
+\begin{aligned}  
 x&amp;\equiv \sum_{j=1}^n a_jb_j                      &amp;\pmod {m_i}
-\\
+\\  
 &amp;\equiv a_ib_i+\sum_{j\neq i}^n
-a_jb_j                                      &amp;\pmod {m_i} \\
-&amp;\equiv a_i                                      &amp;\pmod {m_i}
-\end{aligned}
+a_jb_j                                      &amp;\pmod {m_i} \\  
+&amp;\equiv a_i                                      &amp;\pmod {m_i}  
+\end{aligned}  
 \]</span></p>
-<p>具体代码实现如下： <pre class="language-cpp" data-language="cpp"><code class="language-cpp">ll <span class="token function">crt</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> ll<span class="token operator">*</span> a<span class="token punctuation">,</span> ll<span class="token operator">*</span> r<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<p>具体代码实现如下：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">ll <span class="token function">crt</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> ll<span class="token operator">*</span> a<span class="token punctuation">,</span> ll<span class="token operator">*</span> r<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   ll M <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
   <span class="token comment">//M=r1*r2*...*rn</span>
   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> M <span class="token operator">=</span> M <span class="token operator">*</span> r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -544,9 +585,10 @@ a_jb_j                                      &amp;\pmod {m_i} \\
     x <span class="token operator">=</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">*</span>m<span class="token operator">*</span>t<span class="token operator">%</span>M<span class="token punctuation">)</span><span class="token operator">%</span>M<span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span>x<span class="token operator">%</span>M<span class="token operator">+</span>M<span class="token punctuation">)</span><span class="token operator">%</span>M<span class="token punctuation">;</span><span class="token comment">//保证x是正数</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <p>以<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1495">洛谷-P1495
-曹冲养猪</a>为例说明其实际应用： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+曹冲养猪</a>为例说明其实际应用：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">ll</span> <span class="token expression"><span class="token keyword">long</span> <span class="token keyword">long</span> </span></span>
 <span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 <span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">;</span>
@@ -576,15 +618,16 @@ ll <span class="token function">crt</span><span class="token punctuation">(</spa
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 		<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld"</span><span class="token punctuation">,</span> <span class="token function">crt</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> a<span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <hr />
-<p>参考自： <a
-target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/inverse/">OI-Wiki
-乘法逆元</a> <a
-target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/crt/">OI-Wiki
-中国剩余定理</a> 《深入浅出程序设计竞赛—进阶版》</p>
+<p>参考自：<br />
+<a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/inverse/">OI-Wiki
+乘法逆元</a><br />
+<a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/crt/">OI-Wiki
+中国剩余定理</a><br />
+《深入浅出程序设计竞赛—进阶版》</p>
 <p><a
-target="_blank" rel="noopener" href="https://www.jianshu.com/p/967729f7a218">知识点:各种求逆元的技术</a>
+target="_blank" rel="noopener" href="https://www.jianshu.com/p/967729f7a218">知识点:各种求逆元的技术</a><br />
 <a
 target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/44523169">5÷2=6？—是的，模7意义下</a></p>
 

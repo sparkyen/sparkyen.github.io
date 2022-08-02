@@ -27,7 +27,7 @@
 <meta property="og:description" content="介绍动态规划中的背包问题，包括01背包、完全背包、多重背包、分组背包、二维费用背包，并在其中讲述滚动数组优化、二进制拆分等优化技巧，以及如何输出方案、求方案总数等">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-08-02T13:08:14.930Z">
+<meta property="article:modified_time" content="2022-08-02T16:26:14.964Z">
 <meta property="article:author" content="sparkyen">
 <meta property="article:tag" content="publication">
 <meta property="article:tag" content="NOI暑假集训">
@@ -170,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -301,40 +301,44 @@ class="math inline">\(j\)</span>的背包里本质是一回事，所以前者状
 件物品，那么问题就转化为“前<span class="math inline">\(i−1\)</span>
 件物品放 入剩下的容量为<span class="math inline">\(j-w[i]\)</span>
 的背包中”, 价值为<span
-class="math inline">\(f[i-1][j-w[i]]+v[i]\)</span>，原因同理。
+class="math inline">\(f[i-1][j-w[i]]+v[i]\)</span>，原因同理。</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-1-1</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
 	<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>w<span class="token punctuation">,</span> <span class="token operator">&amp;</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//许边读边读入计算而不必保存 </span>
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 		f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>i<span class="token operator">==</span><span class="token number">1</span><span class="token operator">?</span><span class="token number">0</span><span class="token operator">:</span>f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//第i件物品放不进去</span>
 		<span class="token keyword">if</span><span class="token punctuation">(</span>j<span class="token operator">>=</span>w<span class="token punctuation">)</span> f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">-</span>w<span class="token punctuation">]</span><span class="token operator">+</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span></code></pre></p>
+	<span class="token punctuation">&#125;</span></code></pre>
 <p>我们还可以将<span class="math inline">\(f(i, j)\)</span>表示把<span
 class="math inline">\(i,i+1,...,n\)</span>个物品装到容量为<span
 class="math inline">\(j\)</span>的背包的最大总重量,答案是<span
-class="math inline">\(d[1][m]\)</span> <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-1-2</span>
+class="math inline">\(d[1][m]\)</span></p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-1-2</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> n<span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span>
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 		f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>i<span class="token operator">==</span>n<span class="token operator">?</span><span class="token number">0</span><span class="token operator">:</span>d<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 		<span class="token keyword">if</span><span class="token punctuation">(</span>j<span class="token operator">>=</span>w<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">-</span>w<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">+</span>v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span></code></pre></p>
+	<span class="token punctuation">&#125;</span></code></pre>
 <h3 id="空间优化">空间优化</h3>
 <p>可以使用滚动数组优化空间，但是导致只有最后一个阶段的状态值，不好打印解。不过就算是二维数组仍然不能保证是最小字典序的解（字典序是从前往后的），因为是逆向打印。</p>
 <p>需特别注意的是递推过程种要倒着遍历保证当前为<span
 class="math inline">\(i\)</span>时<span
 class="math inline">\(f[j]\)</span>都是<span
-class="math inline">\(f[i-1][j]\)</span> <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-1-3</span>
+class="math inline">\(f[i-1][j]\)</span></p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-1-3</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 		<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>v<span class="token punctuation">,</span> <span class="token operator">&amp;</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
 		<span class="token comment">//需要倒着遍历保证当前为i时f[j]都是f[i-1][j] </span>
 		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> m<span class="token punctuation">;</span> j <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 			<span class="token keyword">if</span><span class="token punctuation">(</span>j<span class="token operator">>=</span>v<span class="token punctuation">)</span> f<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>j<span class="token operator">-</span>v<span class="token punctuation">]</span><span class="token operator">+</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
 		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span></code></pre></p>
+	<span class="token punctuation">&#125;</span></code></pre>
 <h3 id="输出方案">输出方案</h3>
 <p>记录路径有两种方式，一是根据结果逆推得出，二是在递推的求解过程中就记录下来。这里以<a
-target="_blank" rel="noopener" href="https://vjudge.net/problem/UVA-624">UVA-624 CD</a> 为例题来说明：
-1. 由dp结果往回逆推 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-2-1</span>
+target="_blank" rel="noopener" href="https://vjudge.net/problem/UVA-624">UVA-624 CD</a>
+为例题来说明：</p>
+<ol type="1">
+<li><p>由dp结果往回逆推 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-2-1</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>w<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
@@ -351,9 +355,8 @@ target="_blank" rel="noopener" href="https://vjudge.net/problem/UVA-624">UVA-624
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> id<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span> res<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"sum:%d\n"</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></p>
-<ol start="2" type="1">
-<li>递推求解过程中记录 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-2-2</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"sum:%d\n"</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></p></li>
+<li><p>递推求解过程中记录 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-2-2</span>
 <span class="token comment">//初始化 </span>
 <span class="token function">memset</span><span class="token punctuation">(</span>dp<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>dp<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">memset</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -378,7 +381,7 @@ target="_blank" rel="noopener" href="https://vjudge.net/problem/UVA-624">UVA-624
 		j <span class="token operator">-=</span> w<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token string">"sum:"</span> <span class="token operator">&lt;&lt;</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span></code></pre></li>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"sum:"</span> <span class="token operator">&lt;&lt;</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span></code></pre></p></li>
 </ol>
 <h3 id="输出最小字典序的路径">输出最小字典序的路径</h3>
 <ol type="1">
@@ -398,14 +401,15 @@ target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/desc
 target="_blank" rel="noopener" href="https://vjudge.net/problem/HDU-6083">HDU-6083
 度度熊的午饭时光</a>为例说明：</p>
 <p><strong>题目要求优先级：价值总和(大) &gt; 序列总和(小) &gt;
-字典序(小)</strong> <span
+字典序(小)</strong><br />
+<span
 class="math inline">\(dp[j-w[i]]+v[i]&gt;dp[j]\)</span>保证价值总和大的物品被选，相同时<span
 class="math inline">\(sum[j-w[i]]+i&lt;sum[j]\)</span>保证序列总和小的物品被选（这里<span
 class="math inline">\(sum[i][j]\)</span>表示<span
 class="math inline">\(i,i+1,...,n\)</span>个物品装到容量为<span
 class="math inline">\(j\)</span>的背包序列和，可以节省空间变为<span
 class="math inline">\(sum[j]\)</span>），第二关键字相同时<span
-class="math inline">\(sum[j-w[i]]+i==sum[j]\)</span>保证字典序最小
+class="math inline">\(sum[j-w[i]]+i==sum[j]\)</span>保证字典序最小</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 1-3-1</span>
 <span class="token comment">//ref: #22475787 | yfsyfs's solution for [HDU-6083] (https://vjudge.net/solution/snapshot/22475787)</span>
 <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>m<span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -439,13 +443,14 @@ class="math inline">\(sum[j-w[i]]+i==sum[j]\)</span>保证字典序最小
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> id<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> res<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c"</span><span class="token punctuation">,</span> i<span class="token operator">!=</span>id<span class="token operator">-</span><span class="token number">1</span> <span class="token operator">?</span><span class="token char">' '</span><span class="token operator">:</span><span class="token char">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <h3 id="求方案总数">求方案总数</h3>
-<p>状态转移方程已经考察了所有可能的背包组成方案，利用如下递推式即可：
+<p>状态转移方程已经考察了所有可能的背包组成方案，利用如下递推式即可：<br />
 <span class="math display">\[f[i][j] = f[i − 1][j]+ f[i-1][j
 −v[i]]\]</span></p>
 <p>这里以<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/11/">AcWing-11
-背包问题求方案数</a>说明： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// code 1-4-1</span>
+背包问题求方案数</a>说明：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// code 1-4-1</span>
 <span class="token comment">// ref: https://www.acwing.com/solution/content/11494/</span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
@@ -469,16 +474,16 @@ class="math inline">\(sum[j-w[i]]+i==sum[j]\)</span>保证字典序最小
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
     cout<span class="token operator">&lt;&lt;</span> g<span class="token punctuation">[</span>m<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <h2 id="完全背包">完全背包</h2>
-<p>这里和01背包的区别就在于每件物品有无数件可用，最朴素的解法就是我可以循环遍历看看我用几件物品才能使得当前价值最大，但显然其时间复杂度非常高：
+<p>这里和01背包的区别就在于每件物品有无数件可用，最朴素的解法就是我可以循环遍历看看我用几件物品才能使得当前价值最大，但显然其时间复杂度非常高：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 2-1-1</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> k<span class="token operator">*</span>w<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">&lt;=</span>j<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
 			f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">-</span>k<span class="token operator">*</span>w<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">+</span>k<span class="token operator">*</span>v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <p>而我们通过仔细观察发现：01背包中<span
 class="math inline">\(f[i][j]\)</span>由 <span
 class="math inline">\(f[i-1][j]\)</span>和<span
@@ -516,7 +521,7 @@ class="math inline">\(j=0..m\)</span>的顺序循环。这就是这个简单的�
 <span class="token punctuation">&#125;</span></code></pre>
 <p>完全背包可以<a
 target="_blank" rel="noopener" href="https://vjudge.net/problem/51Nod-2649/origin">51Nod-2649
-完全背包</a>为例题来练手，不同的解法时间复杂度不同，如下：
+完全背包</a>为例题来练手，不同的解法时间复杂度不同，如下：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 2-2-1</span>
 <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">,</span> <span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
@@ -541,13 +546,13 @@ target="_blank" rel="noopener" href="https://vjudge.net/problem/51Nod-2649/origi
 		dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>j<span class="token operator">-</span>w<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">+</span>v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span> 
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></p>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h2 id="多重背包">多重背包</h2>
 <p>多重背包与完全背包的区别在于进一步限定了每件物品可以选择的数量，这里以<a
 target="_blank" rel="noopener" href="https://vjudge.net/problem/51Nod-1086/origin">51Nod-1086 背包问题
 V2</a>为例题来说明。</p>
 <p>同样的我们可以选择和完全背包一样的朴素做法，枚举第<span
-class="math inline">\(i\)</span>件物品选择多少件能够使得当前总价值最大：
+class="math inline">\(i\)</span>件物品选择多少件能够使得当前总价值最大：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 3-1-1</span>
 <span class="token comment">/*
 多重背包朴素做法 AC: 593ms
@@ -569,7 +574,7 @@ class="math inline">\(i\)</span>件物品选择多少件能够使得当前总价
 	<span class="token punctuation">&#125;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <h3 id="二进制拆分优化">二进制拆分优化</h3>
 <p>细心观察发现，朴素做法是把每件物品拆成了<span
 class="math inline">\(c[i]\)</span>件，这样的目的是为了枚举取物品的所有可能方案。而我们知道一个十进制整数能被若干个2的整数次幂相加得到，如<span
@@ -580,7 +585,7 @@ class="math inline">\(i\)</span>件物品的所有可能方案，枚举次数由
 class="math inline">\(O(n)\)</span>降至<span class="math inline">\(O(log
 \
 n)\)</span>。具体做法是将每件物品最大可用数量拆分后，每段单独作为一个新物品，后面的写法则和01背包相同。</p>
-<p>每段单独作为一个新物品后，若仍然使用二维数组计算的话，那么第一维的物品数会增加很多，甚至超出内存，严重时无法用于问题求解：
+<p>每段单独作为一个新物品后，若仍然使用二维数组计算的话，那么第一维的物品数会增加很多，甚至超出内存，严重时无法用于问题求解：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 3-2-1</span>
 <span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">5e4</span><span class="token operator">+</span><span class="token number">100</span><span class="token punctuation">;</span>
 <span class="token comment">//weight, value, count 由于n*log2(k)大概有800多则只开110的空间不够 </span>
@@ -608,8 +613,8 @@ n)\)</span>。具体做法是将每件物品最大可用数量拆分后，每段
 	<span class="token punctuation">&#125;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>cnt<span class="token punctuation">]</span><span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	
-<span class="token punctuation">&#125;</span></code></pre></p>
-<p>在这种情况下，我们必须使用滚动数组来对空间进行优化：
+<span class="token punctuation">&#125;</span></code></pre>
+<p>在这种情况下，我们必须使用滚动数组来对空间进行优化：</p>
 <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 3-2-2</span>
 <span class="token comment">/*
 多重背包二进制优化 AC: 46ms
@@ -644,7 +649,7 @@ n)\)</span>。具体做法是将每件物品最大可用数量拆分后，每段
 			f<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>j<span class="token operator">-</span>w<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">+</span>v<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	<span class="token punctuation">&#125;</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 <h3 id="使用混合背包求解">使用混合背包求解</h3>
 <p>在多重背包中，虽然限制了物品的数量，但是如果数量 * 重量 &gt;=
 总重量，则可以考虑完全背包；否则二进制拆分考虑01背包的做法。</p>
@@ -727,12 +732,13 @@ target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%
 class="math inline">\(f[i][j][k]\)</span>表示前<span
 class="math inline">\(i\)</span>件物品 付出两种费用分别为<span
 class="math inline">\(j\)</span>和<span
-class="math inline">\(k\)</span>时可获得的最大价值，递推式如下： <span
-class="math display">\[f[i][j][k] = max(f[i-1][j][k],
+class="math inline">\(k\)</span>时可获得的最大价值，递推式如下：<br />
+<span class="math display">\[f[i][j][k] = max(f[i-1][j][k],
 f[i-1][j-w1[i]][k-w2[i]]+v[i])\]</span></p>
 <p>同样的我们可以使用滚动数组优化空间，这里以<a
 target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%B7-P1855/origin">洛谷-P1855
-榨取kkksc03</a>为例题说明： <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 5-1-1</span>
+榨取kkksc03</a>为例题说明：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//code 5-1-1</span>
 <span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">1e3</span><span class="token operator">+</span><span class="token number">100</span><span class="token punctuation">;</span> 
 <span class="token keyword">int</span> n<span class="token punctuation">,</span> M<span class="token punctuation">,</span> T<span class="token punctuation">,</span> m<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">,</span> t<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> dp<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -757,7 +763,7 @@ target="_blank" rel="noopener" href="https://vjudge.net/problem/%E6%B4%9B%E8%B0%
     <span class="token punctuation">&#125;</span>
 <span class="token comment">//    printf("%d", dp[M][T]);</span>
 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">[</span>M<span class="token punctuation">]</span><span class="token punctuation">[</span>T<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre></p>
+<span class="token punctuation">&#125;</span></code></pre>
 
     </div>
 
