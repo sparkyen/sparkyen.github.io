@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":{"enable":false,"onlypost":false,"loadingImg":null},"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="讲解图中深搜和广搜的应用，如求路径数、连通块、最短步数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构基础—图">
+<meta property="og:url" content="http://example.com/posts/46893.html">
+<meta property="og:site_name" content="NOTES">
+<meta property="og:description" content="讲解图中深搜和广搜的应用，如求路径数、连通块、最短步数">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-02T13:08:14.935Z">
+<meta property="article:author" content="sparkyen">
+<meta property="article:tag" content="publication">
+<meta property="article:tag" content="NOI暑假集训">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/posts/46893.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/posts/46893.html","path":"posts/46893.html","title":"数据结构基础—图"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据结构基础—图 | NOTES</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">NOTES</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-number">1.</span> <span class="nav-text">深度优先搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-number">2.</span> <span class="nav-text">广度优先搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sparkyen"
+      src="/images/%E5%A4%B4%E5%83%8F/blue.jpg">
+  <p class="site-author-name" itemprop="name">sparkyen</p>
+  <div class="site-description" itemprop="description">今天你吃的啥好吃的鸭</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:sparkyen@126.com" title="E-Mail → mailto:sparkyen@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/sparkyen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sparkyen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/sparkyen/" title="cnblogs → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;sparkyen&#x2F;" rel="noopener" target="_blank"><i class="fa fa-clock-rotate-left fa-fw"></i>cnblogs</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/190880139/" title="douban → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;190880139&#x2F;" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>douban</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/46893.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F/blue.jpg">
+      <meta itemprop="name" content="sparkyen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NOTES">
+      <meta itemprop="description" content="今天你吃的啥好吃的鸭">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据结构基础—图 | NOTES">
+      <meta itemprop="description" content="讲解图中深搜和广搜的应用，如求路径数、连通块、最短步数">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构基础—图
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-20 00:00:00" itemprop="dateCreated datePublished" datetime="2022-07-20T00:00:00+08:00">2022-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">讲解图中深搜和广搜的应用，如求路径数、连通块、最短步数</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>关于**深度优先搜索(DFS)**和 **广度优先搜索(BFS)**，不同的书对其有着不同的内容划分，有的将其划分到搜索（如《深入浅出程序设计竞赛—基础篇》），有的将其划分到数据结构基础（如《算法竞赛入门经典》）。不管怎么都是可以的，不过我倾向于在学完<code>数据结构—树</code>以后，将其的思想用到图的搜索上，这样一样和图论的讲解也就更好的衔接。</p>
+<p>下面的动图可以帮助你首先有个生动形象的直观理解：<br><a target="_blank" rel="noopener" href="https://cs.stanford.edu/people/abisee/tutorial/bfsdfs.html">Comparing BFS and DFS</a></p>
+<h2 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h2><p>通俗易懂的来说就是：一条路走到黑，不撞南墙不回头。</p>
+<p>不过需要<code>注意</code>的是：假如一个方格可能会被多条路径经过，那么在标记其占位并搜索完前面的路径后，需要取消对其的占位标记（即回溯），这样才能让其在此被其他路径所经过。下面介绍几种基本应用：</p>
+<p><strong>1. 求路径数</strong></p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+洛谷-P1605 迷宫
+https://www.luogu.com.cn/problem/P1605
+*/</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">1e3</span><span class="token operator">+</span><span class="token number">100</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">,</span> t<span class="token punctuation">,</span> sx<span class="token punctuation">,</span> sy<span class="token punctuation">,</span> fx<span class="token punctuation">,</span> fy<span class="token punctuation">;</span>
+<span class="token keyword">int</span> dx<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> dy<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> vis<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">,</span> cnt<span class="token punctuation">;</span> 
+<span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token comment">//边界外或者访问过就返回 </span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">||</span>x<span class="token operator">></span>n<span class="token operator">||</span>y<span class="token operator">&lt;</span><span class="token number">1</span><span class="token operator">||</span>y<span class="token operator">></span>m<span class="token punctuation">)</span><span class="token operator">||</span>vis<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>y<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">==</span>fx<span class="token operator">&amp;&amp;</span>y<span class="token operator">==</span>fy<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		cnt<span class="token operator">++</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	vis<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">//占位, 防止往回走 </span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">int</span> nx <span class="token operator">=</span> x<span class="token operator">+</span>dx<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> ny <span class="token operator">=</span> y<span class="token operator">+</span>dy<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+		<span class="token function">dfs</span><span class="token punctuation">(</span>nx<span class="token punctuation">,</span> ny<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	vis<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//取消占位(回溯), 空出占用的位置 </span>
+	<span class="token comment">/*
+	# # # $ # 
+	. . # . .
+	# # . . #
+	. . . . #
+	# # . . #
+	# # @ # #
+	*/</span> 
+<span class="token punctuation">&#125;</span> 
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">,</span> <span class="token operator">&amp;</span>m<span class="token punctuation">,</span> <span class="token operator">&amp;</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>sx<span class="token punctuation">,</span> <span class="token operator">&amp;</span>sy<span class="token punctuation">,</span> <span class="token operator">&amp;</span>fx<span class="token punctuation">,</span> <span class="token operator">&amp;</span>fy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>t<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+		<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>x<span class="token punctuation">,</span> <span class="token operator">&amp;</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		vis<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token function">dfs</span><span class="token punctuation">(</span>sx<span class="token punctuation">,</span> sy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> cnt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+<span class="token punctuation">&#125;</span> </code></pre>
+
+<p><strong>2. 求连通块个数</strong><br>$DFS$和$BFS$都可以用于求连通块，都是搜索，$DFS$会更加简洁好写，因此基本使用$DFS$来求解 </p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+POJ-2386 Lake Counting 
+https://vjudge.net/problem/POJ-2386
+*/</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">,</span> res<span class="token punctuation">;</span>
+<span class="token comment">/*
+数组开小了会导致WA：field[nx][ny]超出数组范围 
+对此POJ显示WA，而OpenJ_Bailian则显示TLE，发现后者不仅仅对这题如此 
+*/</span> 
+<span class="token keyword">char</span> field<span class="token punctuation">[</span><span class="token number">110</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">110</span><span class="token punctuation">]</span><span class="token punctuation">;</span>	
+<span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	field<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'.'</span><span class="token punctuation">;</span> <span class="token comment">//将水坑夷为平地, 表示已经搜索过 </span>
+	<span class="token comment">//由于水坑的连接四通八达，因此需要将每个方向都进行搜素 </span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> dx <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> dx <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">;</span> dx<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> dy <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> dy <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">;</span> dy<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			<span class="token keyword">int</span> nx <span class="token operator">=</span> x<span class="token operator">+</span>dx<span class="token punctuation">,</span> ny <span class="token operator">=</span> y<span class="token operator">+</span>dy<span class="token punctuation">;</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;=</span>nx<span class="token operator">&amp;&amp;</span>nx<span class="token operator">&lt;=</span>n<span class="token operator">&amp;&amp;</span><span class="token number">1</span><span class="token operator">&lt;=</span>ny<span class="token operator">&amp;&amp;</span>ny<span class="token operator">&lt;=</span>m<span class="token operator">&amp;&amp;</span>field<span class="token punctuation">[</span>nx<span class="token punctuation">]</span><span class="token punctuation">[</span>ny<span class="token punctuation">]</span><span class="token operator">==</span><span class="token char">'W'</span><span class="token punctuation">)</span> 
+				<span class="token function">dfs</span><span class="token punctuation">(</span>nx<span class="token punctuation">,</span> ny<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span> 
+	<span class="token punctuation">&#125;</span>      
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> 
+	<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">,</span> <span class="token operator">&amp;</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+		<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span> field<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		 	<span class="token keyword">if</span><span class="token punctuation">(</span>field<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span><span class="token char">'W'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		 		<span class="token function">dfs</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		 		res<span class="token operator">++</span><span class="token punctuation">;</span>
+			<span class="token punctuation">&#125;</span> 
+		<span class="token punctuation">&#125;</span> 
+	<span class="token punctuation">&#125;</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h2><p>通俗易懂的来说就是：如洪水泛滥般，周围村庄先被殃及</p>
+<p>在<code>数据结构—树</code>中讲过了树的广度优先遍历，对于一个节点$u$，我们优先遍历其所有的子节点，即靠其最近的节点（距离为1）。那么同样的道理，在图的搜索中，广度优先搜索(BFS)会优先考虑每种状态和初始状态的距离，越近的就会越先考虑。</p>
+<p>利用上述特性我们可以求图中的<strong>最短步数</strong></p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+POJ-2251 Dungeon Master
+*/</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;queue></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">int</span> l<span class="token punctuation">,</span> r<span class="token punctuation">,</span> c<span class="token punctuation">,</span> sx<span class="token punctuation">,</span> sy<span class="token punctuation">,</span> sz<span class="token punctuation">;</span>
+<span class="token keyword">bool</span> vis<span class="token punctuation">[</span><span class="token number">105</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">105</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">105</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> mp<span class="token punctuation">[</span><span class="token number">105</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">105</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">105</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">struct</span> <span class="token class-name">node</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">;</span>
+	<span class="token keyword">int</span> step<span class="token punctuation">;</span>
+	<span class="token function">node</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> <span class="token keyword">int</span> z<span class="token punctuation">,</span> <span class="token keyword">int</span> step<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">x</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">y</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">z</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">step</span><span class="token punctuation">(</span>step<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> mv<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">bfs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    queue <span class="token operator">&lt;</span>node<span class="token operator">></span> que<span class="token punctuation">;</span>
+    vis<span class="token punctuation">[</span>sx<span class="token punctuation">]</span><span class="token punctuation">[</span>sy<span class="token punctuation">]</span><span class="token punctuation">[</span>sz<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+    que<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">node</span><span class="token punctuation">(</span>sx<span class="token punctuation">,</span> sy<span class="token punctuation">,</span> sz<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>que<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        node now <span class="token operator">=</span> que<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> que<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>mp<span class="token punctuation">[</span>now<span class="token punctuation">.</span>x<span class="token punctuation">]</span><span class="token punctuation">[</span>now<span class="token punctuation">.</span>y<span class="token punctuation">]</span><span class="token punctuation">[</span>now<span class="token punctuation">.</span>z<span class="token punctuation">]</span><span class="token operator">==</span><span class="token char">'E'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Escaped in %d minute(s).\n"</span><span class="token punctuation">,</span> now<span class="token punctuation">.</span>step<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">6</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        	<span class="token keyword">int</span> nx <span class="token operator">=</span> now<span class="token punctuation">.</span>x<span class="token operator">+</span>mv<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> ny <span class="token operator">=</span> now<span class="token punctuation">.</span>y<span class="token operator">+</span>mv<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nz <span class="token operator">=</span> now<span class="token punctuation">.</span>z<span class="token operator">+</span>mv<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token operator">&lt;=</span>nx<span class="token operator">&amp;&amp;</span>nx<span class="token operator">&lt;</span>l<span class="token operator">&amp;&amp;</span><span class="token number">0</span><span class="token operator">&lt;=</span>ny<span class="token operator">&amp;&amp;</span>ny<span class="token operator">&lt;</span>r<span class="token operator">&amp;&amp;</span><span class="token number">0</span><span class="token operator">&lt;=</span>nz<span class="token operator">&amp;&amp;</span>nz<span class="token operator">&lt;</span>c<span class="token operator">&amp;&amp;</span><span class="token operator">!</span>vis<span class="token punctuation">[</span>nx<span class="token punctuation">]</span><span class="token punctuation">[</span>ny<span class="token punctuation">]</span><span class="token punctuation">[</span>nz<span class="token punctuation">]</span><span class="token operator">&amp;&amp;</span>mp<span class="token punctuation">[</span>nx<span class="token punctuation">]</span><span class="token punctuation">[</span>ny<span class="token punctuation">]</span><span class="token punctuation">[</span>nz<span class="token punctuation">]</span><span class="token operator">!=</span><span class="token char">'#'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                vis<span class="token punctuation">[</span>nx<span class="token punctuation">]</span><span class="token punctuation">[</span>ny<span class="token punctuation">]</span><span class="token punctuation">[</span>nz<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+                que<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">node</span><span class="token punctuation">(</span>nx<span class="token punctuation">,</span> ny<span class="token punctuation">,</span> nz<span class="token punctuation">,</span> now<span class="token punctuation">.</span>step<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Trapped!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">~</span><span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d%d%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>l<span class="token punctuation">,</span> <span class="token operator">&amp;</span>r<span class="token punctuation">,</span> <span class="token operator">&amp;</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>l<span class="token operator">&amp;&amp;</span><span class="token operator">!</span>r<span class="token operator">&amp;&amp;</span><span class="token operator">!</span>c<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> l<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> r<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            	<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span> mp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> c<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            		vis<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            		<span class="token keyword">if</span><span class="token punctuation">(</span>mp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token operator">==</span><span class="token char">'S'</span><span class="token punctuation">)</span>
+						sx <span class="token operator">=</span> i<span class="token punctuation">,</span> sy <span class="token operator">=</span> j<span class="token punctuation">,</span> sz <span class="token operator">=</span> k<span class="token punctuation">;</span>
+				<span class="token punctuation">&#125;</span>	
+			<span class="token punctuation">&#125;</span>
+        <span class="token function">bfs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上分别介绍了深度优先搜索(DFS)和 广度优先搜索(BFS)不同的基本应用，我们需要根据题目的性质来灵活的决定使用哪种搜索方式。</p>
+<hr>
+<p>参考自：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/70802487">BFS,DFS,A* and Dijkstra’s的区别与联系</a><br><a href="../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E5%9B%BE%E8%AE%BA/Graph%20Search.pdf">Graph Search Algorithms</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/publication/" rel="tag"># publication</a>
+              <a href="/tags/NOI%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD/" rel="tag"># NOI暑假集训</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/23439.html" rel="prev" title="数据结构基础—树">
+                  <i class="fa fa-chevron-left"></i> 数据结构基础—树
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/62068.html" rel="next" title="~scanf的作用">
+                  ~scanf的作用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sparkyen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js","integrity":"sha256-TIYL00Rhw/8WaoUhYTLX9SKIEFdXxg+yMWSLVUbhiLg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

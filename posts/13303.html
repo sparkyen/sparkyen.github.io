@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":{"enable":false,"onlypost":false,"loadingImg":null},"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="简述加法和乘法原理，着重介绍组合数的求解以及二项式定理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数论—组合数学与计数">
+<meta property="og:url" content="http://example.com/posts/13303.html">
+<meta property="og:site_name" content="NOTES">
+<meta property="og:description" content="简述加法和乘法原理，着重介绍组合数的求解以及二项式定理">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E7%A4%BA%E6%84%8F%E5%9B%BE1.gif">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E7%A4%BA%E6%84%8F%E5%9B%BE2.gif">
+<meta property="article:published_time" content="2022-07-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-02T13:08:14.944Z">
+<meta property="article:author" content="sparkyen">
+<meta property="article:tag" content="publication">
+<meta property="article:tag" content="NOI暑假集训">
+<meta property="article:tag" content="数论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E7%A4%BA%E6%84%8F%E5%9B%BE1.gif">
+
+
+<link rel="canonical" href="http://example.com/posts/13303.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/posts/13303.html","path":"posts/13303.html","title":"数论—组合数学与计数"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数论—组合数学与计数 | NOTES</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">NOTES</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E6%B3%95%E5%92%8C%E4%B9%98%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">加法和乘法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88"><span class="nav-number">2.</span> <span class="nav-text">排列组合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">常见组合计数方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%95%B0%E7%9A%84%E6%B1%82%E8%A7%A3"><span class="nav-number">2.2.</span> <span class="nav-text">组合数的求解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86%E4%B8%8E%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92"><span class="nav-number">2.3.</span> <span class="nav-text">二项式定理与杨辉三角</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%AE%9A%E7%90%86%E7%9A%84%E5%BD%92%E7%BA%B3%E8%AF%81%E6%98%8E"><span class="nav-number">2.3.1.</span> <span class="nav-text">二项式定理的归纳证明</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sparkyen"
+      src="/images/%E5%A4%B4%E5%83%8F/blue.jpg">
+  <p class="site-author-name" itemprop="name">sparkyen</p>
+  <div class="site-description" itemprop="description">今天你吃的啥好吃的鸭</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:sparkyen@126.com" title="E-Mail → mailto:sparkyen@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/sparkyen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sparkyen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/sparkyen/" title="cnblogs → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;sparkyen&#x2F;" rel="noopener" target="_blank"><i class="fa fa-clock-rotate-left fa-fw"></i>cnblogs</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/190880139/" title="douban → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;190880139&#x2F;" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>douban</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/13303.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F/blue.jpg">
+      <meta itemprop="name" content="sparkyen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NOTES">
+      <meta itemprop="description" content="今天你吃的啥好吃的鸭">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数论—组合数学与计数 | NOTES">
+      <meta itemprop="description" content="简述加法和乘法原理，着重介绍组合数的求解以及二项式定理">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数论—组合数学与计数
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2022-07-29T00:00:00+08:00">2022-07-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">简述加法和乘法原理，着重介绍组合数的求解以及二项式定理</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="加法和乘法原理"><a href="#加法和乘法原理" class="headerlink" title="加法和乘法原理"></a>加法和乘法原理</h2><p><strong>加法原理：</strong> 做一件事，有$n$类方法，每类方法中分别有$m_1,m_2,…, m_n$种方法，则完成这件事有$\sum_{i&#x3D;1}^{n} m_i$种不同的方案</p>
+<p><strong>乘法原理：</strong> 做一件事，有$n$个步骤需要依次完成，每一步中分别有$m_1,m_2,…, m_n$种方法，则完成这件事有$\prod_{i&#x3D;1}^{n} m_i$种不同的方案</p>
+<h2 id="排列组合"><a href="#排列组合" class="headerlink" title="排列组合"></a>排列组合</h2><p><strong>排列数：</strong> 从$n$个人里面选出$m$个人占成一排，考虑这些人的相对顺序，方案数是$A_{n}^{m} &#x3D; n \cdot (n-1) \cdots (n-m+1)&#x3D;\frac{n!}{(n-m)!}$</p>
+<p>如果在乎排列那么就是 $A_n^m$，如果不在乎那么就要除掉重复，那么重复了多少？同样选出的来的 $m$ 个人，他们还要“全排”得 $A_m^m$，所以得到组合数的计算公式。</p>
+<p><strong>组合数：</strong> 从$n$个人里面选出$m$个人占成一排，不考虑这些人的相对顺序，方案数是$C_{n}^{m} &#x3D; \frac{A_{n}^{m}}{m!}&#x3D;\frac{n!}{m! \cdot(n-m)!}$</p>
+<h3 id="常见组合计数方法"><a href="#常见组合计数方法" class="headerlink" title="常见组合计数方法"></a>常见组合计数方法</h3><p>如捆绑法、插空法等等</p>
+<h3 id="组合数的求解"><a href="#组合数的求解" class="headerlink" title="组合数的求解"></a>组合数的求解</h3><p>我们知道了有哪些常用的组合计数方法，那么该怎么求解组合数呢？</p>
+<p>我们可以直接写出其实现</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">ll <span class="token function">fac</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	ll f <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>n<span class="token operator">--</span><span class="token punctuation">)</span> f <span class="token operator">*=</span> n<span class="token punctuation">;</span>
+	<span class="token keyword">return</span> f<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+ll <span class="token function">C</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> m<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token function">fac</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token operator">/</span><span class="token punctuation">(</span><span class="token function">fac</span><span class="token punctuation">(</span>n<span class="token operator">-</span>m<span class="token punctuation">)</span><span class="token operator">*</span><span class="token function">fac</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>但是有两个问题：</p>
+<ol>
+<li>求解过程中会调用阶乘函数，但是阶乘函数值很大，计算$fac(21)&#x3D;21!&#x3D;51090942171709440000$ 就已经大于64位整数，就会溢出，答案就不正确了</li>
+<li>多次调用并计算阶乘，效率非常低</li>
+</ol>
+<p>于是我们有另外一种思路，利用递推式：$C_n^m&#x3D;C_{n-1}^{m-1}+C_{n-1}^{m}$，其被称为帕斯卡公式。</p>
+<p>上述证明可以由加法原理得到：<br>要计算$C_{n}^{m}$也就是“从$n$个人里面选$m$个”，那么第$n$个人要么选，要不不选。所以要完成从$n$个人里面选$m$个”的任务，可以通过以下两种途径：</p>
+<ol>
+<li>在前$n-1$个人里面选$m-1$个，然后选走第$n$个，方案数是$C_{n-1}^{m-1}$</li>
+<li>在前$n-1$个人里面选$m$个，然后不选走第$n$个，方案数是$C_{n-1}^{m}$</li>
+</ol>
+<p>知道递推公式，知道初始条件$C_0^0&#x3D;C_i^0&#x3D;1$，就可以得到所有递推项的值，这种方法相对不容易溢出，但是复杂度为$O(n^2)$，具体实现如下：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	C<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> C<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+		C<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>C<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">+</span>C<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>然而，实际上，组合数的增长速度是非常快的， $C_{100}^{50}$ 已经是30位数， $C_{300}^{150}$ 则有89位数，比宇宙中的原子数还多。所谓递推不容易溢出，那如果结果本身就溢出了，你又怎么办呢？</p>
+<p>所幸算法竞赛中的题目常常会要求将结果对某个质数$p$取模，这样一来，溢出的问题就不用太担心了。我们干脆直接回到最原始的方法： $C_{n}^{m} &#x3D; \frac{n!}{m! \cdot(n-m)!}$ 。只不过，现在我们要把除法变成求逆元，也即： $C_{n}^{m} \equiv n! \cdot (m!)^{-1}\cdot [(n-m)!]^{-1}\pmod p$。</p>
+<p>模 $p$ 意义下阶乘和逆元都可以$O(n)$ 预处理出来，然后直接$O(1)$ 查询即可（实际上不预处理逆元直接 $O(log⁡\ n)$ 求也绰绰有余）。这基本上是<strong>最常用</strong>的求组合数方法。</p>
+<p>当$n&lt;m$时，规定$C_n^m&#x3D;0$</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// 需要先预处理出阶乘fac[]和逆元inv[]</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> fac<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>fac<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">*</span>i<span class="token punctuation">)</span><span class="token operator">%</span>p<span class="token punctuation">;</span>
+inv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> inv<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token operator">-</span>inv<span class="token punctuation">[</span>p<span class="token operator">%</span>i<span class="token punctuation">]</span><span class="token operator">*</span><span class="token punctuation">(</span>p<span class="token operator">/</span>i<span class="token punctuation">)</span><span class="token operator">%</span>p<span class="token punctuation">;</span>
+ll <span class="token function">C</span><span class="token punctuation">(</span>ll n<span class="token punctuation">,</span> ll m<span class="token punctuation">,</span> ll p<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">&lt;</span>m<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> fact<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token operator">*</span><span class="token function">inv</span><span class="token punctuation">(</span>fact<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token operator">%</span>p <span class="token operator">*</span> <span class="token function">inv</span><span class="token punctuation">(</span>fact<span class="token punctuation">[</span>n<span class="token operator">-</span>m<span class="token punctuation">]</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token operator">%</span>p<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>一般来说，这个方法够用了。偏偏，有时候， $p$ 可能比 $m$ 小……</p>
+<p>这下麻烦了。如果 $p$ 比 $m$ 小，就不能保证 $n$ 和 $m−n$ 的逆元存在了（它们可能是 $p$ 的倍数）。当然还是可以用帕斯卡公式递推，但 $O(n^2)$ 还是太不理想。</p>
+<p>于是，卢卡斯定理终于要出场了:</p>
+<p>$$C_n^m\equiv C_{n\mod p}^{m\mod p}\times C_{\lfloor n&#x2F;p\rfloor}^{\lfloor m&#x2F;p\rfloor}\pmod p$$</p>
+<p>其中模数$p$必须为素数，可以利用这个式子递归求解。观察上述表达式，可知 $n\bmod p$ 和 $m\bmod p$ 一定是小于 $p$ 的数，可以直接求解，$\displaystyle\binom{\left\lfloor n&#x2F;p \right\rfloor}{\left\lfloor m&#x2F;p\right\rfloor}$ 可以继续用 Lucas 定理求解</p>
+<p>递归出口是 $m&#x3D;0$</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">ll <span class="token function">lucas</span><span class="token punctuation">(</span>ll n<span class="token punctuation">,</span> ll m<span class="token punctuation">,</span> ll p<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>m<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token operator">%</span>p<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">lucas</span><span class="token punctuation">(</span>n<span class="token operator">/</span>p<span class="token punctuation">,</span> m<span class="token operator">/</span>p<span class="token punctuation">,</span> p<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token function">C</span><span class="token punctuation">(</span>n<span class="token operator">%</span>p<span class="token punctuation">,</span> m<span class="token operator">%</span>p<span class="token punctuation">,</span> p<span class="token punctuation">)</span> <span class="token operator">%</span> p<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="二项式定理与杨辉三角"><a href="#二项式定理与杨辉三角" class="headerlink" title="二项式定理与杨辉三角"></a>二项式定理与杨辉三角</h3><p>二项式$(x+y)^n$展开，我们可以得到多项式：</p>
+<p>$(x+y)^0 &#x3D; 1$<br>$(x+y)^1 &#x3D; x+y$<br>$(x+y)^2 &#x3D; x^2+2xy+y^2$<br>$(x+y)^3 &#x3D; x^3+3x^2y+3xy^2+y^3$<br>$(x+y)^4 &#x3D; x^4+4x^3y+6x^2y^2+4xy^3+y^4$<br>$(x+y)^5 &#x3D; x^5+5x^4y+10x^3y^2+10x^2y^3+5xy^4+y^5$</p>
+<p>将其二项式系数表示成三角形中的一种几何排列，就得到了如下图所示的杨辉三角：三角形左边和右边的数字全都是1，而内部的每一个数字都是连接到它的上端的两个数字之和<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E7%A4%BA%E6%84%8F%E5%9B%BE1.gif"></p>
+<p>观察可以发现内部的数字的其他特征：</p>
+<p>$n$次幂对应的项数共有 $n + 1$ 项，而且每一行的数字都是对称的，从外往内看，每一行：</p>
+<p>顺数和倒数的第2个数字都是$n$，$C_n^1&#x3D;C_n^{n-1}&#x3D;n$<br>顺数和倒数的第3个数字都是 $C_n^2&#x3D;C_n^{n–2}$<br>$$\vdots$$</p>
+<p>所以杨辉三角又可以表示为以下形式：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%9D%A8%E8%BE%89%E4%B8%89%E8%A7%92%E7%A4%BA%E6%84%8F%E5%9B%BE2.gif"><br>于是我们发现每行对应的数分别是：<br>$$C_n^0, C_n^1,C_n^2,\cdots, C_n^{n-2},C_n^{n-1},C_n^{n}$$</p>
+<p><strong>用组合解释</strong>如下：<br>$(x+y)^n$就是$n$个$(x+y)$相乘，每个$(x+y)$相乘时有两种选择，选$x$或$y$。</p>
+<p>$x^iy^{n-i}$ 出现的次数 &#x3D;  $n$个$(x+y)$ 中取$i$个$x$的<strong>组合数</strong>$C_n^i$</p>
+<p>$n$个$(x+y)$所有的组合情况，即$(x+y)^n$的展开式为<br>$$\sum_{i&#x3D;0}^n C_{n}^{i}x^iy^{n-i}$$</p>
+<p>比如要计算$(ax+by)^k$中$x^ny^m$的系数，即$x$取了$n$次，$y$取了$m$次，那么对应的系数就是$C_k^ma^nb^m$</p>
+<h4 id="二项式定理的归纳证明"><a href="#二项式定理的归纳证明" class="headerlink" title="二项式定理的归纳证明"></a>二项式定理的归纳证明</h4><p>对于二项式的展开，我们给出这一结论的归纳证明：<br>(1) 当$n&#x3D;1$时，$(x+y)&#x3D;x+y$，结论显然成立。<br>(2) 不妨假设$n&#x3D;k$时结论成立，即<br>$$(x+y)^k&#x3D;\sum_{i&#x3D;0}^n C_{k}^{i}x^iy^{k-i}$$<br>而<br>$$(x+y)^{k+1}&#x3D;(x+y)(\sum_{i&#x3D;0}^n C_{k}^{i}x^iy^{k-i})$$<br>乘法分配律展开后得到：</p>
+<p>$$<br>\begin{aligned}<br>(x+y)^{k+1}<br>&amp;&#x3D; (x+y)(\sum_{i&#x3D;0}^k C_{k}^{i}x^iy^{k-i}) \<br>&amp;&#x3D; \sum_{i&#x3D;0}^k C_{k}^{i}x^{i+1}y^{k-i}</p>
+<ul>
+<li>\sum_{i&#x3D;0}^k C_{k}^{i}x^iy^{k+1-i} \<br>&amp;&#x3D; x^{k+1}+\sum_{i&#x3D;0}^{k-1}(C_{k}^{i})x^{i+1}y^{k-i}<br>+y^{k+1}+\sum_{i&#x3D;1}^{k}(C_{k}^{i})x^iy^{k+1-i} \<br>&amp;&#x3D; x^{k+1}+y^{k+1}+\sum_{i&#x3D;1}^{k}(C_{k}^{i-1}+C_{k}^{i})x^iy^{k+1-i} \<br>&amp;&#x3D; x^{k+1}+y^{k+1}+\sum_{i&#x3D;1}^{k} (C_{k+1}^{i})x^iy^{k+1-i} \<br>&amp;&#x3D; \sum_{i&#x3D;0}^{k+1} (C_{k+1}^{i})x^iy^{k+1-i}<br>\end{aligned}<br>$$<br>即结论对$n&#x3D;k+1$成立</li>
+</ul>
+<p>(3) 综上所述，结论对任意$n \in\mathbb{N}^+$ (正整数集合)成立</p>
+<p>这里的证明方法被称为<strong>数学归纳法</strong>，只要通过证明最简单形式（$n$为较小常数时）的结论以及使用$n&#x3D;k$的结论推出$n&#x3D;k+1$的结论即可证明命题对任意满足条件的$n$成立。这是一种重要的数学证明方法，需要掌握。</p>
+<p>二项式可以引申出许多有趣的推论：<br> (1) 取$x&#x3D;1, y&#x3D;-1$有<br> $$\sum_{2\mid i} C_n^i &#x3D; \sum_{2\nmid i} C_n^i$$<br> (2) 取$x&#x3D;1,y&#x3D;1$有<br> $$ \sum_{i&#x3D;0}^{n} C_n^i &#x3D;2^n$$</p>
+<hr>
+<p>参考自：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/116698264">算法学习笔记(25): 卢卡斯定理</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/RioTian/p/14659917.html">【算法学习笔记】组合数与 Lucas 定理</a><br><a target="_blank" rel="noopener" href="https://oi-wiki.org/math/number-theory/lucas/">卢卡斯定理</a><br><a target="_blank" rel="noopener" href="http://math001.com/binomial_theorem/">二项式定理与杨辉三角</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/publication/" rel="tag"># publication</a>
+              <a href="/tags/NOI%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD/" rel="tag"># NOI暑假集训</a>
+              <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/6401.html" rel="prev" title="数论—常见符号">
+                  <i class="fa fa-chevron-left"></i> 数论—常见符号
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/34065.html" rel="next" title="CSP赛前总结">
+                  CSP赛前总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sparkyen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js","integrity":"sha256-TIYL00Rhw/8WaoUhYTLX9SKIEFdXxg+yMWSLVUbhiLg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

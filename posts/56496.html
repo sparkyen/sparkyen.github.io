@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css?family=consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" integrity="sha256-xejo6yLi6vGtAjcMIsY8BHdKsLg7QynVlFMzdQgUuy8=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":{"enable":false,"onlypost":false,"loadingImg":null},"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="讲解分治——“分而治之”的思想和归并排序与逆序对等经典应用；还以小白兔的故事为背景讲解了倍增的思想，最后使用对应的ST表解决区间最值问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分治与倍增">
+<meta property="og:url" content="http://example.com/posts/56496.html">
+<meta property="og:site_name" content="NOTES">
+<meta property="og:description" content="讲解分治——“分而治之”的思想和归并排序与逆序对等经典应用；还以小白兔的故事为背景讲解了倍增的思想，最后使用对应的ST表解决区间最值问题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E5%BD%92%E5%B9%B6%E6%AD%A5%E9%AA%A4%E7%A4%BA%E4%BE%8B.jpg">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E9%80%86%E5%BA%8F%E5%AF%B9%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%9C%80%E5%A4%A7%E5%AD%97%E6%AE%B5%E5%92%8C%E7%A4%BA%E4%BE%8B%E5%9B%BE.jpg">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E5%80%8D%E5%A2%9E%E7%A4%BA%E4%BE%8B%E5%9B%BE.jpg">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/ST%E8%A1%A8%E9%A2%84%E5%A4%84%E7%90%86.svg">
+<meta property="og:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/ST%E8%A1%A8%E6%9F%A5%E8%AF%A2.svg">
+<meta property="article:published_time" content="2022-07-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-08-02T13:08:14.926Z">
+<meta property="article:author" content="sparkyen">
+<meta property="article:tag" content="技巧与思想">
+<meta property="article:tag" content="publication">
+<meta property="article:tag" content="NOI暑假集训">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
+
+
+<link rel="canonical" href="http://example.com/posts/56496.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/posts/56496.html","path":"posts/56496.html","title":"分治与倍增"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>分治与倍增 | NOTES</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">NOTES</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%B2%BB"><span class="nav-number">1.</span> <span class="nav-text">分治</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E4%B8%8E%E9%80%86%E5%BA%8F%E5%AF%B9"><span class="nav-number">1.1.</span> <span class="nav-text">归并排序与逆序对</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%BA%8F%E5%AF%B9"><span class="nav-number">1.1.2.</span> <span class="nav-text">逆序对</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%B9%82"><span class="nav-number">1.2.</span> <span class="nav-text">快速幂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%BA%8F%E5%88%97%E4%B8%8A%E7%9A%84%E5%88%86%E6%B2%BB"><span class="nav-number">1.3.</span> <span class="nav-text">其他序列上的分治</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%80%8D%E5%A2%9E"><span class="nav-number">2.</span> <span class="nav-text">倍增</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E4%BA%8B%E8%83%8C%E6%99%AF"><span class="nav-number">2.1.</span> <span class="nav-text">故事背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E6%9C%80%E5%80%BC%E9%97%AE%E9%A2%98%E4%B8%8EST%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">区间最值问题与ST表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ST-%E8%A1%A8%E7%BB%B4%E6%8A%A4%E5%85%B6%E4%BB%96%E4%BF%A1%E6%81%AF"><span class="nav-number">2.2.1.</span> <span class="nav-text">ST 表维护其他信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E5%B7%A9%E5%9B%BA"><span class="nav-number">3.</span> <span class="nav-text">练习巩固</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="sparkyen"
+      src="/images/%E5%A4%B4%E5%83%8F/blue.jpg">
+  <p class="site-author-name" itemprop="name">sparkyen</p>
+  <div class="site-description" itemprop="description">今天你吃的啥好吃的鸭</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:sparkyen@126.com" title="E-Mail → mailto:sparkyen@126.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/sparkyen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sparkyen" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cnblogs.com/sparkyen/" title="cnblogs → https:&#x2F;&#x2F;www.cnblogs.com&#x2F;sparkyen&#x2F;" rel="noopener" target="_blank"><i class="fa fa-clock-rotate-left fa-fw"></i>cnblogs</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/190880139/" title="douban → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;190880139&#x2F;" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>douban</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="Back to top">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/56496.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F/blue.jpg">
+      <meta itemprop="name" content="sparkyen">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NOTES">
+      <meta itemprop="description" content="今天你吃的啥好吃的鸭">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="分治与倍增 | NOTES">
+      <meta itemprop="description" content="讲解分治——“分而治之”的思想和归并排序与逆序对等经典应用；还以小白兔的故事为背景讲解了倍增的思想，最后使用对应的ST表解决区间最值问题">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          分治与倍增
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2022-07-25T00:00:00+08:00">2022-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">讲解分治——“分而治之”的思想和归并排序与逆序对等经典应用；还以小白兔的故事为背景讲解了倍增的思想，最后使用对应的ST表解决区间最值问题</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h1><p>分治算法的核心思想就是“分而治之”。<br>大概的流程可以分为三步：<strong>分解 -&gt; 解决 -&gt; 合并</strong>。</p>
+<ol>
+<li>分解原问题为结构相同的子问题。</li>
+<li>分解到某个容易求解的边界之后，进行递归求解。</li>
+<li>将子问题的解合并成原问题的解。</li>
+</ol>
+<p>分治法能解决的问题一般有如下特征：</p>
+<ol>
+<li>可以把原问题分为多个<strong>无关</strong>的子问题</li>
+<li>子问题的答案可以高效合并，即知道了子问题的答案后可以高效计算其对全局答案产生的影响</li>
+<li>当前子问题的答案可以高效求出，在这里“高效”的复杂度一般为$O(n)$，$O(nlogn)$<h2 id="归并排序与逆序对"><a href="#归并排序与逆序对" class="headerlink" title="归并排序与逆序对"></a>归并排序与逆序对</h2><h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3>假设实现归并排序的函数名为 <code>merge_sort</code>。明确该函数的职责，即 <strong>对传入的一个数组排序</strong>。这个问题显然可以分解。给一个数组排序等于给该数组的左右两半分别排序，然后合并成一个数组。<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">merge_sort</span><span class="token punctuation">(</span>一个数组<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>可以很容易处理<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token function">merge_sort</span><span class="token punctuation">(</span>左半个数组<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">merge_sort</span><span class="token punctuation">(</span>右半个数组<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">merge</span><span class="token punctuation">(</span>左半个数组<span class="token punctuation">,</span> 右半个数组<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+具体过程如下图所示：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%A4%BA%E4%BE%8B%E5%9B%BE.png"></li>
+</ol>
+<p>其中<code>merge</code> 函数的实现方式与两个有序链表的合并一致：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E5%BD%92%E5%B9%B6%E6%AD%A5%E9%AA%A4%E7%A4%BA%E4%BE%8B.jpg"></p>
+<p>详细实现如下：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">merge_sort</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>a<span class="token punctuation">,</span> <span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>l<span class="token operator">==</span>r<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> mid <span class="token operator">=</span> <span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token function">merge_sort</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> l<span class="token punctuation">,</span> mid<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">merge_sort</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> mid<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//递归到更小的子问题，即分治 </span>
+    <span class="token comment">//归并 </span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> l<span class="token punctuation">,</span> j <span class="token operator">=</span> mid<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> k <span class="token operator">=</span> l<span class="token punctuation">;</span> k <span class="token operator">&lt;=</span> r<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  
+    	<span class="token comment">//后段元素被用完了 或者前段现在的首元素比后段的小 </span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>j<span class="token operator">==</span>r<span class="token operator">+</span><span class="token number">1</span><span class="token operator">||</span><span class="token punctuation">(</span>i<span class="token operator">&lt;=</span>mid<span class="token operator">&amp;&amp;</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">&lt;=</span>a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> tmp<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  
+        <span class="token keyword">else</span> tmp<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> l<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> r<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> tmp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+
+<h3 id="逆序对"><a href="#逆序对" class="headerlink" title="逆序对"></a>逆序对</h3><p>逆序对是$i&lt;j$且$a_i&gt;a_j$ 的有序数对$(i,j)$<br>对于这个问题，可以在归并排序的过程中同时求出序列的逆序对数，操作步骤如下图所示：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E9%80%86%E5%BA%8F%E5%AF%B9%E7%A4%BA%E6%84%8F%E5%9B%BE.jpg"><br>排序后的数组无逆序对，归并排序的合并操作中<strong>每次后段首元素被作为当前最小值取出时，前段剩余元素个数之和</strong>即是合并操作增加的逆序对数量</p>
+<p>对此，将 <code>a[j++]</code> 替换为 <code>(cnt += mid+1-i, a[j++])</code> 即可。</p>
+<h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><p>给出三个整数$b,p,k$，求$b^p \ mod \ k$</p>
+<p>考虑使用分治来求解：</p>
+<ol>
+<li>若$p&#x3D;0$，答案就是$b^0 &#x3D; 1 \ mod \ k$</li>
+<li>若$p &#x3D; 2n$，即$p$是一个偶数，那么可以分解为求$b^n \ mod \ k$，最后合并求平方就是答案，即$b^n \times b^n &#x3D; b^{2n} &#x3D; b^p$</li>
+<li>若$p &#x3D; 2n+1$，即$p$是一个奇数，同样可以分解为求$b^n \ mod \ k$，最后合并求平方，再乘以b就是答案，即$b^n \times b^n \times b&#x3D; b^{2n+1} &#x3D; b^p$</li>
+</ol>
+<p>递归实现如下：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">ll <span class="token function">qpow</span><span class="token punctuation">(</span>ll x<span class="token punctuation">,</span> ll n<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">1</span><span class="token operator">%</span>mod<span class="token punctuation">;</span> <span class="token comment">//这里取模是为了避免k=1的情况出错</span>
+	ll tmp <span class="token operator">=</span> <span class="token function">qpow</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">%</span><span class="token number">2</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> tmp<span class="token operator">*</span>tmp<span class="token operator">%</span>mod<span class="token punctuation">;</span>
+	<span class="token keyword">return</span>  tmp<span class="token operator">*</span>tmp<span class="token operator">*</span>x<span class="token operator">%</span>mod<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> </code></pre>
+
+
+<p>我们可以想到，将$n$写成二进制形式就能表示成2的幂次的和，例如$13 &#x3D; 1101 &#x3D; 2^3+2^2+2^0$，对于$n$而言有<br>$$n &#x3D; 2^{k_1}+2^{k_2}+2^{k_3} \cdots$$<br>就有<br>$$x^n &#x3D; x^{2^{k_1}} \cdot x^{2^{k_2}} \cdot x^{2^{k_3}} \cdots$$</p>
+<p>通常快速幂使用非递归的实现方式，代码如下：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp">ll <span class="token function">qpow</span><span class="token punctuation">(</span>ll x<span class="token punctuation">,</span> ll n<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	ll res <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span>n<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>n<span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">)</span> res <span class="token operator">=</span> res<span class="token operator">*</span>x<span class="token operator">%</span>mod <span class="token comment">//若二进制最低位为1</span>
+		x <span class="token operator">=</span> x<span class="token operator">*</span>x<span class="token operator">%</span>mod<span class="token punctuation">;</span>
+		n <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">//n二进制表示向后移一位 101101 -> 10110 </span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span> </code></pre>
+
+<h2 id="其他序列上的分治"><a href="#其他序列上的分治" class="headerlink" title="其他序列上的分治"></a>其他序列上的分治</h2><p>给定一个长度为$n$的序列${a_i}$，选出其中连续且非空的一段使得这段和最大</p>
+<p>可以把问题分治为：每次将序列从中间分成两半，计算经过中点的最大字段，然后对两边都递归下去计算答案。</p>
+<p>其意思为，如果最大子段是跨过中线的，则在这一层统计其答案，如果最大字段没有跨过中线，则对两边递归计算答案的过程会统计其答案。</p>
+<p>对于跨过中线的最大字段，可以如下图所示的方式计算：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E6%9C%80%E5%A4%A7%E5%AD%97%E6%AE%B5%E5%92%8C%E7%A4%BA%E4%BE%8B%E5%9B%BE.jpg"></p>
+<p>具体实现如下：</p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">maxSum</span><span class="token punctuation">(</span><span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>l<span class="token operator">==</span>r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		ans <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> a<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">int</span> mid <span class="token operator">=</span> <span class="token punctuation">(</span>l<span class="token operator">+</span>r<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token comment">//分治计算[l, mid]和[mid+1, r] </span>
+	<span class="token function">maxSum</span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> mid<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">maxSum</span><span class="token punctuation">(</span>mid<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">int</span> tmp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> pre <span class="token operator">=</span> <span class="token operator">-</span>inf<span class="token punctuation">,</span> suf <span class="token operator">=</span> <span class="token operator">-</span>inf<span class="token punctuation">;</span>
+	<span class="token comment">//计算最大的前缀 </span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> mid<span class="token punctuation">;</span> i <span class="token operator">>=</span> l<span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		tmp <span class="token operator">+=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+		pre <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>pre<span class="token punctuation">,</span> tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">//计算最大的后缀 </span>
+	tmp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> mid<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> r<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		tmp <span class="token operator">+=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+		suf <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>suf<span class="token punctuation">,</span> tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	ans <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> pre<span class="token operator">+</span>suf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h1 id="倍增"><a href="#倍增" class="headerlink" title="倍增"></a>倍增</h1><h2 id="故事背景"><a href="#故事背景" class="headerlink" title="故事背景"></a>故事背景</h2><p>从前，有一只可爱得不得了的小白兔，它每天都会醒来都会随机出现在地图某个位置上，并且她酷爱到处旅游撒欢，不过可爱的代价就是她只能向前跳。一天阳光明媚的早晨她醒来发现自己在A地，想去往前方遥远的B、C、D、E、F ……(此处省略超级多个地点)，因为它真的是太没事情做了。显然，小白兔不能知道下一步会到哪里，除非她自己走过去。<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/%E5%80%8D%E5%A2%9E%E7%A4%BA%E4%BE%8B%E5%9B%BE.jpg"><br><strong>普通小白兔：</strong><br>一步又一步，生命不息，跳跃不止。<br><strong>超级小白兔：</strong><br>第一步到B，再一步到C，再一步到D，再一步到E，再一步到F，完工。<br>（她一定厌烦了无止境跳很多步的生活，不想再普通下去了。于是某天晚上拿个本子做小抄，记录好从每个格子跳任意步会到达的地方，然后赶在天亮之前回来。这样以后，不管早上在哪儿醒来，只要是前方想去的地方，看看小抄本一步就到啦）</p>
+<blockquote>
+<p>普通兔子 &#x3D; 速度慢，无资源损耗 <br>超级兔子 &#x3D; 速度快，多资源损耗（不知她的小抄本是否还够用，100个格子她要记录大概5000条信息）</p>
+</blockquote>
+<p>人不能既要，又想要，但是兔子可以。她想速度尽可能快，并且想要她的小抄本能够抄的下。那可不可以把记录的信息数降到最低呢？当然可以，2B兔子帮你忙，让你用2战胜敌人。</p>
+<p>当你只记录任何一个格子跳1、2、4、8、16……步会到达的格子的时候，你有没有发现信息数突然少了好多好多啊！真的少了好多好多啊！100个格子只要500条左右。</p>
+<p>在夜深人静的时候，它偷偷出门做小抄，记录下从每个格子跳1、2、4、8……个格子后会到达的格子，然后在太阳出来后，它在众目睽睽之下，开始了表演。</p>
+<p><strong>从A出发：</strong><br>若跳8个格子（超过B了，放弃）<br>若跳4个格子（超过B了，放弃）<br>若跳2个格子（没超过B，跳吧）<br>若跳1个格子（没超过B，跳吧）<br><strong>从B出发：</strong><br>…………</p>
+<p><strong>好的，聪明小白兔白天的事情你已经看懂了，且看它晚上是怎么打小抄的吧。</strong></p>
+<p>从A出发跳1步到1（记录下来）<br>从1出发跳1步到2（记录下来）<br>…………（跳1步的记录完毕）</p>
+<p>从A出发跳2步？就是从A出发跳1步再跳1步的到的地方，翻看小抄，直接誊写从1出发跳1步会到的2这个格子作为A跳2步会到的格子。<br>从1出发跳2步？跟刚才一样，直接誊写。<br>…………（跳2步的记录完毕）</p>
+<p>从A出发跳4步？你还真去跳4步？不，它也就是等于从A出发跳2步到的2号点再跳2步会到的格子，那么我们直接誊写2号格子跳2步会到的格子就可以了。</p>
+<p>……</p>
+<p><em><strong>上述操作能够奏效是因为由于十进制数可以表示成2的幂次的和。想要通过若干次求和得出这个数，为寻求最少的步数，我们当然优先选择幂次大的，然后依次小的进行拼凑</strong></em></p>
+<p><strong><code>总结感悟</code></strong><br>类似于前缀和的空间换时间，这里不像超极小白兔一样占用很多的空间，也不像普通小白兔一样时间很长，它达到了空间和时间的平衡</p>
+<h2 id="区间最值问题与ST表"><a href="#区间最值问题与ST表" class="headerlink" title="区间最值问题与ST表"></a>区间最值问题与ST表</h2><p>区间最值问题(Range Maximum&#x2F;Minimum Query)指的是：给出$n$个数${a_i}$，并快速查询某个区间的的最值</p>
+<p>根据故事背景我们受到启发，同样的预处理以每一个位置开头，长度为$2^0,2^1,2^2,…,2^{\lfloor log_2 n \rfloor }$的所有区间最值。</p>
+<p>具体的，令 $f(i,j)$ 表示区间 $[i,i+2^j-1]$ 的最大值。第二维就相当于倍增的时候“跳了 $2^j-1$ 步”，很容易得出递推式为：$f(i,j)&#x3D;\max(f(i,j-1),f(i+2^{j-1},j-1))$。这样得出来的信息表我们称作ST表(Sparse-Table)。<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/ST%E8%A1%A8%E9%A2%84%E5%A4%84%E7%90%86.svg"></p>
+<pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+		f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> h<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token operator">&lt;=</span>n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+			f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> </code></pre>
+
+<p>而对于查询，假设区间为$[l, r]$，可以有不同的实现思路：</p>
+<ol>
+<li><p>区间拆分查询<br> 记区间长度$L$，则该区间可以拆分为$O(log_2L)$的小区间。将$L$二进制拆分，我们可以像故事中的小兔子一样，从$l$开始向后跳，每次跳的时候拆出来一个二的幂个数，就可以拼出整个区间</p>
+ <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">RMQ</span><span class="token punctuation">(</span><span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> L <span class="token operator">=</span> r<span class="token operator">-</span>l<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> ans <span class="token operator">=</span> <span class="token operator">-</span>inf<span class="token punctuation">;</span>
+	<span class="token comment">//表示从i开始走2^j步 </span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> l<span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> L<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span>L<span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			ans <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			i <span class="token operator">+=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre></li>
+<li><p>区间合并查询<br> 对于查询区间最值问题来说，区间合并的过程是允许重叠的，重叠并不会对区间最大值产生影响，因此只要找到两个区间并集为$[l, r]$就可以了。为简单起见，我们将两个区间长度都定为$2^k$，并令$k$为满足$2^k \leq r-l+1$的最大整数即可。</p>
+ <pre class="language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">RMQ</span><span class="token punctuation">(</span><span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> k <span class="token operator">=</span> log_2<span class="token punctuation">[</span>r<span class="token operator">-</span>l<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">,</span> f<span class="token punctuation">[</span>r<span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>k<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> </code></pre></li>
+</ol>
+<p>明显的，区间$[l,l+2^k-1]$和区间$[r-2^k+1, r]$合并起来覆盖了需要查询的区间$[l,r]$，具体例子如下图所示：<br><img data-src="/../images/NOI%E6%9A%91%E5%81%87%E5%9F%B9%E8%AE%AD/%E7%AE%97%E6%B3%95%E4%B8%93%E9%A2%98/ST%E8%A1%A8%E6%9F%A5%E8%AF%A2.svg"></p>
+<p><strong><code>注意</code></strong><br><code>&lt;&lt;</code>运算符优先级<strong>小于</strong><code>+-</code>运算符<br>比如这个表达式：5 - 1 &lt;&lt; 2是多少？<br>答案是：4 * 2 * 2 &#x3D; 16。所以我们要写成5 - (1 &lt;&lt; 2)才是5-1 * 2 * 2 &#x3D; 1</p>
+<h3 id="ST-表维护其他信息"><a href="#ST-表维护其他信息" class="headerlink" title="ST 表维护其他信息"></a>ST 表维护其他信息</h3><p>RMQ很典型的一个特征就是它是一个“可重复贡献问题”，那什么是可重复贡献问题呢？</p>
+<blockquote>
+<p><strong>可重复贡献问题</strong> 是指对于运算 $\operatorname{opt}$，满足 $x\operatorname{opt} x&#x3D;x$，则对应的区间询问就是一个可重复贡献问题。例如，最大值有 $\max(x,x)&#x3D;x$，gcd 有 $\operatorname{gcd}(x,x)&#x3D;x$，所以 RMQ 和区间 GCD 就是一个可重复贡献问题。像区间和就不具有这个性质，如果求区间和的时候采用的预处理区间重叠了，则会导致重叠部分被计算两次，这是我们所不愿意看到的。另外，$\operatorname{opt}$ 还必须满足结合律（运算的顺序并不会影响到表示式的值）才能使用 ST 表求解。</p>
+</blockquote>
+<p>除 RMQ 以外，还有其它的“可重复贡献问题”。例如“区间按位和”、“区间按位或”、“区间 GCD”，ST 表都能高效地解决。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ST 表能较好的维护“可重复贡献”的区间信息（同时也应满足结合律），时间复杂度较低，代码量相对其他算法很小。但是，ST 表能维护的信息非常有限，不支持修改操作</p>
+<h1 id="练习巩固"><a href="#练习巩固" class="headerlink" title="练习巩固"></a>练习巩固</h1><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1908">【归并排序与逆序对】洛谷-P1908 逆序对</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1226">【快速幂】洛谷-P1226 【模板】快速幂取余运算</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1115">【其他序列上的分治】洛谷-P1115 最大子段和</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2880">【RMQ问题ST表解法】洛谷-P2880 [USACO07JAN] Balanced Lineup G</a></p>
+<hr>
+<p>参考自：<br>《挑战程序设计竞赛》<br>《深入浅出程序设计竞赛—进阶篇》<br><a target="_blank" rel="noopener" href="https://oi-wiki.org/basic/divide-and-conquer/">OI-Wiki 递归&amp;分治</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/JarjingX/article/details/8180560">【白话系列】倍增算法</a><br><a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/sparse-table/">OI-Wiki ST表</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E5%B7%A7%E4%B8%8E%E6%80%9D%E6%83%B3/" rel="tag"># 技巧与思想</a>
+              <a href="/tags/publication/" rel="tag"># publication</a>
+              <a href="/tags/NOI%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD/" rel="tag"># NOI暑假集训</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/44458.html" rel="prev" title="图论—最小生成树">
+                  <i class="fa fa-chevron-left"></i> 图论—最小生成树
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/10589.html" rel="next" title="数论—基础">
+                  数论—基础 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sparkyen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"neutral","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js","integrity":"sha256-TIYL00Rhw/8WaoUhYTLX9SKIEFdXxg+yMWSLVUbhiLg="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
